@@ -33,7 +33,7 @@
     </header>
 
     <main>
-        <!-- SEÇÃO DO FORMULÁRIO (Baseado na image_2832ba.jpg e image_2832dd.png) -->
+        <!-- SEÇÃO DO FORMULÁRIO -->
         <section class="contact-form-section">
             <div class="container-small">
                 <h2 class="section-title text-center">Agende sua Consulta</h2>
@@ -83,7 +83,7 @@
             </div>
         </section>
 
-        <!-- SEÇÃO INFOS E UNIDADES (Baseado na image_283661.png) -->
+        <!-- SEÇÃO INFOS E UNIDADES (A que aparece na sua imagem image_34d61c.png) -->
         <section class="info-section">
             <div class="container-default">
                 <div class="info-grid">
@@ -101,7 +101,7 @@
                     <div class="info-col">
                         <h3>Horário de funcionamento</h3>
                         <p>
-                            <strong>Segunda a sexta</strong><br>
+                            <strong>Seugnda a sexta</strong><br>
                             Das 08h às 20h
                         </p>
                         <p>
@@ -129,6 +129,76 @@
     <footer class="simple-footer">
         <p>&copy; 2026 Nexo Psicologia Humanista. Todos os direitos reservados.</p>
     </footer>
+
+    <!-- SCRIPT DE INTEGRAÇÃO COM O BACKEND (JAVA) -->
+<script>
+    const formularioNexo = document.querySelector('.nexo-form');
+    const whatsappInput = document.getElementById('whatsapp');
+
+    // =======================================================
+    // MÁSCARA AUTOMÁTICA DO WHATSAPP (Aparece enquanto digita)
+    // =======================================================
+    if (whatsappInput) {
+        whatsappInput.addEventListener('input', (event) => {
+            let valor = event.target.value;
+            
+            // Remove qualquer caractere que não seja número (letras, símbolos)
+            valor = valor.replace(/\D/g, ""); 
+            
+            // Aplica a formatação dinamicamente com base na quantidade de números
+            if (valor.length > 0) {
+                valor = "(" + valor;
+            }
+            if (valor.length > 3) {
+                valor = valor.slice(0, 3) + ") " + valor.slice(3);
+            }
+            if (valor.length > 10) {
+                valor = valor.slice(0, 10) + "-" + valor.slice(10, 15);
+            }
+            
+            // Limita o tamanho máximo para o padrão de celular: (99) 99999-9999
+            event.target.value = valor.slice(0, 15);
+        });
+    }
+
+    // =======================================================
+    // ENVIO DO FORMULÁRIO PARA O BACKEND (JAVA)
+    // =======================================================
+    if (formularioNexo) {
+        formularioNexo.addEventListener('submit', async (event) => {
+            event.preventDefault(); // Impede a página de recarregar
+
+            const dadosFormulario = {
+                nome: document.getElementById('nome').value,
+                whatsapp: document.getElementById('whatsapp').value,
+                email: document.getElementById('email').value,
+                atendimento: document.getElementById('atendimento').value,
+                modalidade: document.getElementById('modalidade').value,
+                mensagem: document.getElementById('mensagem').value
+            };
+
+            try {
+                const response = await fetch('http://localhost:8080/api/agendamentos', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(dadosFormulario)
+                });
+
+                if (response.ok) {
+                    alert('Agendamento enviado com sucesso! Entraremos em contato.');
+                    formularioNexo.reset(); // Limpa o formulário na tela
+                } else {
+                    alert('Erro ao processar o agendamento no servidor. Código: ' + response.status);
+                }
+            } catch (error) {
+                console.error('Erro de conexão:', error);
+                alert('Não foi possível conectar ao servidor backend em Java. Verifique se ele está rodando na porta 8080.');
+            }
+        });
+    }
+</script>
 
 </body>
 </html>
