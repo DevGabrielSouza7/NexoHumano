@@ -577,6 +577,16 @@ body {
     background-color: var(--secondary-green);
 }
 
+/* =======================================================
+   ESTILO DO BOTÃO DE AGENDAMENTO DESATIVADO (LOADING)
+   ======================================================= */
+.btn-submit:disabled {
+    background-color: #888; /* Deixa o botão cinza */
+    cursor: not-allowed;    /* Muda a setinha do mouse para um símbolo de bloqueio */
+    opacity: 0.6;           /* Deixa o botão meio transparente */
+    transform: none;        /* Remove qualquer animação de hover */
+}
+
 /* ==========================================================================
    SEÇÃO INFORMAÇÕES DE CONTATO E UNIDADES
    ========================================================================== */
