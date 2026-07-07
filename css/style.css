@@ -1,110 +1,110 @@
-/* ==========================================================================
-   CONFIGURAÇÕES GERAIS E CORES (RESET)
-   ========================================================================== */
+/* =========================================
+   VARIÁVEIS DE CORES E FONTES
+   ========================================= */
+:root {
+    --bg-beige: #efebe4; 
+    --bg-white: #ffffff; 
+    --primary-green: #678665; 
+    --text-dark: #2c302e; 
+    --font-serif: 'Playfair Display', serif;
+    --font-sans: 'Poppins', sans-serif;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-:root {
-    --bg-light-creme: #e8e6dc; /* Cor de fundo principal de algumas seções */
-    --bg-dark-creme: #eaddd0;  /* Cor de fundo ligeiramente mais escura/rosada */
-    --text-color: #2b2b2b;
-    --primary-green: #114a24; /* Verde escuro do botão "Agendar Consulta" */
-    --secondary-green: #597d57; /* Verde médio do botão superior */
-    --font-serif: 'Playfair Display', serif;
-    --font-sans: 'Poppins', sans-serif;
-}
-
 body {
     font-family: var(--font-sans);
-    color: var(--text-color);
-    background-color: #ffffff;
+    color: var(--text-dark);
+    background-color: var(--bg-white);
     line-height: 1.6;
 }
 
-/* ==========================================================================
-   HEADER & MENU (ABAS)
-   ========================================================================== */
+/* =========================================
+   TIPOGRAFIA (Títulos Serifados)
+   ========================================= */
+h1, h2, h3, h4 {
+    font-family: var(--font-serif);
+    font-weight: 400;
+    color: var(--text-dark);
+}
+
+.section-title {
+    font-size: 3rem;
+    margin-bottom: 3rem;
+    text-align: left;
+}
+
+.text-center {
+    text-align: center;
+}
+
+/* =========================================
+   BOTÕES
+   ========================================= */
+.btn-primary {
+    display: inline-block;
+    background-color: var(--primary-green);
+    color: white;
+    padding: 12px 30px;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 1rem;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+
+.btn-primary:hover {
+    opacity: 0.85;
+}
+
+/* =========================================
+   LAYOUT GERAL E CABEÇALHO
+   ========================================= */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+.bg-beige {
+    background-color: var(--bg-beige);
+}
+
+.bg-white {
+    background-color: var(--bg-white);
+}
+
 .main-header {
-    background-color: #ffffff;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
+    background-color: var(--bg-beige);
+    padding: 20px 0;
 }
 
 .header-container {
     max-width: 1200px;
     margin: 0 auto;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start; 
     align-items: center;
-    padding: 15px 20px;
+    padding: 0 20px;
 }
 
 .logo img {
-    height: 50px; /* Ajuste conforme o tamanho da sua imagem de logo */
+    height: 180px; 
+    width: auto;
+    display: block;
 }
 
-.nav-menu ul {
-    display: flex;
-    list-style: none;
-    gap: 30px;
-}
-
-.nav-menu a {
-    text-decoration: none;
-    color: var(--text-color);
-    font-weight: 500;
-    transition: color 0.3s;
-}
-
-.nav-menu a:hover, .nav-menu a.active {
-    color: var(--primary-green);
-    border-bottom: 2px solid var(--primary-green);
-}
-
-/* ==========================================================================
-   BOTÕES
-   ========================================================================== */
-.btn-primary-small {
-    background-color: var(--secondary-green);
-    color: #ffffff;
-    text-decoration: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 0.9rem;
-    transition: background 0.3s;
-}
-
-.btn-primary-small:hover {
-    background-color: var(--primary-green);
-}
-
-.btn-primary {
-    display: inline-block;
-    background-color: var(--secondary-green);
-    color: #ffffff;
-    text-decoration: none;
-    padding: 12px 30px;
-    border-radius: 5px;
-    font-weight: 500;
-    margin-top: 20px;
-    transition: background 0.3s;
-}
-
-.btn-primary:hover {
-    background-color: var(--primary-green);
-}
-
-/* ==========================================================================
-   SEÇÃO HERO (BANNER PRINCIPAL)
-   ========================================================================== */
+/* =========================================
+   1. HERO SECTION (Lugar de escuta)
+   ========================================= */
 .hero-section {
-    padding: 60px 20px;
-    background-color: #ffffff;
+    padding: 40px 20px 100px 20px;
 }
 
 .hero-container {
@@ -116,531 +116,372 @@ body {
     gap: 40px;
 }
 
+.hero-text {
+    flex: 1;
+}
+
 .hero-text h1 {
-    font-family: var(--font-serif);
-    font-size: 4rem;
-    font-weight: 400;
+    font-size: 4.5rem;
     line-height: 1.1;
-    max-width: 400px;
-}
-
-.hero-image img {
-    width: 450px;
-    height: 450px;
-    object-fit: cover;
-    border-radius: 50%; /* Faz a imagem ficar perfeitamente redonda como no Canva */
-}
-
-/* ==========================================================================
-   SEÇÃO INTRO (PORQUE FAZER TERAPIA)
-   ========================================================================== */
-.intro-section {
-    background-color: var(--bg-light-creme);
-    padding: 80px 20px;
-    text-align: left;
-}
-
-.intro-container {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.intro-section h2 {
-    font-family: var(--font-serif);
-    font-size: 3rem;
-    font-weight: 400;
     margin-bottom: 30px;
 }
 
-.intro-section p {
-    font-size: 1.2rem;
-    color: #4a4a4a;
+.hero-image {
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
 }
 
-.simple-footer {
-    text-align: center;
-    padding: 20px;
-    background-color: #f5f5f5;
-    font-size: 0.85rem;
-}
-
-/* Responsividade Básica para Celular */
-@media (max-width: 768px) {
-    .hero-container {
-        flex-direction: column-reverse;
-        text-align: center;
-    }
-    .hero-text h1 {
-        font-size: 2.5rem;
-        margin: 0 auto;
-    }
-    .hero-image img {
-        width: 280px;
-        height: 280px;
-    }
-    .header-container {
-        flex-direction: column;
-        gap: 15px;
-    }
-}
-/* ==========================================================================
-   SEÇÃO QUEM SOMOS (EQUIPE)
-   ========================================================================== */
-.team-section {
-    background-color: var(--bg-dark-creme); /* Cor de fundo terrosa/pastél da imagem 4 */
-    padding: 80px 20px;
-    text-align: center;
-}
-
-.team-container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.team-header {
-    margin-bottom: 60px;
-}
-
-.team-header h2 {
-    font-family: var(--font-serif);
-    font-size: 3.5rem;
-    font-weight: 400;
-    color: var(--text-color);
-}
-
-/* Criando o alinhamento em colunas dos profissionais */
-.team-grid {
-    display: table;
+.hero-image img {
     width: 100%;
-    table-layout: fixed;
+    max-width: 500px;
+    aspect-ratio: 1 / 1;
+    object-fit: cover;
+    border-radius: 50%; 
+}
+
+/* =========================================
+   2. ATIVIDADES
+   ========================================= */
+.activities-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 30px;
     margin-bottom: 40px;
 }
 
-.team-card {
-    display: table-cell;
-    text-align: center;
-    padding: 0 20px;
-    vertical-align: top;
-}
-
-/* Formato circular idêntico ao Canva para as fotos */
-.profile-img-container {
-    width: 220px;
-    height: 220px;
-    margin: 0 auto 20px auto;
-    border-radius: 50%;
-    overflow: hidden;
-    background-color: #cccccc; /* Cor cinza temporária enquanto não tem imagem */
-}
-
-.profile-img-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.team-card h3 {
-    font-family: var(--font-serif);
-    font-size: 1.8rem;
-    font-weight: 400;
-    margin-bottom: 5px;
-}
-
-.team-card .crp {
-    font-size: 1rem;
-    color: #666666;
-}
-
-.team-action {
-    margin-top: 40px;
-}
-
-/* Responsividade para celulares (transforma a tabela em blocos empilhados) */
-@media (max-width: 768px) {
-    .team-header h2 {
-        font-size: 2.2rem;
-    }
-    
-    .team-grid, .team-card {
-        display: block;
-        width: 100%;
-    }
-    
-    .team-card {
-        margin-bottom: 40px;
-        padding: 0;
-    }
-}
-/* ==========================================================================
-   ESTILOS GERAIS PARA AS SEÇÕES
-   ========================================================================== */
-.container-default {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.section-title {
-    font-family: var(--font-serif);
-    font-size: 3.2rem;
-    font-weight: 400;
-    margin-bottom: 50px;
-    color: var(--text-color);
-}
-
-/* ==========================================================================
-   1. SEÇÃO ATIVIDADES
-   ========================================================================== */
-.activities-section {
-    background-color: var(--bg-light-creme);
-    padding: 80px 0;
-    text-align: center;
-}
-
-.activities-grid {
-    display: table;
-    width: 100%;
-    table-layout: fixed;
-}
-
 .activity-card {
-    display: table-cell;
-    padding: 0 15px;
-    vertical-align: top;
+    text-align: center;
 }
 
-.icon-placeholder-circle {
+.icon-circle {
+    background-color: var(--primary-green);
+    color: white;
     width: 100px;
     height: 100px;
-    background-color: var(--secondary-green);
-    color: #ffffff;
-    font-size: 2.5rem;
-    line-height: 100px;
     border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin: 0 auto 20px auto;
+    font-size: 2.5rem;
 }
 
 .activity-card h3 {
-    font-family: var(--font-serif);
-    font-size: 1.6rem;
-    font-weight: 400;
+    font-size: 1.5rem;
     margin-bottom: 15px;
 }
 
 .activity-card p {
-    font-size: 0.95rem;
-    color: #555555;
+    font-size: 0.9rem;
+    color: #555;
 }
 
-/* ==========================================================================
-   2. SEÇÃO MODALIDADES
-   ========================================================================== */
-.modalities-section {
-    background-color: var(--bg-dark-creme);
-    padding: 80px 0;
+/* =========================================
+   3. EQUIPE
+   ========================================= */
+.team-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin-bottom: 40px;
+    text-align: center;
 }
 
-.modalities-layout {
-    display: table;
-    width: 100%;
-    table-layout: fixed;
-}
-
-.modality-block {
-    display: table-cell;
-    width: 50%;
-    padding: 0 30px;
-    vertical-align: middle;
-}
-
-.modality-img-container {
-    width: 280px;
-    height: 280px;
-    margin: 0 auto 20px auto;
-    border-radius: 50%;
-    overflow: hidden;
-    background-color: #cccccc;
-}
-
-.modality-img-container img {
-    width: 100%;
-    height: 100%;
+.team-card img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%; 
     object-fit: cover;
+    margin-bottom: 20px;
 }
 
-.modality-text {
-    text-align: center;
-}
-
-.modality-text h3 {
-    font-family: var(--font-serif);
-    font-size: 1.8rem;
-    font-weight: 400;
-    margin-bottom: 10px;
-}
-
-/* ==========================================================================
-   3. SEÇÃO JORNADA DE RECUPERAÇÃO
-   ========================================================================== */
-.journey-section {
-    background-color: var(--bg-dark-creme);
-    padding: 80px 0;
-}
-
-.journey-grid {
-    display: table;
-    width: 100%;
-    table-layout: fixed;
-}
-
-.journey-step {
-    display: inline-block;
-    width: 50%;
-    padding: 20px 40px;
-    margin-bottom: 30px;
-    vertical-align: top;
-}
-
-.step-number {
-    display: table-cell;
-    width: 70px;
-    height: 70px;
-    background-color: var(--secondary-green);
-    color: #ffffff;
-    font-size: 2rem;
-    font-family: var(--font-serif);
-    text-align: center;
-    line-height: 70px;
-    border-radius: 50%;
-}
-
-.step-content {
-    display: table-cell;
-    padding-left: 20px;
-    vertical-align: middle;
-}
-
-.step-content h3 {
-    font-family: var(--font-serif);
-    font-size: 1.7rem;
-    font-weight: 400;
+.team-card h3 {
+    font-size: 1.5rem;
     margin-bottom: 5px;
 }
 
-/* Responsividade para Telas Menores */
-@media (max-width: 768px) {
-    .section-title { font-size: 2.2rem; text-align: center; }
-    
-    .activities-grid, .activity-card,
-    .modalities-layout, .modality-block {
-        display: block;
-        width: 100%;
-        margin-bottom: 40px;
-    }
-    
-    .journey-step {
-        width: 100%;
-        display: block;
-        padding: 15px 0;
-    }
-}
-/* ==========================================================================
-   SEÇÃO FAQ (DÚVIDAS FREQUENTES)
-   ========================================================================== */
-.faq-section {
-    background-color: var(--bg-light-creme); /* Cor bege claro de fundo */
-    padding: 100px 0;
+.team-card p.crp {
+    font-size: 0.85rem;
+    color: #666;
 }
 
-.faq-grid {
-    display: table;
-    width: 100%;
-    table-layout: fixed;
-    margin-top: 40px;
+/* =========================================
+   4. PORQUE FAZER TERAPIA E FORMULÁRIO (COM ÍCONES)
+   ========================================= */
+.contact-layout {
+    display: flex;
+    gap: 60px;
+    align-items: center;
 }
 
-.faq-item {
-    display: table-cell;
-    padding: 0 25px;
-    vertical-align: top;
+.contact-text {
+    flex: 1;
 }
 
-.faq-item h3 {
+.contact-text h2 {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    margin-bottom: 30px;
     font-family: var(--font-serif);
-    font-size: 1.8rem;
-    font-weight: 400;
-    line-height: 1.3;
-    margin-bottom: 20px;
-    color: var(--text-color);
 }
 
-.faq-item p {
-    font-size: 1.05rem;
-    color: #4a4a4a;
-    line-height: 1.6;
+.contact-text p {
+    font-size: 1.2rem;
+    text-align: justify;
+    color: #444;
 }
 
-/* Responsividade para o FAQ empilhar no celular */
-@media (max-width: 768px) {
-    .faq-grid {
-        display: block;
-    }
-    
-    .faq-item {
-        display: block;
-        width: 100%;
-        margin-bottom: 50px;
-        padding: 0;
-    }
-    
-    .faq-item h3 {
-        font-size: 1.5rem;
-        margin-bottom: 10px;
-    }
-}
-/* ==========================================================================
-   SEÇÃO CONTATO / FORMULÁRIO
-   ========================================================================= */
-.contact-form-section {
-    background-color: #ffffff;
-    padding: 60px 20px;
+.contact-form-container {
+    flex: 1;
 }
 
-.container-small {
-    max-width: 600px;
-    margin: 0 auto;
-}
-
-.text-center {
-    text-align: center;
-}
-
-.nexo-form {
-    background-color: #ffffff;
-    border: 1px solid #e0e0e0;
-    padding: 40px;
-    border-radius: 8px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
-}
-
-.form-group {
-    margin-bottom: 25px;
+.nexo-form .form-group {
+    margin-bottom: 22px; 
     position: relative;
 }
 
-/* Customização dos inputs baseados nas linhas verdes do modelo */
-.form-group label {
-    display: block;
-    font-size: 0.9rem;
-    font-weight: 500;
-    margin-bottom: 5px;
-    color: var(--primary-green);
+.nexo-form label {
+    background: var(--bg-white);
+    padding: 0 5px;
+    margin-left: 10px;
+    font-size: 0.85rem;
+    position: absolute;
+    top: -10px; 
+    left: 10px;
+    z-index: 1;
+    color: #0b4522; 
 }
 
-.form-group input, 
-.form-group select, 
-.form-group textarea {
+.nexo-form input,
+.nexo-form select,
+.nexo-form textarea {
     width: 100%;
     padding: 12px 15px;
-    border: 2px solid var(--primary-green);
-    border-radius: 6px;
-    background-color: transparent;
+    border: 2px solid #0b4522; 
+    border-radius: 4px;
     font-family: var(--font-sans);
-    font-size: 1rem;
-    color: var(--text-color);
+    background-color: transparent;
     outline: none;
-    transition: border-color 0.3s;
+    color: var(--text-dark);
+    
+    background-repeat: no-repeat;
+    background-position: 12px center;
+    background-size: 18px;
+    transition: all 0.3s;
 }
 
-.form-group input:focus, 
-.form-group select:focus, 
-.form-group textarea:focus {
-    background-color: #fcfcf9;
+.nexo-form input[type="text"],
+.nexo-form input[type="tel"],
+.nexo-form input[type="email"],
+.nexo-form textarea {
+    padding-left: 40px; 
 }
 
-/* Botão de envio verde escuro idêntico ao "AGENDAR CONSULTA" */
-.btn-submit {
-    width: 100%;
-    background-color: #03421b; /* Verde bem escuro do card de form */
-    color: #ffffff;
-    border: none;
-    padding: 15px;
-    font-size: 1.1rem;
+#nome {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="%23999999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>');
+}
+#whatsapp {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="%23999999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>');
+}
+#email {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="%23999999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"></circle><path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-3.92 7.94"></path></svg>');
+}
+#mensagem {
+    background-position: 12px 15px; 
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="%23999999" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>');
+}
+
+.nexo-form input:focus,
+.nexo-form select:focus,
+.nexo-form textarea:focus {
+    border-color: var(--primary-green);
+    box-shadow: 0 0 5px rgba(103, 134, 101, 0.4);
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+}
+
+.nexo-form #btn-submit {
+    background-color: #0b4522; 
+    color: white;
     font-weight: 600;
     letter-spacing: 1px;
-    border-radius: 6px;
+    padding: 15px;
+    border-radius: 4px;
+    border: none;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: opacity 0.3s ease;
 }
 
-.btn-submit:hover {
-    background-color: var(--secondary-green);
+.nexo-form #btn-submit:hover {
+    opacity: 0.85;
 }
 
-/* =======================================================
-   ESTILO DO BOTÃO DE AGENDAMENTO DESATIVADO (LOADING)
-   ======================================================= */
-.btn-submit:disabled {
-    background-color: #888; /* Deixa o botão cinza */
-    cursor: not-allowed;    /* Muda a setinha do mouse para um símbolo de bloqueio */
-    opacity: 0.6;           /* Deixa o botão meio transparente */
-    transform: none;        /* Remove qualquer animação de hover */
+/* =========================================
+   5. MODALIDADES
+   ========================================= */
+.modalities-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 50px;
+    text-align: center;
+    margin-bottom: 40px;
 }
 
-/* ==========================================================================
-   SEÇÃO INFORMAÇÕES DE CONTATO E UNIDADES
-   ========================================================================== */
+.modality-card img {
+    width: 100%;
+    max-width: 400px;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 2% 2% 5% 4% / 3% 4% 2% 5%; 
+    margin-bottom: 20px;
+}
+
+.modality-card h3 {
+    font-size: 2rem;
+}
+
+/* =========================================
+   6. DÚVIDAS FREQUENTES
+   ========================================= */
+.faq-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+}
+
+.faq-item h3 {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    line-height: 1.3;
+}
+
+.faq-item p {
+    font-size: 0.95rem;
+    color: #444;
+}
+
+/* =========================================
+   7. JORNADA DE RECUPERAÇÃO
+   ========================================= */
+.journey-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 40px;
+}
+
+.journey-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.step-number {
+    background-color: var(--primary-green);
+    color: white;
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+    flex-shrink: 0;
+    line-height: 1; 
+}
+
+.step-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.step-content p {
+    font-size: 0.95rem;
+    color: #444;
+}
+
+.circle-decor {
+    width: 40px;
+    height: 40px;
+    background-color: var(--primary-green);
+    border-radius: 50%;
+    position: absolute;
+    right: 50px;
+    bottom: 50px;
+}
+.section-relative { position: relative; }
+
+/* =========================================
+   8. ESTILIZAÇÃO DA SEÇÃO DE INFORMAÇÕES FINAL
+   ========================================= */
 .info-section {
-    background-color: var(--bg-light-creme);
-    padding: 80px 0;
+    background-color: #0b4522; /* Fundo verde escuro premium */
+    padding-top: 80px;
+    padding-bottom: 80px;
 }
 
 .info-grid {
-    display: table;
-    width: 100%;
-    table-layout: fixed;
-}
-
-.info-col {
-    display: table-cell;
-    padding: 0 30px;
-    vertical-align: top;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 50px;
 }
 
 .info-col h3 {
     font-family: var(--font-serif);
     font-size: 1.8rem;
-    font-weight: 400;
     line-height: 1.3;
     margin-bottom: 25px;
-    color: var(--text-color);
+    color: var(--bg-beige); /* Títulos na cor bege clarinha do site */
+    font-weight: 400;
 }
 
-.info-col p, .units-list li {
+.info-col p, .info-col ul, .info-col li {
     font-size: 1rem;
-    color: #4a4a4a;
-    margin-bottom: 15px;
+    color: rgba(255, 255, 255, 0.85); /* Texto branco com leve transparência para suavizar */
     line-height: 1.6;
 }
 
-.contact-details {
-    font-size: 1.1rem !important;
+.contact-details strong, .info-col p strong, .units-list li strong {
+    color: #ffffff; /* Negritos em branco puro para dar destaque */
+    font-weight: 600;
 }
 
 .units-list {
     list-style: none;
 }
 
-/* Responsividade do Rodapé */
-@media (max-width: 768px) {
-    .info-grid {
-        display: block;
-    }
-    
-    .info-col {
-        display: block;
-        width: 100%;
-        margin-bottom: 40px;
-        padding: 0 20px;
-    }
+.units-list li {
+    margin-bottom: 15px;
+}
+
+/* Rodapé Compacto (Fundo Branco) - MANTIDO INTACTO */
+.simple-footer {
+    background-color: var(--bg-white);
+    color: var(--text-dark);
+    font-size: 0.9rem;
+}
+
+.simple-footer p {
+    color: #444;
+}
+
+.developer-credit {
+    margin-top: 8px;
+    font-size: 0.85rem;
+}
+
+.developer-credit a {
+    color: #0b4522; 
+    text-decoration: none;
+    font-weight: 600;
+    transition: opacity 0.3s ease;
+}
+
+.developer-credit a:hover {
+    opacity: 0.7;
+    text-decoration: underline;
 }

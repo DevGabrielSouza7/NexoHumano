@@ -4,9 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nexo | Psicologia Humanista</title>
+    
+    <link rel="icon" type="image/png" href="img/favicon.png">
     <link rel="stylesheet" href="css/style.css">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Fontes: Playfair Display (Títulos) e Poppins (Textos) -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -14,286 +18,255 @@
     <header class="main-header">
         <div class="header-container">
             <div class="logo">
-                <img src="img/logo-nexo.png" alt="Nexo Logo"> 
-            </div>
-            <nav class="nav-menu">
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#quem-somos">Quem Somos</a></li>
-                    <li><a href="#servicos">Serviços</a></li>
-                    <li><a href="#faq">FAQ</a></li>
-                    <li><a href="#contato">Contato</a></li>
-                </ul>
-            </nav>
-            <div class="header-cta">
-                <a href="#contato" class="btn-primary-small">Agendar consulta</a>
+                <img src="img/logo-nexo-completa.png" alt="Nexo Logo"> 
             </div>
         </div>
     </header>
 
     <main>
-        <div id="home">
-            <section class="hero-section">
-                <div class="hero-container">
-                    <div class="hero-text">
-                        <h1>Lugar de escuta e cuidado</h1>
+        <!-- 1. HERO SECTION -->
+        <section class="hero-section bg-beige">
+            <div class="hero-container">
+                <div class="hero-text">
+                    <h1>Lugar de<br>escuta e<br>cuidado</h1>
+                    <a href="#contato" class="btn-primary">Agendar consulta</a>
+                </div>
+                <div class="hero-image">
+                    <img src="img/equipe-hero.png" alt="Equipe Nexo">
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. ATIVIDADES -->
+        <section class="bg-white">
+            <div class="container text-center">
+                <h2 class="section-title text-center">Conheça nossas<br>atividades</h2>
+                <div class="activities-grid">
+                    <div class="activity-card">
+                        <div class="icon-circle">🧘</div> 
+                        <h3>Psicoterapia<br>Individual</h3>
+                        <p>Processo controlado e acompanhado por especialistas.</p>
                     </div>
-                    <div class="hero-image">
-                        <img src="img/hero-hands.jpg" alt="Mãos segurando uma planta mudinha">
+                    <div class="activity-card">
+                        <div class="icon-circle">🙏</div>
+                        <h3>Orientação Parental</h3>
+                        <p>Conversas em grupo para compartilhar experiências e progressos.</p>
+                    </div>
+                    <div class="activity-card">
+                        <div class="icon-circle">⏱️</div>
+                        <h3>Plantão Psicológico</h3>
+                        <p>Atividades físicas monitoradas por profissionais.</p>
+                    </div>
+                    <div class="activity-card">
+                        <div class="icon-circle">🌿</div>
+                        <h3>Orientação<br>Vocacional</h3>
+                        <p>Aulas teóricas e práticas de realinhamento social.</p>
                     </div>
                 </div>
-            </section>
+                <a href="#contato" class="btn-primary">Marque sua consulta</a>
+            </div>
+        </section>
 
-            <section class="intro-section">
-                <div class="intro-container">
-                    <h2>Porque fazer terapia?</h2>
-                    <p>
-                        A psicoterapia é um espaço de escuta, acolhimento e autoconhecimento. 
-                        Por meio dela, é possível compreender emoções, desenvolver recursos para 
-                        lidar com desafios e fortalecer a saúde mental.
-                    </p>
-                    <a href="#contato" class="btn-primary">Marque sua consulta</a>
-                </div>
-            </section>
-        </div>
-
-        <section id="quem-somos" class="team-section">
-            <div class="team-container">
-                <div class="team-header">
-                    <h2>Conheça quem vai te atender</h2>
-                    <div class="lotus-icon"></div> 
-                </div>
-
+        <!-- 3. EQUIPE -->
+        <section class="bg-beige section-relative">
+            <div class="container">
+                <h2 class="section-title">Conheça quem<br>vai te atender</h2>
                 <div class="team-grid">
                     <div class="team-card">
-                        <div class="profile-img-container">
-                            <img src="img/adriana.jpg" alt="Adriana Santos" class="profile-placeholder">
-                        </div>
+                        <img src="img/adriana.png" alt="Adriana Santos">
                         <h3>Adriana Santos</h3>
                         <p class="crp">CRP: 19/5704</p>
                     </div>
-
                     <div class="team-card">
-                        <div class="profile-img-container">
-                            <img src="img/joselito.jpg" alt="Joselito Silva" class="profile-placeholder">
-                        </div>
+                        <img src="img/joselito.png" alt="Joselito Silva">
                         <h3>Joselito Silva</h3>
                         <p class="crp">CRP: 19/5704</p>
                     </div>
-
                     <div class="team-card">
-                        <div class="profile-img-container">
-                            <img src="img/suzana.jpg" alt="Suzana Melo" class="profile-placeholder">
-                        </div>
+                        <img src="img/suzana.png" alt="Suzana Melo">
                         <h3>Suzana Melo</h3>
                         <p class="crp">CRP: 19/5704</p>
                     </div>
                 </div>
+                <div class="text-center">
+                    <a href="#contato" class="btn-primary">Marque sua consulta</a>
+                </div>
+                <div class="circle-decor"></div>
+            </div>
+        </section>
 
-                <div class="team-action">
+        <!-- 4. TEXTO E FORMULÁRIO -->
+        <section id="contato" class="bg-white">
+            <div class="container contact-layout">
+                <div class="contact-text">
+                    <h2>Porque fazer<br>terapia?</h2>
+                    <p>A psicoterapia é um espaço de escuta, acolhimento e autoconhecimento. Por meio dela, é possível compreender emoções, desenvolver recursos para lidar com desafios e fortalecer a saúde mental.</p>
+                </div>
+                <div class="contact-form-container">
+                    <form class="nexo-form">
+                        <div class="form-group">
+                            <label>Nome</label>
+                            <input type="text" id="nome" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Número do WhatsApp</label>
+                            <input type="tel" id="whatsapp" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group" style="flex: 1;">
+                                <label>Atendimento</label>
+                                <select id="atendimento" required>
+                                    <option value="" disabled selected>Selecione</option>
+                                    <option value="individual">Individual</option>
+                                    <option value="parental">Parental</option>
+                                </select>
+                            </div>
+                            <div class="form-group" style="flex: 1;">
+                                <label>Modalidade</label>
+                                <select id="modalidade" required>
+                                    <option value="" disabled selected>Selecione</option>
+                                    <option value="presencial">Presencial</option>
+                                    <option value="online">Online</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Mensagem</label>
+                            <textarea id="mensagem" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary" id="btn-submit" style="width: 100%;">AGENDAR CONSULTA</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. MODALIDADES -->
+        <section class="bg-beige">
+            <div class="container">
+                <h2 class="section-title">Modalidades de<br>Atendimento</h2>
+                <div class="modalities-grid">
+                    <div class="modality-card">
+                        <img src="img/online.png" alt="Atendimento Online">
+                        <h3>Psicoterapia Online</h3>
+                    </div>
+                    <div class="modality-card">
+                        <img src="img/presencial.png" alt="Consultório Presencial">
+                        <h3>Psicoterapia Presencial</h3>
+                    </div>
+                </div>
+                <div class="text-center">
                     <a href="#contato" class="btn-primary">Marque sua consulta</a>
                 </div>
             </div>
         </section>
 
-        <div id="servicos">
-            <section class="activities-section">
-                <div class="container-default">
-                    <h2 class="section-title">Conheça nossas atividades</h2>
-                    <div class="activities-grid">
-                        <div class="activity-card">
-                            <div class="icon-placeholder-circle">🧘</div>
-                            <h3>Psicoterapia Individual</h3>
-                            <p>Processo controlado e acompanhado por especialistas.</p>
-                        </div>
-                        <div class="activity-card">
-                            <div class="icon-placeholder-circle">🙏</div>
-                            <h3>Orientação Parental</h3>
-                            <p>Conversas em grupo para compartilhar experiências e progressos.</p>
-                        </div>
-                        <div class="activity-card">
-                            <div class="icon-placeholder-circle">🌀</div>
-                            <h3>Palestras</h3>
-                            <p>Atividades físicas monitoradas por profissionais.</p>
-                        </div>
-                        <div class="activity-card">
-                            <div class="icon-placeholder-circle">🌿</div>
-                            <h3>Orientação Vocacional</h3>
-                            <p>Aulas teóricas e práticas de realinhamento social.</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="modalities-section">
-                <div class="container-default">
-                    <h2 class="section-title">Modalidades de Atendimento</h2>
-                    <div class="modalities-layout">
-                        <div class="modality-block">
-                            <div class="modality-img-container">
-                                <img src="img/presencial.jpg" alt="Consultório Presencial" class="modality-placeholder">
-                            </div>
-                            <div class="modality-text">
-                                <h3>Presencial</h3>
-                                <p>Texto falando sobre a modalidade presencial e a estrutura do consultório.</p>
-                            </div>
-                        </div>
-                        <div class="modality-block">
-                            <div class="modality-img-container">
-                                <img src="img/online.jpg" alt="Atendimento Online" class="modality-placeholder">
-                            </div>
-                            <div class="modality-text">
-                                <h3>Online</h3>
-                                <p>Texto falando sobre a modalidade online, o sigilo e o conforto do atendimento à distância.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <section class="journey-section">
-                <div class="container-default">
-                    <h2 class="section-title">Jornada de recuperação</h2>
-                    <div class="journey-grid">
-                        <div class="journey-step">
-                            <div class="step-number">1</div>
-                            <div class="step-content">
-                                <h3>Internação voluntária</h3>
-                                <p>Internação agendada e chegada do paciente no centro.</p>
-                            </div>
-                        </div>
-                        <div class="journey-step">
-                            <div class="step-number">3</div>
-                            <div class="step-content">
-                                <h3>Desintoxicação & Terapia</h3>
-                                <p>Desintoxicação química se necessário e terapia acompanhada.</p>
-                            </div>
-                        </div>
-                        <div class="journey-step">
-                            <div class="step-number">2</div>
-                            <div class="step-content">
-                                <h3>Diagnóstico</h3>
-                                <p>Conversa com o paciente e responsáveis para diagnóstico.</p>
-                            </div>
-                        </div>
-                        <div class="journey-step">
-                            <div class="step-number">4</div>
-                            <div class="step-content">
-                                <h3>Atividades de recuperação</h3>
-                                <p>Atividades sociais e físicas monitoradas.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-
-        <section id="faq" class="faq-section">
-            <div class="container-default">
-                <h2 class="section-title">Dúvidas frequentes</h2>
+        <!-- 6. DÚVIDAS FREQUENTES -->
+        <section class="bg-white section-relative">
+            <div class="container">
+                <h2 class="section-title">Dúvidas<br>frequentes</h2>
                 <div class="faq-grid">
                     <div class="faq-item">
-                        <h3>Vocês fazem internação involuntária?</h3>
+                        <h3>Como funciona o<br>Plantão Psicológico?</h3>
                         <p>Não trabalhamos com esse método. Aceitamos apenas pacientes que desejem fazer o tratamento.</p>
                     </div>
                     <div class="faq-item">
-                        <h3>A eficácia do tratamento é comprovada?</h3>
+                        <h3>A eficácia da terapia<br>online é comprovada?</h3>
                         <p>O tratamento só funciona se o paciente estiver disposto. Nenhum método é 100% eficaz se não houver comprometimento.</p>
                     </div>
                     <div class="faq-item">
-                        <h3>Como posso indicar para um familiar ou amigo?</h3>
+                        <h3>Como posso indicar<br>para um familiar ou<br>amigo?</h3>
                         <p>Mostre nosso site e indique canais de ajuda. Com a validação do paciente, seguimos com uma conversa inicial.</p>
+                    </div>
+                </div>
+                <div class="circle-decor"></div>
+            </div>
+        </section>
+
+        <!-- 7. JORNADA DE RECUPERAÇÃO -->
+        <section class="bg-beige">
+            <div class="container">
+                <h2 class="section-title">Jornada de<br>recuperação</h2>
+                <div class="journey-grid">
+                    <div class="journey-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Internação voluntária</h3>
+                            <p>Internação agendada e chegada do paciente no centro.</p>
+                        </div>
+                    </div>
+                    <div class="journey-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Desintoxicação &<br>Terapia</h3>
+                            <p>Desintoxicação química se necessário e terapia acompanhada.</p>
+                        </div>
+                    </div>
+                    <div class="journey-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Diagnóstico</h3>
+                            <p>Conversa com o paciente e responsáveis para diagnóstico.</p>
+                        </div>
+                    </div>
+                    <div class="journey-step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Atividades de<br>recuperação</h3>
+                            <p>Atividades sociais e físicas monitoradas.</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <div id="contato">
-            <section class="contact-form-section">
-                <div class="container-small">
-                    <h2 class="section-title text-center">Agende sua Consulta</h2>
-                    
-                    <form class="nexo-form">
-                        <div class="form-group">
-                            <label for="nome">Nome</label>
-                            <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="whatsapp">Número do WhatsApp</label>
-                            <input type="tel" id="whatsapp" name="whatsapp" placeholder="(00) 00000-0000" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="atendimento">Atendimento</label>
-                            <select id="atendimento" name="atendimento" required>
-                                <option value="" disabled selected>Selecione</option>
-                                <option value="individual">Psicoterapia Individual</option>
-                                <option value="parental">Orientação Parental</option>
-                                <option value="vocacional">Orientação Vocacional</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="modalidade">Modalidade</label>
-                            <select id="modalidade" name="modalidade" required>
-                                <option value="" disabled selected>Selecione</option>
-                                <option value="presencial">Presencial</option>
-                                <option value="online">Online</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="mensagem">Mensagem</label>
-                            <textarea id="mensagem" name="mensagem" rows="4" placeholder="Escreva sua mensagem aqui..."></textarea>
-                        </div>
-                        
-                        <button type="submit" class="btn-submit" id="btn-submit">AGENDAR CONSULTA</button>
-                    </form>
-                </div>
-            </section>
-
-            <section class="info-section">
-                <div class="container-default">
-                    <div class="info-grid">
-                        <div class="info-col">
-                            <h3>Para pedir ajuda, entre em contato. Tudo será confidencial.</h3>
-                            <p class="contact-details">
-                                <strong>Tel:</strong> (12) 3456-7890<br>
-                                <strong>E-mail:</strong> ola@grandesite.com.br
-                            </p>
-                        </div>
-                        <div class="info-col">
-                            <h3>Horário de funcionamento</h3>
-                            <p>
-                                <strong>Segunda a sexta</strong><br>
-                                Das 08h às 20h
-                            </p>
-                            <p>
-                                <strong>Sábado, domingo e feriados</strong><br>
-                                Das 09h às 18h
-                            </p>
-                        </div>
-                        <div class="info-col">
-                            <h3>Venha. Você será bem recebido.</h3>
-                            <ul class="units-list">
-                                <li><strong>Unidade 1:</strong> Rua Botânica, 55, Curitiba</li>
-                                <li><strong>Unidade 2:</strong> Rua Sonora, 95, Manaus</li>
-                                <li><strong>Unidade 3:</strong> Avenida João de Barro, 400, Natal</li>
-                                <li><strong>Unidade 4:</strong> Rua dos Libertadores, 73, Teresina</li>
-                            </ul>
-                        </div>
+        <!-- 8. SEÇÃO DE INFORMAÇÕES DE CONTATO (AGORA NO FUNDO VERDE) -->
+       <section class="info-section">
+            <div class="container">
+                <div class="info-grid">
+                    <div class="info-col">
+                        <h3>Para pedir ajuda, entre<br>em contato. Tudo será<br>confidencial.</h3>
+                        <p class="contact-details">
+                            <strong>Tel:</strong> (12) 3456-7890<br>
+                            <strong>E-mail:</strong> ola@grandesite.com.br
+                        </p>
+                    </div>
+                    <div class="info-col">
+                        <h3>Horário de<br>funcionamento</h3>
+                        <p>
+                            <strong>Segunda a sexta</strong><br>
+                            Das 08h às 20h
+                        </p>
+                        <p style="margin-top: 15px;">
+                            <strong>Sábado, domingo e feriados</strong><br>
+                            Das 09h às 18h
+                        </p>
+                    </div>
+                    <div class="info-col">
+                        <h3>Venha. Você será bem<br>recebido.</h3>
+                        <ul class="units-list">
+                            <li><strong>Unidade 1:</strong> Rua Botânica, 55, Curitiba</li>
+                            <li><strong>Unidade 2:</strong> Rua Sonora, 95, Manaus</li>
+                            <li><strong>Unidade 3:</strong> Avenida João de Barro, 400, Natal</li>
+                            <li><strong>Unidade 4:</strong> Rua dos Libertadores, 73, Teresina</li>
+                        </ul>
                     </div>
                 </div>
-            </section>
-        </div>
+            </div>
+        </section>
     </main>
 
-    <footer class="simple-footer">
-        <p>&copy; 2026 Nexo Psicologia Humanista. Todos os direitos reservados.</p>
-        <p style="font-size: 0.85rem; margin-top: 8px; color: #666;">
-            Desenvolvido por <a href="https://www.linkedin.com/in/gabriel-souza-3b80a3271" target="_blank" style="color: var(--primary-green); text-decoration: none; font-weight: 600; transition: opacity 0.3s;" onmouseover="this.style.opacity='0.7'" onmouseout="this.style.opacity='1'">Gabriel Souza</a>
-        </p>
+    <!-- RODAPÉ COMPACTO E ASSINATURA (AGORA NO FUNDO BRANCO) -->
+    <footer class="simple-footer bg-white">
+        <div class="container" style="padding: 30px 0; text-align: center;">
+            <p>&copy; 2026 Nexo Psicologia Humanista. Todos os direitos reservados.</p>
+            <p class="developer-credit">
+                Desenvolvido por <a href="https://www.linkedin.com/in/gabriel-souza-3b80a3271" target="_blank" rel="noopener noreferrer">Gabriel Souza</a>
+            </p>
+        </div>
     </footer>
 
     <script>
@@ -360,6 +333,5 @@
             });
         }
     </script>
-
 </body>
 </html>
