@@ -4,69 +4,359 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nexo | Psicologia Humanista</title>
-    <!-- Link para o nosso arquivo de estilos CSS -->
     <link rel="stylesheet" href="css/style.css">
-    <!-- Importando uma fonte elegante similar à do modelo (Playfair Display) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <!-- MENU DE NAVEGAÇÃO (As abas do site) -->
     <header class="main-header">
         <div class="header-container">
             <div class="logo">
-                <!-- Substitua pelo caminho real da sua logo depois -->
                 <img src="img/logo-nexo.png" alt="Nexo Logo"> 
             </div>
             <nav class="nav-menu">
                 <ul>
-                    <li><a href="index.html" class="active">Home</a></li>
-                    <li><a href="quem-somos.html">Quem Somos</a></li>
-                    <li><a href="servicos.html">Serviços</a></li>
-                    <li><a href="faq.html">FAQ</a></li>
-                    <li><a href="contato.html">Contato</a></li>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#quem-somos">Quem Somos</a></li>
+                    <li><a href="#servicos">Serviços</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#contato">Contato</a></li>
                 </ul>
             </nav>
             <div class="header-cta">
-                <a href="contato.html" class="btn-primary-small">Agendar consulta</a>
+                <a href="#contato" class="btn-primary-small">Agendar consulta</a>
             </div>
         </div>
     </header>
 
-    <!-- BANNER PRINCIPAL (Baseado na image_28327a.jpg) -->
     <main>
-        <section class="hero-section">
-            <div class="hero-container">
-                <div class="hero-text">
-                    <h1>Lugar de escuta e cuidado</h1>
+        <div id="home">
+            <section class="hero-section">
+                <div class="hero-container">
+                    <div class="hero-text">
+                        <h1>Lugar de escuta e cuidado</h1>
+                    </div>
+                    <div class="hero-image">
+                        <img src="img/hero-hands.jpg" alt="Mãos segurando uma planta mudinha">
+                    </div>
                 </div>
-                <div class="hero-image">
-                    <!-- Imagem circular com as mãos e a planta -->
-                    <img src="img/hero-hands.jpg" alt="Mãos segurando uma planta mudinha">
+            </section>
+
+            <section class="intro-section">
+                <div class="intro-container">
+                    <h2>Porque fazer terapia?</h2>
+                    <p>
+                        A psicoterapia é um espaço de escuta, acolhimento e autoconhecimento. 
+                        Por meio dela, é possível compreender emoções, desenvolver recursos para 
+                        lidar com desafios e fortalecer a saúde mental.
+                    </p>
+                    <a href="#contato" class="btn-primary">Marque sua consulta</a>
+                </div>
+            </section>
+        </div>
+
+        <section id="quem-somos" class="team-section">
+            <div class="team-container">
+                <div class="team-header">
+                    <h2>Conheça quem vai te atender</h2>
+                    <div class="lotus-icon"></div> 
+                </div>
+
+                <div class="team-grid">
+                    <div class="team-card">
+                        <div class="profile-img-container">
+                            <img src="img/adriana.jpg" alt="Adriana Santos" class="profile-placeholder">
+                        </div>
+                        <h3>Adriana Santos</h3>
+                        <p class="crp">CRP: 19/5704</p>
+                    </div>
+
+                    <div class="team-card">
+                        <div class="profile-img-container">
+                            <img src="img/joselito.jpg" alt="Joselito Silva" class="profile-placeholder">
+                        </div>
+                        <h3>Joselito Silva</h3>
+                        <p class="crp">CRP: 19/5704</p>
+                    </div>
+
+                    <div class="team-card">
+                        <div class="profile-img-container">
+                            <img src="img/suzana.jpg" alt="Suzana Melo" class="profile-placeholder">
+                        </div>
+                        <h3>Suzana Melo</h3>
+                        <p class="crp">CRP: 19/5704</p>
+                    </div>
+                </div>
+
+                <div class="team-action">
+                    <a href="#contato" class="btn-primary">Marque sua consulta</a>
                 </div>
             </div>
         </section>
 
-        <!-- SEÇÃO INTRODUTÓRIA (Baseado na image_2832ba.jpg) -->
-        <section class="intro-section">
-            <div class="intro-container">
-                <h2>Porque fazer terapia?</h2>
-                <p>
-                    A psicoterapia é um espaço de escuta, acolhimento e autoconhecimento. 
-                    Por meio dela, é possível compreender emoções, desenvolver recursos para 
-                    lidar com desafios e fortalecer a saúde mental.
-                </p>
-                <a href="contato.html" class="btn-primary">Marque sua consulta</a>
+        <div id="servicos">
+            <section class="activities-section">
+                <div class="container-default">
+                    <h2 class="section-title">Conheça nossas atividades</h2>
+                    <div class="activities-grid">
+                        <div class="activity-card">
+                            <div class="icon-placeholder-circle">🧘</div>
+                            <h3>Psicoterapia Individual</h3>
+                            <p>Processo controlado e acompanhado por especialistas.</p>
+                        </div>
+                        <div class="activity-card">
+                            <div class="icon-placeholder-circle">🙏</div>
+                            <h3>Orientação Parental</h3>
+                            <p>Conversas em grupo para compartilhar experiências e progressos.</p>
+                        </div>
+                        <div class="activity-card">
+                            <div class="icon-placeholder-circle">🌀</div>
+                            <h3>Palestras</h3>
+                            <p>Atividades físicas monitoradas por profissionais.</p>
+                        </div>
+                        <div class="activity-card">
+                            <div class="icon-placeholder-circle">🌿</div>
+                            <h3>Orientação Vocacional</h3>
+                            <p>Aulas teóricas e práticas de realinhamento social.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="modalities-section">
+                <div class="container-default">
+                    <h2 class="section-title">Modalidades de Atendimento</h2>
+                    <div class="modalities-layout">
+                        <div class="modality-block">
+                            <div class="modality-img-container">
+                                <img src="img/presencial.jpg" alt="Consultório Presencial" class="modality-placeholder">
+                            </div>
+                            <div class="modality-text">
+                                <h3>Presencial</h3>
+                                <p>Texto falando sobre a modalidade presencial e a estrutura do consultório.</p>
+                            </div>
+                        </div>
+                        <div class="modality-block">
+                            <div class="modality-img-container">
+                                <img src="img/online.jpg" alt="Atendimento Online" class="modality-placeholder">
+                            </div>
+                            <div class="modality-text">
+                                <h3>Online</h3>
+                                <p>Texto falando sobre a modalidade online, o sigilo e o conforto do atendimento à distância.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="journey-section">
+                <div class="container-default">
+                    <h2 class="section-title">Jornada de recuperação</h2>
+                    <div class="journey-grid">
+                        <div class="journey-step">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h3>Internação voluntária</h3>
+                                <p>Internação agendada e chegada do paciente no centro.</p>
+                            </div>
+                        </div>
+                        <div class="journey-step">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h3>Desintoxicação & Terapia</h3>
+                                <p>Desintoxicação química se necessário e terapia acompanhada.</p>
+                            </div>
+                        </div>
+                        <div class="journey-step">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h3>Diagnóstico</h3>
+                                <p>Conversa com o paciente e responsáveis para diagnóstico.</p>
+                            </div>
+                        </div>
+                        <div class="journey-step">
+                            <div class="step-number">4</div>
+                            <div class="step-content">
+                                <h3>Atividades de recuperação</h3>
+                                <p>Atividades sociais e físicas monitoradas.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <section id="faq" class="faq-section">
+            <div class="container-default">
+                <h2 class="section-title">Dúvidas frequentes</h2>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <h3>Vocês fazem internação involuntária?</h3>
+                        <p>Não trabalhamos com esse método. Aceitamos apenas pacientes que desejem fazer o tratamento.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>A eficácia do tratamento é comprovada?</h3>
+                        <p>O tratamento só funciona se o paciente estiver disposto. Nenhum método é 100% eficaz se não houver comprometimento.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3>Como posso indicar para um familiar ou amigo?</h3>
+                        <p>Mostre nosso site e indique canais de ajuda. Com a validação do paciente, seguimos com uma conversa inicial.</p>
+                    </div>
+                </div>
             </div>
         </section>
+
+        <div id="contato">
+            <section class="contact-form-section">
+                <div class="container-small">
+                    <h2 class="section-title text-center">Agende sua Consulta</h2>
+                    
+                    <form class="nexo-form">
+                        <div class="form-group">
+                            <label for="nome">Nome</label>
+                            <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="whatsapp">Número do WhatsApp</label>
+                            <input type="tel" id="whatsapp" name="whatsapp" placeholder="(00) 00000-0000" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="seuemail@exemplo.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="atendimento">Atendimento</label>
+                            <select id="atendimento" name="atendimento" required>
+                                <option value="" disabled selected>Selecione</option>
+                                <option value="individual">Psicoterapia Individual</option>
+                                <option value="parental">Orientação Parental</option>
+                                <option value="vocacional">Orientação Vocacional</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="modalidade">Modalidade</label>
+                            <select id="modalidade" name="modalidade" required>
+                                <option value="" disabled selected>Selecione</option>
+                                <option value="presencial">Presencial</option>
+                                <option value="online">Online</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="mensagem">Mensagem</label>
+                            <textarea id="mensagem" name="mensagem" rows="4" placeholder="Escreva sua mensagem aqui..."></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn-submit" id="btn-submit">AGENDAR CONSULTA</button>
+                    </form>
+                </div>
+            </section>
+
+            <section class="info-section">
+                <div class="container-default">
+                    <div class="info-grid">
+                        <div class="info-col">
+                            <h3>Para pedir ajuda, entre em contato. Tudo será confidencial.</h3>
+                            <p class="contact-details">
+                                <strong>Tel:</strong> (12) 3456-7890<br>
+                                <strong>E-mail:</strong> ola@grandesite.com.br
+                            </p>
+                        </div>
+                        <div class="info-col">
+                            <h3>Horário de funcionamento</h3>
+                            <p>
+                                <strong>Segunda a sexta</strong><br>
+                                Das 08h às 20h
+                            </p>
+                            <p>
+                                <strong>Sábado, domingo e feriados</strong><br>
+                                Das 09h às 18h
+                            </p>
+                        </div>
+                        <div class="info-col">
+                            <h3>Venha. Você será bem recebido.</h3>
+                            <ul class="units-list">
+                                <li><strong>Unidade 1:</strong> Rua Botânica, 55, Curitiba</li>
+                                <li><strong>Unidade 2:</strong> Rua Sonora, 95, Manaus</li>
+                                <li><strong>Unidade 3:</strong> Avenida João de Barro, 400, Natal</li>
+                                <li><strong>Unidade 4:</strong> Rua dos Libertadores, 73, Teresina</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
     </main>
 
-    <!-- RODAPÉ SIMPLIFICADO DA HOME -->
     <footer class="simple-footer">
         <p>&copy; 2026 Nexo Psicologia Humanista. Todos os direitos reservados.</p>
     </footer>
+
+    <script>
+        const formularioNexo = document.querySelector('.nexo-form');
+        const whatsappInput = document.getElementById('whatsapp');
+
+        if (whatsappInput) {
+            whatsappInput.addEventListener('input', (event) => {
+                let valor = event.target.value;
+                valor = valor.replace(/\D/g, ""); 
+                if (valor.length > 0) {
+                    valor = "(" + valor;
+                }
+                if (valor.length > 3) {
+                    valor = valor.slice(0, 3) + ") " + valor.slice(3);
+                }
+                if (valor.length > 10) {
+                    valor = valor.slice(0, 10) + "-" + valor.slice(10, 15);
+                }
+                event.target.value = valor.slice(0, 15);
+            });
+        }
+
+        if (formularioNexo) {
+            formularioNexo.addEventListener('submit', async (event) => {
+                event.preventDefault(); 
+
+                const btnSubmit = document.getElementById('btn-submit');
+                
+                btnSubmit.disabled = true;
+                btnSubmit.innerText = "Processando agendamento...";
+
+                const dadosFormulario = {
+                    nome: document.getElementById('nome').value,
+                    whatsapp: document.getElementById('whatsapp').value,
+                    email: document.getElementById('email').value,
+                    atendimento: document.getElementById('atendimento').value,
+                    modalidade: document.getElementById('modalidade').value,
+                    mensagem: document.getElementById('mensagem').value
+                };
+
+                try {
+                    const response = await fetch('https://nexo-api-s2dz.onrender.com/api/agendamentos', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(dadosFormulario)
+                    });
+
+                    if (response.ok) {
+                        alert('Agendamento enviado com sucesso! Entraremos em contato.');
+                        formularioNexo.reset(); 
+                    } else {
+                        alert('Erro ao processar o agendamento no servidor. Código: ' + response.status);
+                    }
+                } catch (error) {
+                    console.error('Erro de conexão:', error);
+                    alert('Estamos acordando o servidor... por favor, aguarde mais alguns segundos e tente novamente.');
+                } finally {
+                    btnSubmit.disabled = false;
+                    btnSubmit.innerText = "AGENDAR CONSULTA";
+                }
+            });
+        }
+    </script>
 
 </body>
 </html>
