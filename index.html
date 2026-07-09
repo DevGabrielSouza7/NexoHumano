@@ -269,17 +269,17 @@
         </div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script>
-        // 1. INICIALIZAR A LIGAÇÃO AO SUPABASE
+   <script>
+        // 1. INICIALIZAR A LIGAÇÃO AO SUPABASE (NOME ALTERADO PARA supabaseClient)
         const supabaseUrl = 'https://aywlhxvljukjsmcspplc.supabase.co'; 
         const supabaseKey = 'sb_publishable_EEuGEXGAAMSTKXS94LTihA_Q9QWrDaT';
-        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+        const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
 
         // 2. FUNÇÃO PARA CARREGAR O CONTEÚDO
         async function carregarConteudoDinamico() {
             try {
-                // Vai à tabela 'conteudo_site' e traz todas as linhas
-                const { data, error } = await supabase
+                // Usamos o supabaseClient que acabámos de criar
+                const { data, error } = await supabaseClient
                     .from('conteudo_site')
                     .select('*');
 
@@ -305,8 +305,6 @@
                         const terapiaTexto = document.querySelector('.contact-text p');
                         if (terapiaTexto) terapiaTexto.innerHTML = item.valor;
                     }
-
-                    // Se quiser adicionar os contactos depois, a lógica é exatamente a mesma!
                 });
 
                 console.log('Conteúdo carregado da Base de Dados com sucesso!');
@@ -319,7 +317,6 @@
         // Executa a função automaticamente assim que o site carrega
         document.addEventListener('DOMContentLoaded', carregarConteudoDinamico);
     </script>
-
     <script>
         const formularioNexo = document.querySelector('.nexo-form');
         const whatsappInput = document.getElementById('whatsapp');
