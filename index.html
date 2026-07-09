@@ -268,6 +268,57 @@
             </p>
         </div>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        // 1. INICIALIZAR A LIGAÇÃO AO SUPABASE
+        const supabaseUrl = 'https://aywlhxvljukjsmcspplc.supabase.co'; 
+        const supabaseKey = 'sb_publishable_EEuGEXGAAMSTKXS94LTihA_Q9QWrDaT';
+        const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+        // 2. FUNÇÃO PARA CARREGAR O CONTEÚDO
+        async function carregarConteudoDinamico() {
+            try {
+                // Vai à tabela 'conteudo_site' e traz todas as linhas
+                const { data, error } = await supabase
+                    .from('conteudo_site')
+                    .select('*');
+
+                if (error) throw error;
+
+                // 3. ATUALIZAR O HTML COM OS DADOS DA BASE DE DADOS
+                data.forEach(item => {
+                    
+                    // Atualizar o Título da Hero Section
+                    if (item.secao === 'hero' && item.chave === 'titulo') {
+                        const heroTitle = document.querySelector('.hero-text h1');
+                        if (heroTitle) heroTitle.innerHTML = item.valor;
+                    }
+
+                    // Atualizar o Título da secção Terapia
+                    if (item.secao === 'terapia' && item.chave === 'titulo') {
+                        const terapiaTitle = document.querySelector('.contact-text h2');
+                        if (terapiaTitle) terapiaTitle.innerHTML = item.valor;
+                    }
+
+                    // Atualizar o Texto da secção Terapia
+                    if (item.secao === 'terapia' && item.chave === 'texto') {
+                        const terapiaTexto = document.querySelector('.contact-text p');
+                        if (terapiaTexto) terapiaTexto.innerHTML = item.valor;
+                    }
+
+                    // Se quiser adicionar os contactos depois, a lógica é exatamente a mesma!
+                });
+
+                console.log('Conteúdo carregado da Base de Dados com sucesso!');
+                
+            } catch (erro) {
+                console.error('Erro ao conectar com o Supabase:', erro.message);
+            }
+        }
+
+        // Executa a função automaticamente assim que o site carrega
+        document.addEventListener('DOMContentLoaded', carregarConteudoDinamico);
+    </script>
 
     <script>
         const formularioNexo = document.querySelector('.nexo-form');
