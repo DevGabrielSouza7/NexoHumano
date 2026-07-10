@@ -10,20 +10,84 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Link dinâmico unificado com todas as opções de tipografia mapeadas no CMS -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Lato:wght@300;400;700&family=Lora:ital,wght@0,400..700;1,400..700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600&family=Oswald:wght@300;400;500&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@300;400;500;600&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+    <!-- CSS Adicional para o Menu de Navegação do Topo -->
+    <style>
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            padding: 15px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .main-nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+        }
+        .main-nav a {
+            text-decoration: none;
+            font-weight: 500;
+            color: #2c302e; /* Cor base do texto */
+            transition: color 0.3s ease;
+            font-size: 1rem;
+        }
+        .main-nav a:hover {
+            color: #0b4522; /* Cor verde primária do Nexo */
+        }
+        
+        /* Ajuste do menu para telas de celular */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+            }
+            .main-nav ul {
+                gap: 15px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .main-nav a {
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* Efeito de rolagem suave para toda a página */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
 </head>
 <body>
 
     <header class="main-header">
         <div class="header-container">
             <div class="logo">
-                <img src="img/logo-nexo-completa.png" alt="Nexo Logo"> 
+                <img src="img/logo-nexo-completa.png" alt="Nexo Logo" style="max-height: 50px;"> 
             </div>
+            <!-- MENU DE TÓPICOS ADICIONADO AQUI -->
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#inicio">Início</a></li>
+                    <li><a href="#atividades">Atividades</a></li>
+                    <li><a href="#equipe">Equipe</a></li>
+                    <li><a href="#modalidades">Modalidades</a></li>
+                    <li><a href="#contato">Agendar</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 
     <main>
-        <section class="hero-section bg-beige">
+        <!-- 1. HERO SECTION (Adicionado id="inicio") -->
+        <section id="inicio" class="hero-section bg-beige">
             <div class="hero-container">
                 <div class="hero-text">
                     <h1>Lugar de<br>escuta e<br>cuidado</h1>
@@ -35,7 +99,8 @@
             </div>
         </section>
 
-        <section class="bg-white">
+        <!-- 2. ATIVIDADES (Adicionado id="atividades") -->
+        <section id="atividades" class="bg-white">
             <div class="container text-center">
                 <h2 class="section-title text-center">Conheça nossas<br>atividades</h2>
                 <div class="activities-grid">
@@ -64,7 +129,8 @@
             </div>
         </section>
 
-        <section class="bg-beige section-relative">
+        <!-- 3. EQUIPE (Adicionado id="equipe") -->
+        <section id="equipe" class="bg-beige section-relative">
             <div class="container">
                 <h2 class="section-title">Conheça quem<br>vai te atender</h2>
                 <div class="team-grid">
@@ -91,6 +157,7 @@
             </div>
         </section>
 
+        <!-- 4. TEXTO E FORMULÁRIO -->
         <section id="contato" class="bg-white">
             <div class="container contact-layout">
                 <div class="contact-text">
@@ -139,7 +206,8 @@
             </div>
         </section>
 
-        <section class="bg-beige">
+        <!-- 5. MODALIDADES (Adicionado id="modalidades") -->
+        <section id="modalidades" class="bg-beige">
             <div class="container">
                 <h2 class="section-title">Modalidades de<br>Atendimento</h2>
                 <div class="modalities-grid">
@@ -158,6 +226,7 @@
             </div>
         </section>
 
+        <!-- 6. DÚVIDAS FREQUENTES -->
         <section class="bg-white section-relative">
             <div class="container">
                 <h2 class="section-title">Dúvidas<br>frequentes</h2>
@@ -179,6 +248,7 @@
             </div>
         </section>
 
+        <!-- 7. JORNADA DE RECUPERAÇÃO -->
         <section class="bg-beige">
             <div class="container">
                 <h2 class="section-title">Jornada de<br>recuperação</h2>
@@ -215,7 +285,8 @@
             </div>
         </section>
 
-        <section class="info-section">
+        <!-- 8. SEÇÃO DE INFORMAÇÕES DE CONTATO -->
+         <section class="info-section">
             <div class="container">
                 <div class="info-grid">
                     <div class="info-col">
