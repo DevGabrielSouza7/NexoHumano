@@ -305,6 +305,13 @@
                         const terapiaTexto = document.querySelector('.contact-text p');
                         if (terapiaTexto) terapiaTexto.innerHTML = item.valor;
                     }
+                    // Atualizar a Imagem Principal
+                    if (item.secao === 'hero' && item.chave === 'imagem') {
+                        const heroImg = document.querySelector('.hero-image img'); 
+                        if (heroImg) {
+                        heroImg.src = item.valor;
+    }
+}
                 });
 
                 console.log('Conteúdo carregado da Base de Dados com sucesso!');
