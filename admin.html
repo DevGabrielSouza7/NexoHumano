@@ -145,9 +145,19 @@
         }
 
         async function buscarDadosAtuais() {
+            console.log("Iniciando busca no banco...");
             try {
-                const { data, error } = await supabaseClient.from('conteudo_site').select('*');
-                if (error) throw error;
+                const { data, error } = await supabaseClient
+                    .from('conteudo_site')
+                    .select('*');
+
+                if (error) {
+                    console.error("Erro retornado pelo Supabase:", error);
+                    throw error;
+                }
+                
+                console.log("Dados recebidos com sucesso:", data);
+               
                 data.forEach(item => {
                     if (item.secao === 'hero' && item.chave === 'titulo') document.getElementById('hero_titulo').value = item.valor;
                     if (item.secao === 'terapia' && item.chave === 'titulo') document.getElementById('terapia_titulo').value = item.valor;
