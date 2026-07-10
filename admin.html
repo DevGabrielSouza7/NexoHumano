@@ -32,7 +32,6 @@
             padding: 20px;
         }
 
-        /* Ecrã de Login */
         .login-card {
             background: white;
             padding: 40px;
@@ -43,7 +42,6 @@
             text-align: center;
         }
 
-        /* Painel Principal */
         .admin-container {
             display: none;
             background: white;
@@ -60,7 +58,10 @@
             font-size: 1.8rem;
             border-bottom: 2px solid var(--bg-beige);
             padding-bottom: 10px;
+            margin-top: 20px;
         }
+
+        h2:first-of-type { margin-top: 0; }
 
         .form-group {
             margin-bottom: 20px;
@@ -97,18 +98,22 @@
             border-color: var(--primary-green);
         }
 
-        textarea {
-            resize: vertical;
-        }
+        textarea { resize: vertical; }
 
         .preview-img {
-            max-width: 150px;
-            max-height: 150px;
+            max-width: 120px;
+            max-height: 120px;
             margin-top: 10px;
             border-radius: 8px;
             display: block;
             border: 1px solid #ddd;
             object-fit: cover;
+        }
+
+        .image-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
         }
 
         .btn {
@@ -122,12 +127,10 @@
             cursor: pointer;
             width: 100%;
             transition: opacity 0.3s;
-            margin-top: 10px;
+            margin-top: 20px;
         }
 
-        .btn:hover {
-            opacity: 0.9;
-        }
+        .btn:hover { opacity: 0.9; }
 
         .status-msg {
             margin-top: 15px;
@@ -150,32 +153,61 @@
     </div>
 
     <div class="admin-container" id="adminContainer">
-        <h2>Gerenciar Conteúdo do Site</h2>
-        
         <form id="adminForm" onsubmit="salvarAlteracoes(event)">
             
+            <h2>Seção Inicial (Hero)</h2>
             <div class="form-group">
                 <label for="hero_titulo">Título Principal (Boas-vindas)</label>
                 <input type="text" id="hero_titulo" required>
             </div>
-        
             <div class="form-group">
-                <label for="hero_imagem">Imagem Principal da Hero (Google Fotos / Arquivos)</label>
+                <label for="hero_imagem">Imagem Principal da Hero</label>
                 <input type="file" id="hero_imagem" accept="image/*" onchange="mostrarPreview(this, 'previewHero')">
-                <input type="hidden" id="hero_imagem_url_atual"> <img id="previewHero" class="preview-img" src="" alt="Preview da imagem">
+                <input type="hidden" id="hero_imagem_url_atual">
+                <img id="previewHero" class="preview-img" src="" alt="Preview">
             </div>
 
+            <h2>Seção Terapia</h2>
             <div class="form-group">
                 <label for="terapia_titulo">Título da Seção Terapia</label>
                 <input type="text" id="terapia_titulo" required>
             </div>
-
             <div class="form-group">
                 <label for="terapia_texto">Texto Explicativo da Terapia</label>
-                <textarea id="terapia_texto" rows="5" required></textarea>
+                <textarea id="terapia_texto" rows="4" required></textarea>
             </div>
 
-            <button type="submit" class="btn" id="btnSalvar">Salvar Alterações</button>
+            <h2>Quem vai te atender (Equipe)</h2>
+            <div class="image-grid">
+                <div class="form-group">
+                    <label for="equipe_foto1">Foto do Psicólogo 1</label>
+                    <input type="file" id="equipe_foto1" accept="image/*" onchange="mostrarPreview(this, 'previewEquipe1')">
+                    <input type="hidden" id="equipe_foto1_url_atual">
+                    <img id="previewEquipe1" class="preview-img" src="" alt="Preview">
+                </div>
+                <div class="form-group">
+                    <label for="equipe_foto2">Foto do Psicólogo 2</label>
+                    <input type="file" id="equipe_foto2" accept="image/*" onchange="mostrarPreview(this, 'previewEquipe2')">
+                    <input type="hidden" id="equipe_foto2_url_atual">
+                    <img id="previewEquipe2" class="preview-img" src="" alt="Preview">
+                </div>
+                <div class="form-group">
+                    <label for="equipe_foto3">Foto do Psicólogo 3</label>
+                    <input type="file" id="equipe_foto3" accept="image/*" onchange="mostrarPreview(this, 'previewEquipe3')">
+                    <input type="hidden" id="equipe_foto3_url_atual">
+                    <img id="previewEquipe3" class="preview-img" src="" alt="Preview">
+                </div>
+            </div>
+
+            <h2>Imagens de Baixo (Rodapé / Estrutura)</h2>
+            <div class="form-group">
+                <label for="rodape_foto1">Imagem de Baixo (Destaque/Rodapé)</label>
+                <input type="file" id="rodape_foto1" accept="image/*" onchange="mostrarPreview(this, 'previewRodape1')">
+                <input type="hidden" id="rodape_foto1_url_atual">
+                <img id="previewRodape1" class="preview-img" src="" alt="Preview">
+            </div>
+
+            <button type="submit" class="btn" id="btnSalvar">Salvar Todas as Alterações</button>
         </form>
         
         <div id="statusSalvar" class="status-msg"></div>
@@ -203,7 +235,6 @@
             }
         }
 
-        // Função para mostrar a foto na tela assim que o usuário clica nela nos arquivos
         function mostrarPreview(input, idPreview) {
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
@@ -212,6 +243,31 @@
                 }
                 reader.readAsDataURL(input.files[0]);
             }
+        }
+
+        // FUNÇÃO COMPACTA E REUTILIZÁVEL PARA FAZER UPLOAD DE QUALQUER IMAGEM
+        async function fazerUploadImagem(inputId, hiddenId, prefixoNome) {
+            const fileInput = document.getElementById(inputId);
+            let urlFinal = document.getElementById(hiddenId).value;
+
+            if (fileInput.files && fileInput.files[0]) {
+                const file = fileInput.files[0];
+                const fileExt = file.name.split('.').pop();
+                const fileName = `${prefixoNome}_${Date.now()}.${fileExt}`;
+
+                const { error: uploadError } = await supabaseClient.storage
+                    .from('imagens-clinica')
+                    .upload(fileName, file);
+
+                if (uploadError) throw uploadError;
+
+                const { data: publicUrlData } = supabaseClient.storage
+                    .from('imagens-clinica')
+                    .getPublicUrl(fileName);
+
+                urlFinal = publicUrlData.publicUrl;
+            }
+            return urlFinal;
         }
 
         async function buscarDadosAtuais() {
@@ -223,71 +279,66 @@
                 if (error) throw error;
 
                 data.forEach(item => {
-                    if (item.secao === 'hero' && item.chave === 'titulo') {
-                        document.getElementById('hero_titulo').value = item.valor;
-                    }
-                    if (item.secao === 'terapia' && item.chave === 'titulo') {
-                        document.getElementById('terapia_titulo').value = item.valor;
-                    }
-                    if (item.secao === 'terapia' && item.chave === 'texto') {
-                        document.getElementById('terapia_texto').value = item.valor;
-                    }
+                    if (item.secao === 'hero' && item.chave === 'titulo') document.getElementById('hero_titulo').value = item.valor;
+                    if (item.secao === 'terapia' && item.chave === 'titulo') document.getElementById('terapia_titulo').value = item.valor;
+                    if (item.secao === 'terapia' && item.chave === 'texto') document.getElementById('terapia_texto').value = item.valor;
+                    
+                    // Mapeamento das Imagens para os Inputs Escondidos e Previews
                     if (item.secao === 'hero' && item.chave === 'imagem') {
                         document.getElementById('hero_imagem_url_atual').value = item.valor;
                         document.getElementById('previewHero').src = item.valor;
                     }
+                    if (item.secao === 'equipe' && item.chave === 'foto_1') {
+                        document.getElementById('equipe_foto1_url_atual').value = item.valor;
+                        document.getElementById('previewEquipe1').src = item.valor;
+                    }
+                    if (item.secao === 'equipe' && item.chave === 'foto_2') {
+                        document.getElementById('equipe_foto2_url_atual').value = item.valor;
+                        document.getElementById('previewEquipe2').src = item.valor;
+                    }
+                    if (item.secao === 'equipe' && item.chave === 'foto_3') {
+                        document.getElementById('equipe_foto3_url_atual').value = item.valor;
+                        document.getElementById('previewEquipe3').src = item.valor;
+                    }
+                    if (item.secao === 'rodape' && item.chave === 'foto_1') {
+                        document.getElementById('rodape_foto1_url_atual').value = item.valor;
+                        document.getElementById('previewRodape1').src = item.valor;
+                    }
                 });
             } catch (error) {
                 console.error("Erro ao carregar dados:", error.message);
-                alert("Erro ao ler os dados atuais do Supabase.");
+                alert("Erro ao ler os dados atuais.");
             }
         }
 
         async function salvarAlteracoes(event) {
             event.preventDefault();
-            
             const btnSalvar = document.getElementById('btnSalvar');
             const statusSalvar = document.getElementById('statusSalvar');
 
             btnSalvar.disabled = true;
             statusSalvar.style.color = "blue";
-            statusSalvar.innerText = "Enviando dados e carregando imagens para o Storage...";
+            statusSalvar.innerText = "Processando uploads e atualizando o banco...";
 
             try {
-                let urlFinalImagemHero = document.getElementById('hero_imagem_url_atual').value;
-                const fileInputHero = document.getElementById('hero_imagem');
+                // Executa o upload inteligente de cada imagem
+                const urlHero = await fazerUploadImagem('hero_imagem', 'hero_imagem_url_atual', 'hero');
+                const urlEquipe1 = await fazerUploadImagem('equipe_foto1', 'equipe_foto1_url_atual', 'eq1');
+                const urlEquipe2 = await fazerUploadImagem('equipe_foto2', 'equipe_foto2_url_atual', 'eq2');
+                const urlEquipe3 = await fazerUploadImagem('equipe_foto3', 'equipe_foto3_url_atual', 'eq3');
+                const urlRodape1 = await fazerUploadImagem('rodape_foto1', 'rodape_foto1_url_atual', 'rod1');
 
-                // LÓGICA DE UPLOAD DA IMAGEM PARA O STORAGE
-                if (fileInputHero.files && fileInputHero.files[0]) {
-                    const file = fileInputHero.files[0];
-                    const fileExt = file.name.split('.').pop();
-                    // Cria um nome único usando o timestamp para evitar arquivos duplicados
-                    const fileName = `hero_${Date.now()}.${fileExt}`;
-
-                    // Faz o upload para a pasta 'imagens-clinica' que criamos
-                    const { data: uploadData, error: uploadError } = await supabaseClient.storage
-                        .from('imagens-clinica')
-                        .upload(fileName, file);
-
-                    if (uploadError) throw uploadError;
-
-                    // Pega o link público gerado pelo Supabase Storage
-                    const { data: publicUrlData } = supabaseClient.storage
-                        .from('imagens-clinica')
-                        .getPublicUrl(fileName);
-
-                    urlFinalImagemHero = publicUrlData.publicUrl;
-                }
-
-                // Monta o array com as informações atualizadas
                 const novosDados = [
                     { secao: 'hero', chave: 'titulo', valor: document.getElementById('hero_titulo').value },
                     { secao: 'terapia', chave: 'titulo', valor: document.getElementById('terapia_titulo').value },
                     { secao: 'terapia', chave: 'texto', valor: document.getElementById('terapia_texto').value },
-                    { secao: 'hero', chave: 'imagem', valor: urlFinalImagemHero },
+                    { secao: 'hero', chave: 'imagem', valor: urlHero },
+                    { secao: 'equipe', chave: 'foto_1', valor: urlEquipe1 },
+                    { secao: 'equipe', chave: 'foto_2', valor: urlEquipe2 },
+                    { secao: 'equipe', chave: 'foto_3', valor: urlEquipe3 },
+                    { secao: 'rodape', chave: 'foto_1', valor: urlRodape1 }
                 ];
 
-                // Executa o UPDATE na tabela conteudo_site
                 for (const item of novosDados) {
                     const { error } = await supabaseClient
                         .from('conteudo_site')
@@ -298,11 +349,15 @@
                     if (error) throw error;
                 }
 
-                // Atualiza o input oculto com a nova URL para caso o admin queira salvar novamente
-                document.getElementById('hero_imagem_url_atual').value = urlFinalImagemHero;
+                // Atualiza as variáveis locais para refletir o estado salvo
+                document.getElementById('hero_imagem_url_atual').value = urlHero;
+                document.getElementById('equipe_foto1_url_atual').value = urlEquipe1;
+                document.getElementById('equipe_foto2_url_atual').value = urlEquipe2;
+                document.getElementById('equipe_foto3_url_atual').value = urlEquipe3;
+                document.getElementById('rodape_foto1_url_atual').value = urlRodape1;
 
                 statusSalvar.style.color = "green";
-                statusSalvar.innerText = "Sucesso! O site e as imagens foram atualizados em tempo real.";
+                statusSalvar.innerText = "Sucesso! O site e todas as imagens foram atualizados.";
             } catch (error) {
                 console.error("Erro ao salvar:", error.message);
                 statusSalvar.style.color = "red";

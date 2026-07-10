@@ -310,8 +310,30 @@
                         const heroImg = document.querySelector('.hero-image img'); 
                         if (heroImg) {
                         heroImg.src = item.valor;
-    }
-}
+                    }
+                   // 1. Fotos da secção "Quem vai te atender" (Equipe)
+                    if (item.secao === 'equipe' && item.chave === 'foto_1') {
+                        const foto1 = document.querySelector('.team-grid .team-card:nth-child(1) img');
+                        if (foto1) foto1.src = item.valor;
+                    }
+                    if (item.secao === 'equipe' && item.chave === 'foto_2') {
+                        const foto2 = document.querySelector('.team-grid .team-card:nth-child(2) img');
+                        if (foto2) foto2.src = item.valor;
+                    }
+                    if (item.secao === 'equipe' && item.chave === 'foto_3') {
+                        const foto3 = document.querySelector('.team-grid .team-card:nth-child(3) img');
+                        if (foto3) foto3.src = item.valor;
+                    }
+                    // 2. Imagens das Modalidades de Atendimento (Online e Presencial)
+                    if (item.secao === 'modalidades' && item.chave === 'foto_online') {
+                        const fotoOnline = document.querySelector('.modalities-grid .modality-card:nth-child(1) img');
+                        if (fotoOnline) fotoOnline.src = item.valor;
+                    }
+                    if (item.secao === 'modalidades' && item.chave === 'foto_presencial') {
+                        const fotoPresencial = document.querySelector('.modalities-grid .modality-card:nth-child(2) img');
+                        if (fotoPresencial) fotoPresencial.src = item.valor;
+                    }
+                }
                 });
 
                 console.log('Conteúdo carregado da Base de Dados com sucesso!');
