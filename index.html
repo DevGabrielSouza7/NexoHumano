@@ -23,6 +23,7 @@
     </header>
 
     <main>
+        <!-- 1. HERO SECTION -->
         <section class="hero-section bg-beige">
             <div class="hero-container">
                 <div class="hero-text">
@@ -35,6 +36,7 @@
             </div>
         </section>
 
+        <!-- 2. ATIVIDADES -->
         <section class="bg-white">
             <div class="container text-center">
                 <h2 class="section-title text-center">Conheça nossas<br>atividades</h2>
@@ -64,6 +66,7 @@
             </div>
         </section>
 
+        <!-- 3. EQUIPE -->
         <section class="bg-beige section-relative">
             <div class="container">
                 <h2 class="section-title">Conheça quem<br>vai te atender</h2>
@@ -91,6 +94,7 @@
             </div>
         </section>
 
+        <!-- 4. TEXTO E FORMULÁRIO -->
         <section id="contato" class="bg-white">
             <div class="container contact-layout">
                 <div class="contact-text">
@@ -139,6 +143,7 @@
             </div>
         </section>
 
+        <!-- 5. MODALIDADES -->
         <section class="bg-beige">
             <div class="container">
                 <h2 class="section-title">Modalidades de<br>Atendimento</h2>
@@ -158,6 +163,7 @@
             </div>
         </section>
 
+        <!-- 6. DÚVIDAS FREQUENTES -->
         <section class="bg-white section-relative">
             <div class="container">
                 <h2 class="section-title">Dúvidas<br>frequentes</h2>
@@ -179,6 +185,7 @@
             </div>
         </section>
 
+        <!-- 7. JORNADA DE RECUPERAÇÃO -->
         <section class="bg-beige">
             <div class="container">
                 <h2 class="section-title">Jornada de<br>recuperação</h2>
@@ -215,7 +222,8 @@
             </div>
         </section>
 
-        <section class="info-section">
+        <!-- 8. SEÇÃO DE INFORMAÇÕES DE CONTATO -->
+         <section class="info-section">
             <div class="container">
                 <div class="info-grid">
                     <div class="info-col">
@@ -270,20 +278,15 @@
                 const { data, error } = await supabaseClient.from('conteudo_site').select('*');
                 if (error) throw error;
 
-                // 1. Criar o Mapa (Dicionário)
                 const dbMap = {};
                 data.forEach(item => {
                     dbMap[item.secao + "_" + item.chave] = item.valor;
                 });
 
-                console.log("Mapa de dados carregado:", dbMap);
-
-                // 2. Erros corrigidos e atualização de Textos
                 if (dbMap['hero_titulo']) document.querySelector('.hero-text h1').innerHTML = dbMap['hero_titulo'];
                 if (dbMap['terapia_titulo']) document.querySelector('.contact-text h2').innerHTML = dbMap['terapia_titulo'];
                 if (dbMap['terapia_texto']) document.querySelector('.contact-text p').innerHTML = dbMap['terapia_texto'];
 
-                // 3. Função segura para atualizar imagem
                 function updateImg(selector, valor) {
                     const img = document.querySelector(selector);
                     if (img && valor && valor.length > 5 && valor !== 'https://via.placeholder.com/300') {
@@ -291,9 +294,6 @@
                     }
                 }
 
-                // ==========================================
-                // NOVO: Função para aplicar CSS dinâmico (Tamanho e Ajuste)
-                // ==========================================
                 function aplicarEstiloImagem(selector, dbMap, baseKey) {
                     const img = document.querySelector(selector);
                     if (!img) return;
@@ -301,13 +301,15 @@
                     const width = dbMap[baseKey + '_width'];
                     const height = dbMap[baseKey + '_height'];
                     const fit = dbMap[baseKey + '_fit'];
+                    const position = dbMap[baseKey + '_position'];
 
                     if (width) img.style.width = width;
                     if (height) img.style.height = height;
                     if (fit) img.style.objectFit = fit;
+                    if (position) img.style.objectPosition = position;
                 }
 
-                // 4. Atualizar Imagens
+                // Aplicar Imagens
                 updateImg('.hero-image img', dbMap['hero_imagem']);
                 updateImg('.team-grid .team-card:nth-child(1) img', dbMap['equipe_foto_1']);
                 updateImg('.team-grid .team-card:nth-child(2) img', dbMap['equipe_foto_2']);
@@ -315,12 +317,15 @@
                 updateImg('.modalities-grid .modality-card:nth-child(1) img', dbMap['modalidades_foto_online']);
                 updateImg('.modalities-grid .modality-card:nth-child(2) img', dbMap['modalidades_foto_presencial']);
 
-                // ==========================================
-                // NOVO: Aplicando o CSS dinâmico na Foto 1 da Equipe
-                // ==========================================
+                // Aplicar Estilos CSS Dinâmicos em todas as seções
+                aplicarEstiloImagem('.hero-image img', dbMap, 'hero_imagem');
+                
                 aplicarEstiloImagem('.team-grid .team-card:nth-child(1) img', dbMap, 'equipe_foto_1');
-
-                console.log('Conteúdo carregado e processado com sucesso!');
+                aplicarEstiloImagem('.team-grid .team-card:nth-child(2) img', dbMap, 'equipe_foto_1');
+                aplicarEstiloImagem('.team-grid .team-card:nth-child(3) img', dbMap, 'equipe_foto_1');
+                
+                aplicarEstiloImagem('.modalities-grid .modality-card:nth-child(1) img', dbMap, 'modalidades_foto');
+                aplicarEstiloImagem('.modalities-grid .modality-card:nth-child(2) img', dbMap, 'modalidades_foto');
                 
             } catch (erro) {
                 console.error('Erro ao conectar com o Supabase:', erro.message);
@@ -384,4 +389,4 @@
         }
     </script>
 </body>
-        </html>
+</html>
