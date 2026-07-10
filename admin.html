@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel Administrativo | Nexo Psicologia</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-beige: #efebe4;
+            --primary-green: #0b4522;
+            --text-dark: #2c302e;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-beige);
+            color: var(--text-dark);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        /* Ecrã de Login */
+        .login-card {
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        /* Painel Principal */
+        .admin-container {
+            display: none;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 800px;
+        }
+
+        h2 {
+            margin-bottom: 25px;
+            color: var(--primary-green);
+            font-size: 1.8rem;
+            border-bottom: 2px solid var(--bg-beige);
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        input[type="password"], input[type="text"], textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            outline: none;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        input[type="file"] {
+            background: #f9f9f9;
+            padding: 10px;
+            border: 2px dashed #ddd;
+            width: 100%;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        input:focus, textarea:focus {
+            border-color: var(--primary-green);
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        .preview-img {
+            max-width: 150px;
+            max-height: 150px;
+            margin-top: 10px;
+            border-radius: 8px;
+            display: block;
+            border: 1px solid #ddd;
+            object-fit: cover;
+        }
+
+        .btn {
+            background-color: var(--primary-green);
+            color: white;
+            padding: 14px 25px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: opacity 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+
+        .status-msg {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-card" id="loginCard">
+        <h2 style="border:none; margin-bottom:15px;">Acesso Restrito</h2>
+        <p style="color:#777; margin-bottom:20px; font-size:0.9rem;">Introduza a senha do administrador</p>
+        <div class="form-group">
+            <input type="password" id="senhaAdmin" placeholder="Digite a senha...">
+        </div>
+        <button class="btn" onclick="verificarSenha()">Entrar no Painel</button>
+        <div id="loginErro" class="status-msg" style="color: red;"></div>
+    </div>
+
+    <div class="admin-container" id="adminContainer">
+        <h2>Gerenciar Conteúdo do Site</h2>
+        
+        <form id="adminForm" onsubmit="salvarAlteracoes(event)">
+            
+            <div class="form-group">
+                <label for="hero_titulo">Título Principal (Boas-vindas)</label>
+                <input type="text" id="hero_titulo" required>
+            </div>
+        
+            <div class="form-group">
+                <label for="hero_imagem">Imagem Principal da Hero (Google Fotos / Arquivos)</label>
+                <input type="file" id="hero_imagem" accept="image/*" onchange="mostrarPreview(this, 'previewHero')">
+                <input type="hidden" id="hero_imagem_url_atual"> <img id="previewHero" class="preview-img" src="" alt="Preview da imagem">
+            </div>
+
+            <div class="form-group">
+                <label for="terapia_titulo">Título da Seção Terapia</label>
+                <input type="text" id="terapia_titulo" required>
+            </div>
+
+            <div class="form-group">
+                <label for="terapia_texto">Texto Explicativo da Terapia</label>
+                <textarea id="terapia_texto" rows="5" required></textarea>
+            </div>
+
+            <button type="submit" class="btn" id="btnSalvar">Salvar Alterações</button>
+        </form>
+        
+        <div id="statusSalvar" class="status-msg"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+        const supabaseUrl = 'https://aywlhxvljukjsmcspplc.supabase.co'; 
+        const supabaseKey = 'sb_publishable_EEuGEXGAAMSTKXS94LTihA_Q9QWrDaT';
+        const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+        const SENHA_CORRETA = 'Pai7nel@07';
+
+        function verificarSenha() {
+            const senhaDigitada = document.getElementById('senhaAdmin').value;
+            const loginErro = document.getElementById('loginErro');
+
+            if (senhaDigitada === SENHA_CORRETA) {
+                document.getElementById('loginCard').style.display = 'none';
+                document.getElementById('adminContainer').style.display = 'block';
+                buscarDadosAtuais();
+            } else {
+                loginErro.innerText = "Senha incorreta! Tente novamente.";
+            }
+        }
+
+        // Função para mostrar a foto na tela assim que o usuário clica nela nos arquivos
+        function mostrarPreview(input, idPreview) {
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    document.getElementById(idPreview).src = e.target.result;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        async function buscarDadosAtuais() {
+            try {
+                const { data, error } = await supabaseClient
+                    .from('conteudo_site')
+                    .select('*');
+
+                if (error) throw error;
+
+                data.forEach(item => {
+                    if (item.secao === 'hero' && item.chave === 'titulo') {
+                        document.getElementById('hero_titulo').value = item.valor;
+                    }
+                    if (item.secao === 'terapia' && item.chave === 'titulo') {
+                        document.getElementById('terapia_titulo').value = item.valor;
+                    }
+                    if (item.secao === 'terapia' && item.chave === 'texto') {
+                        document.getElementById('terapia_texto').value = item.valor;
+                    }
+                    if (item.secao === 'hero' && item.chave === 'imagem') {
+                        document.getElementById('hero_imagem_url_atual').value = item.valor;
+                        document.getElementById('previewHero').src = item.valor;
+                    }
+                });
+            } catch (error) {
+                console.error("Erro ao carregar dados:", error.message);
+                alert("Erro ao ler os dados atuais do Supabase.");
+            }
+        }
+
+        async function salvarAlteracoes(event) {
+            event.preventDefault();
+            
+            const btnSalvar = document.getElementById('btnSalvar');
+            const statusSalvar = document.getElementById('statusSalvar');
+
+            btnSalvar.disabled = true;
+            statusSalvar.style.color = "blue";
+            statusSalvar.innerText = "Enviando dados e carregando imagens para o Storage...";
+
+            try {
+                let urlFinalImagemHero = document.getElementById('hero_imagem_url_atual').value;
+                const fileInputHero = document.getElementById('hero_imagem');
+
+                // LÓGICA DE UPLOAD DA IMAGEM PARA O STORAGE
+                if (fileInputHero.files && fileInputHero.files[0]) {
+                    const file = fileInputHero.files[0];
+                    const fileExt = file.name.split('.').pop();
+                    // Cria um nome único usando o timestamp para evitar arquivos duplicados
+                    const fileName = `hero_${Date.now()}.${fileExt}`;
+
+                    // Faz o upload para a pasta 'imagens-clinica' que criamos
+                    const { data: uploadData, error: uploadError } = await supabaseClient.storage
+                        .from('imagens-clinica')
+                        .upload(fileName, file);
+
+                    if (uploadError) throw uploadError;
+
+                    // Pega o link público gerado pelo Supabase Storage
+                    const { data: publicUrlData } = supabaseClient.storage
+                        .from('imagens-clinica')
+                        .getPublicUrl(fileName);
+
+                    urlFinalImagemHero = publicUrlData.publicUrl;
+                }
+
+                // Monta o array com as informações atualizadas
+                const novosDados = [
+                    { secao: 'hero', chave: 'titulo', valor: document.getElementById('hero_titulo').value },
+                    { secao: 'terapia', chave: 'titulo', valor: document.getElementById('terapia_titulo').value },
+                    { secao: 'terapia', chave: 'texto', valor: document.getElementById('terapia_texto').value },
+                    { secao: 'hero', chave: 'imagem', valor: urlFinalImagemHero },
+                ];
+
+                // Executa o UPDATE na tabela conteudo_site
+                for (const item of novosDados) {
+                    const { error } = await supabaseClient
+                        .from('conteudo_site')
+                        .update({ valor: item.valor })
+                        .eq('secao', item.secao)
+                        .eq('chave', item.chave);
+
+                    if (error) throw error;
+                }
+
+                // Atualiza o input oculto com a nova URL para caso o admin queira salvar novamente
+                document.getElementById('hero_imagem_url_atual').value = urlFinalImagemHero;
+
+                statusSalvar.style.color = "green";
+                statusSalvar.innerText = "Sucesso! O site e as imagens foram atualizados em tempo real.";
+            } catch (error) {
+                console.error("Erro ao salvar:", error.message);
+                statusSalvar.style.color = "red";
+                statusSalvar.innerText = "Erro ao salvar: " + error.message;
+            } finally {
+                btnSalvar.disabled = false;
+            }
+        }
+    </script>
+</body>
+</html>
