@@ -10,7 +10,6 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- Fontes: Playfair Display (Títulos) e Poppins (Textos) -->
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -223,8 +222,8 @@
             </div>
         </section>
 
-        <!-- 8. SEÇÃO DE INFORMAÇÕES DE CONTATO (AGORA NO FUNDO VERDE) -->
-       <section class="info-section">
+        <!-- 8. SEÇÃO DE INFORMAÇÕES DE CONTATO -->
+         <section class="info-section">
             <div class="container">
                 <div class="info-grid">
                     <div class="info-col">
@@ -259,7 +258,6 @@
         </section>
     </main>
 
-    <!-- RODAPÉ COMPACTO E ASSINATURA (AGORA NO FUNDO BRANCO) -->
     <footer class="simple-footer bg-white">
         <div class="container" style="padding: 30px 0; text-align: center;">
             <p>&copy; 2026 Nexo Psicologia Humanista. Todos os direitos reservados.</p>
@@ -268,86 +266,54 @@
             </p>
         </div>
     </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-   <script>
-        // 1. INICIALIZAR A LIGAÇÃO AO SUPABASE (NOME ALTERADO PARA supabaseClient)
+    <script>
         const supabaseUrl = 'https://aywlhxvljukjsmcspplc.supabase.co'; 
         const supabaseKey = 'sb_publishable_EEuGEXGAAMSTKXS94LTihA_Q9QWrDaT';
         const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
 
-        // 2. FUNÇÃO PARA CARREGAR O CONTEÚDO
         async function carregarConteudoDinamico() {
             try {
-                // Usamos o supabaseClient que acabámos de criar
-                const { data, error } = await supabaseClient
-                    .from('conteudo_site')
-                    .select('*');
-
+                const { data, error } = await supabaseClient.from('conteudo_site').select('*');
                 if (error) throw error;
 
-                // 3. ATUALIZAR O HTML COM OS DADOS DA BASE DE DADOS
+                // 1. Criar o Mapa (Dicionário)
+                const dbMap = {};
                 data.forEach(item => {
-                    
-                    // Atualizar o Título da Hero Section
-                    if (item.secao === 'hero' && item.chave === 'titulo') {
-                        const heroTitle = document.querySelector('.hero-text h1');
-                        if (heroTitle) heroTitle.innerHTML = item.valor;
-                    }
-
-                    // Atualizar o Título da secção Terapia
-                    if (item.secao === 'terapia' && item.chave === 'titulo') {
-                        const terapiaTitle = document.querySelector('.contact-text h2');
-                        if (terapiaTitle) terapiaTitle.innerHTML = item.valor;
-                    }
-
-                    // Atualizar o Texto da secção Terapia
-                    if (item.secao === 'terapia' && item.chave === 'texto') {
-                        const terapiaTexto = document.querySelector('.contact-text p');
-                        if (terapiaTexto) terapiaTexto.innerHTML = item.valor;
-                    }
-                    // Atualizar a Imagem Principal
-                    if (item.secao === 'hero' && item.chave === 'imagem') {
-                        const heroImg = document.querySelector('.hero-image img'); 
-                        if (heroImg) {
-                        heroImg.src = item.valor;
-                    }
-                  // ==========================================
-                    // 1. FOTOS DA SEÇÃO QUEM VAI TE ATENDER (EQUIPE)
-                    // ==========================================
-                    const fotosEquipe = document.querySelectorAll('.team-grid .team-card img');
-                    
-                    if (item.secao === 'equipe' && item.chave === 'foto_1' && fotosEquipe[0]) {
-                        fotosEquipe[0].src = item.valor;
-                    }
-                    if (item.secao === 'equipe' && item.chave === 'foto_2' && fotosEquipe[1]) {
-                        fotosEquipe[1].src = item.valor;
-                    }
-                    if (item.secao === 'equipe' && item.chave === 'foto_3' && fotosEquipe[2]) {
-                        fotosEquipe[2].src = item.valor;
-                    }
-
-                    // ==========================================
-                    // 2. IMAGENS DAS MODALIDADES DE ATENDIMENTO
-                    // ==========================================
-                    const fotosModalidades = document.querySelectorAll('.modalities-grid .modality-card img');
-                    
-                    if (item.secao === 'modalidades' && item.chave === 'foto_online' && fotosModalidades[0]) {
-                        fotosModalidades[0].src = item.valor;
-                    }
-                    if (item.secao === 'modalidades' && item.chave === 'foto_presencial' && fotosModalidades[1]) {
-                        fotosModalidades[1].src = item.valor;
-                    }
-                }
+                    dbMap[item.secao + "_" + item.chave] = item.valor;
                 });
 
-                console.log('Conteúdo carregado da Base de Dados com sucesso!');
+                console.log("Mapa de dados carregado:", dbMap);
+
+                // 2. Atualizar Textos
+                if (dbMap['hero_titulo']) document.querySelector('.hero-text h1').innerHTML = dbMap['hero_titulo'];
+                if (dbMap['terapia_titulo']) document.querySelector('.contact-text h2').innerHTML = dbMap['terapia_titulo'];
+                if (dbMap['terapia_texto']) document.querySelector('.contact-text p').innerHTML = dbMap['terapia_texto'];
+
+                // 3. Função segura para atualizar imagem
+                function updateImg(selector, valor) {
+                    const img = document.querySelector(selector);
+                    if (img && valor && valor.length > 5 && valor !== 'https://via.placeholder.com/300') {
+                        img.src = valor;
+                    }
+                }
+
+                // 4. Atualizar Imagens
+                updateImg('.hero-image img', dbMap['hero_imagem']);
+                updateImg('.team-grid .team-card:nth-child(1) img', dbMap['equipe_foto_1']);
+                updateImg('.team-grid .team-card:nth-child(2) img', dbMap['equipe_foto_2']);
+                updateImg('.team-grid .team-card:nth-child(3) img', dbMap['equipe_foto_3']);
+                updateImg('.modalities-grid .modality-card:nth-child(1) img', dbMap['modalidades_foto_online']);
+                updateImg('.modalities-grid .modality-card:nth-child(2) img', dbMap['modalidades_foto_presencial']);
+
+                console.log('Conteúdo carregado e processado com sucesso!');
                 
             } catch (erro) {
                 console.error('Erro ao conectar com o Supabase:', erro.message);
             }
         }
 
-        // Executa a função automaticamente assim que o site carrega
         document.addEventListener('DOMContentLoaded', carregarConteudoDinamico);
     </script>
     <script>
@@ -358,15 +324,9 @@
             whatsappInput.addEventListener('input', (event) => {
                 let valor = event.target.value;
                 valor = valor.replace(/\D/g, ""); 
-                if (valor.length > 0) {
-                    valor = "(" + valor;
-                }
-                if (valor.length > 3) {
-                    valor = valor.slice(0, 3) + ") " + valor.slice(3);
-                }
-                if (valor.length > 10) {
-                    valor = valor.slice(0, 10) + "-" + valor.slice(10, 15);
-                }
+                if (valor.length > 0) valor = "(" + valor;
+                if (valor.length > 3) valor = valor.slice(0, 3) + ") " + valor.slice(3);
+                if (valor.length > 10) valor = valor.slice(0, 10) + "-" + valor.slice(10, 15);
                 event.target.value = valor.slice(0, 15);
             });
         }
@@ -374,9 +334,7 @@
         if (formularioNexo) {
             formularioNexo.addEventListener('submit', async (event) => {
                 event.preventDefault(); 
-
                 const btnSubmit = document.getElementById('btn-submit');
-                
                 btnSubmit.disabled = true;
                 btnSubmit.innerText = "Processando agendamento...";
 
@@ -392,9 +350,7 @@
                 try {
                     const response = await fetch('https://nexo-api-s2dz.onrender.com/api/agendamentos', {
                         method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
+                        headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify(dadosFormulario)
                     });
 
