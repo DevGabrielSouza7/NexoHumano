@@ -9,145 +9,31 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     
     <style>
-        :root {
-            --bg-beige: #efebe4;
-            --primary-green: #0b4522;
-            --text-dark: #2c302e;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-beige);
-            color: var(--text-dark);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            padding: 20px;
-        }
-
-        .login-card {
-            background: white;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
-        }
-
-        .admin-container {
-            display: none;
-            background: white;
-            padding: 40px;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            width: 100%;
-            max-width: 800px;
-        }
-
-        h2 {
-            margin-bottom: 25px;
-            color: var(--primary-green);
-            font-size: 1.8rem;
-            border-bottom: 2px solid var(--bg-beige);
-            padding-bottom: 10px;
-            margin-top: 20px;
-        }
-
+        :root { --bg-beige: #efebe4; --primary-green: #0b4522; --text-dark: #2c302e; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--bg-beige); color: var(--text-dark); display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
+        .login-card { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; max-width: 400px; text-align: center; }
+        .admin-container { display: none; background: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); width: 100%; max-width: 800px; }
+        h2 { margin-bottom: 25px; color: var(--primary-green); font-size: 1.8rem; border-bottom: 2px solid var(--bg-beige); padding-bottom: 10px; margin-top: 20px; }
         h2:first-of-type { margin-top: 0; }
-
-        .form-group {
-            margin-bottom: 20px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 500;
-            font-size: 0.95rem;
-            color: #555;
-        }
-
-        input[type="password"], input[type="text"], textarea {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #ddd;
-            border-radius: 4px;
-            outline: none;
-            font-size: 1rem;
-            transition: border-color 0.3s;
-        }
-
-        input[type="file"] {
-            background: #f9f9f9;
-            padding: 10px;
-            border: 2px dashed #ddd;
-            width: 100%;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        input:focus, textarea:focus {
-            border-color: var(--primary-green);
-        }
-
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: 500; font-size: 0.95rem; color: #555; }
+        input[type="password"], input[type="text"], textarea { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 4px; outline: none; font-size: 1rem; transition: border-color 0.3s; }
+        input[type="file"] { background: #f9f9f9; padding: 10px; border: 2px dashed #ddd; width: 100%; border-radius: 4px; cursor: pointer; }
+        input:focus, textarea:focus { border-color: var(--primary-green); }
         textarea { resize: vertical; }
-
-        .preview-img {
-            max-width: 120px;
-            max-height: 120px;
-            margin-top: 10px;
-            border-radius: 8px;
-            display: block;
-            border: 1px solid #ddd;
-            object-fit: cover;
-        }
-
-        .image-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-        }
-
-        .btn {
-            background-color: var(--primary-green);
-            color: white;
-            padding: 14px 25px;
-            border: none;
-            border-radius: 4px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            width: 100%;
-            transition: opacity 0.3s;
-            margin-top: 20px;
-        }
-
+        .preview-img { max-width: 120px; max-height: 120px; margin-top: 10px; border-radius: 8px; display: block; border: 1px solid #ddd; object-fit: cover; }
+        .image-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px; }
+        .btn { background-color: var(--primary-green); color: white; padding: 14px 25px; border: none; border-radius: 4px; font-size: 1rem; font-weight: 600; cursor: pointer; width: 100%; transition: opacity 0.3s; margin-top: 20px; }
         .btn:hover { opacity: 0.9; }
-
-        .status-msg {
-            margin-top: 15px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            text-align: center;
-        }
+        .status-msg { margin-top: 15px; font-size: 0.9rem; font-weight: 500; text-align: center; }
     </style>
 </head>
 <body>
 
     <div class="login-card" id="loginCard">
         <h2 style="border:none; margin-bottom:15px;">Acesso Restrito</h2>
-        <p style="color:#777; margin-bottom:20px; font-size:0.9rem;">Introduza a senha do administrador</p>
-        <div class="form-group">
-            <input type="password" id="senhaAdmin" placeholder="Digite a senha...">
-        </div>
+        <div class="form-group"><input type="password" id="senhaAdmin" placeholder="Digite a senha..."></div>
         <button class="btn" onclick="verificarSenha()">Entrar no Painel</button>
         <div id="loginErro" class="status-msg" style="color: red;"></div>
     </div>
@@ -157,176 +43,140 @@
             
             <h2>Seção Inicial (Hero)</h2>
             <div class="form-group">
-                <label for="hero_titulo">Título Principal (Boas-vindas)</label>
+                <label>Título Principal</label>
                 <input type="text" id="hero_titulo" required>
             </div>
             <div class="form-group">
-                <label for="hero_imagem">Imagem Principal da Hero</label>
+                <label>Imagem Principal da Hero</label>
                 <input type="file" id="hero_imagem" accept="image/*" onchange="mostrarPreview(this, 'previewHero')">
                 <input type="hidden" id="hero_imagem_url_atual">
-                <img id="previewHero" class="preview-img" src="" alt="Preview">
+                <img id="previewHero" class="preview-img" src="">
             </div>
 
             <h2>Seção Terapia</h2>
             <div class="form-group">
-                <label for="terapia_titulo">Título da Seção Terapia</label>
+                <label>Título da Seção Terapia</label>
                 <input type="text" id="terapia_titulo" required>
             </div>
             <div class="form-group">
-                <label for="terapia_texto">Texto Explicativo da Terapia</label>
+                <label>Texto Explicativo da Terapia</label>
                 <textarea id="terapia_texto" rows="4" required></textarea>
             </div>
 
-            <h2>Quem vai te atender (Equipe)</h2>
+            <h2>Equipe</h2>
             <div class="image-grid">
                 <div class="form-group">
-                    <label for="equipe_foto1">Foto do Psicólogo 1</label>
+                    <label>Foto Psicólogo 1</label>
                     <input type="file" id="equipe_foto1" accept="image/*" onchange="mostrarPreview(this, 'previewEquipe1')">
                     <input type="hidden" id="equipe_foto1_url_atual">
-                    <img id="previewEquipe1" class="preview-img" src="" alt="Preview">
+                    <img id="previewEquipe1" class="preview-img" src="">
                 </div>
                 <div class="form-group">
-                    <label for="equipe_foto2">Foto do Psicólogo 2</label>
+                    <label>Foto Psicólogo 2</label>
                     <input type="file" id="equipe_foto2" accept="image/*" onchange="mostrarPreview(this, 'previewEquipe2')">
                     <input type="hidden" id="equipe_foto2_url_atual">
-                    <img id="previewEquipe2" class="preview-img" src="" alt="Preview">
+                    <img id="previewEquipe2" class="preview-img" src="">
                 </div>
                 <div class="form-group">
-                    <label for="equipe_foto3">Foto do Psicólogo 3</label>
+                    <label>Foto Psicólogo 3</label>
                     <input type="file" id="equipe_foto3" accept="image/*" onchange="mostrarPreview(this, 'previewEquipe3')">
                     <input type="hidden" id="equipe_foto3_url_atual">
-                    <img id="previewEquipe3" class="preview-img" src="" alt="Preview">
+                    <img id="previewEquipe3" class="preview-img" src="">
                 </div>
             </div>
 
-            <h2>Imagens de Baixo (Rodapé / Estrutura)</h2>
-            <div class="form-group">
-                <label for="rodape_foto1">Imagem de Baixo (Destaque/Rodapé)</label>
-                <input type="file" id="rodape_foto1" accept="image/*" onchange="mostrarPreview(this, 'previewRodape1')">
-                <input type="hidden" id="rodape_foto1_url_atual">
-                <img id="previewRodape1" class="preview-img" src="" alt="Preview">
+            <h2>Modalidades de Atendimento</h2>
+            <div class="image-grid">
+                <div class="form-group">
+                    <label>Imagem Atendimento Online</label>
+                    <input type="file" id="modalidade_online" accept="image/*" onchange="mostrarPreview(this, 'previewModOnline')">
+                    <input type="hidden" id="modalidade_online_url_atual">
+                    <img id="previewModOnline" class="preview-img" src="">
+                </div>
+                <div class="form-group">
+                    <label>Imagem Consultório Presencial</label>
+                    <input type="file" id="modalidade_presencial" accept="image/*" onchange="mostrarPreview(this, 'previewModPresencial')">
+                    <input type="hidden" id="modalidade_presencial_url_atual">
+                    <img id="previewModPresencial" class="preview-img" src="">
+                </div>
             </div>
 
             <button type="submit" class="btn" id="btnSalvar">Salvar Todas as Alterações</button>
         </form>
-        
         <div id="statusSalvar" class="status-msg"></div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
     <script>
         const supabaseUrl = 'https://aywlhxvljukjsmcspplc.supabase.co'; 
         const supabaseKey = 'sb_publishable_EEuGEXGAAMSTKXS94LTihA_Q9QWrDaT';
         const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
-
         const SENHA_CORRETA = 'Pai7nel@07';
 
         function verificarSenha() {
-            const senhaDigitada = document.getElementById('senhaAdmin').value;
-            const loginErro = document.getElementById('loginErro');
-
-            if (senhaDigitada === SENHA_CORRETA) {
+            if (document.getElementById('senhaAdmin').value === SENHA_CORRETA) {
                 document.getElementById('loginCard').style.display = 'none';
                 document.getElementById('adminContainer').style.display = 'block';
                 buscarDadosAtuais();
             } else {
-                loginErro.innerText = "Senha incorreta! Tente novamente.";
+                document.getElementById('loginErro').innerText = "Senha incorreta!";
             }
         }
 
         function mostrarPreview(input, idPreview) {
             if (input.files && input.files[0]) {
                 const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById(idPreview).src = e.target.result;
-                }
+                reader.onload = function(e) { document.getElementById(idPreview).src = e.target.result; }
                 reader.readAsDataURL(input.files[0]);
             }
         }
 
-        // FUNÇÃO COMPACTA E REUTILIZÁVEL PARA FAZER UPLOAD DE QUALQUER IMAGEM
         async function fazerUploadImagem(inputId, hiddenId, prefixoNome) {
             const fileInput = document.getElementById(inputId);
             let urlFinal = document.getElementById(hiddenId).value;
-
             if (fileInput.files && fileInput.files[0]) {
                 const file = fileInput.files[0];
-                const fileExt = file.name.split('.').pop();
-                const fileName = `${prefixoNome}_${Date.now()}.${fileExt}`;
-
-                const { error: uploadError } = await supabaseClient.storage
-                    .from('imagens-clinica')
-                    .upload(fileName, file);
-
+                const fileName = `${prefixoNome}_${Date.now()}.${file.name.split('.').pop()}`;
+                const { error: uploadError } = await supabaseClient.storage.from('imagens-clinica').upload(fileName, file);
                 if (uploadError) throw uploadError;
-
-                const { data: publicUrlData } = supabaseClient.storage
-                    .from('imagens-clinica')
-                    .getPublicUrl(fileName);
-
-                urlFinal = publicUrlData.publicUrl;
+                urlFinal = supabaseClient.storage.from('imagens-clinica').getPublicUrl(fileName).data.publicUrl;
             }
             return urlFinal;
         }
 
         async function buscarDadosAtuais() {
             try {
-                const { data, error } = await supabaseClient
-                    .from('conteudo_site')
-                    .select('*');
-
+                const { data, error } = await supabaseClient.from('conteudo_site').select('*');
                 if (error) throw error;
-
                 data.forEach(item => {
                     if (item.secao === 'hero' && item.chave === 'titulo') document.getElementById('hero_titulo').value = item.valor;
                     if (item.secao === 'terapia' && item.chave === 'titulo') document.getElementById('terapia_titulo').value = item.valor;
                     if (item.secao === 'terapia' && item.chave === 'texto') document.getElementById('terapia_texto').value = item.valor;
                     
-                    // Mapeamento das Imagens para os Inputs Escondidos e Previews
-                    if (item.secao === 'hero' && item.chave === 'imagem') {
-                        document.getElementById('hero_imagem_url_atual').value = item.valor;
-                        document.getElementById('previewHero').src = item.valor;
-                    }
-                    if (item.secao === 'equipe' && item.chave === 'foto_1') {
-                        document.getElementById('equipe_foto1_url_atual').value = item.valor;
-                        document.getElementById('previewEquipe1').src = item.valor;
-                    }
-                    if (item.secao === 'equipe' && item.chave === 'foto_2') {
-                        document.getElementById('equipe_foto2_url_atual').value = item.valor;
-                        document.getElementById('previewEquipe2').src = item.valor;
-                    }
-                    if (item.secao === 'equipe' && item.chave === 'foto_3') {
-                        document.getElementById('equipe_foto3_url_atual').value = item.valor;
-                        document.getElementById('previewEquipe3').src = item.valor;
-                    }
-                    if (item.secao === 'rodape' && item.chave === 'foto_1') {
-                        document.getElementById('rodape_foto1_url_atual').value = item.valor;
-                        document.getElementById('previewRodape1').src = item.valor;
-                    }
+                    if (item.secao === 'hero' && item.chave === 'imagem') { document.getElementById('hero_imagem_url_atual').value = item.valor; document.getElementById('previewHero').src = item.valor; }
+                    if (item.secao === 'equipe' && item.chave === 'foto_1') { document.getElementById('equipe_foto1_url_atual').value = item.valor; document.getElementById('previewEquipe1').src = item.valor; }
+                    if (item.secao === 'equipe' && item.chave === 'foto_2') { document.getElementById('equipe_foto2_url_atual').value = item.valor; document.getElementById('previewEquipe2').src = item.valor; }
+                    if (item.secao === 'equipe' && item.chave === 'foto_3') { document.getElementById('equipe_foto3_url_atual').value = item.valor; document.getElementById('previewEquipe3').src = item.valor; }
+                    
+                    // Modalidades
+                    if (item.secao === 'modalidades' && item.chave === 'foto_online') { document.getElementById('modalidade_online_url_atual').value = item.valor; document.getElementById('previewModOnline').src = item.valor; }
+                    if (item.secao === 'modalidades' && item.chave === 'foto_presencial') { document.getElementById('modalidade_presencial_url_atual').value = item.valor; document.getElementById('previewModPresencial').src = item.valor; }
                 });
-            } catch (error) {
-                console.error("Erro ao carregar dados:", error.message);
-                alert("Erro ao ler os dados atuais.");
-            }
+            } catch (error) { alert("Erro ao ler os dados."); }
         }
 
         async function salvarAlteracoes(event) {
             event.preventDefault();
-            const btnSalvar = document.getElementById('btnSalvar');
-            const statusSalvar = document.getElementById('statusSalvar');
-
-            btnSalvar.disabled = true;
-            statusSalvar.style.color = "blue";
-            statusSalvar.innerText = "Processando uploads e atualizando o banco...";
+            const btn = document.getElementById('btnSalvar'); const status = document.getElementById('statusSalvar');
+            btn.disabled = true; status.style.color = "blue"; status.innerText = "Atualizando o banco de dados...";
 
             try {
-                // Executa o upload inteligente de cada imagem
                 const urlHero = await fazerUploadImagem('hero_imagem', 'hero_imagem_url_atual', 'hero');
                 const urlEquipe1 = await fazerUploadImagem('equipe_foto1', 'equipe_foto1_url_atual', 'eq1');
                 const urlEquipe2 = await fazerUploadImagem('equipe_foto2', 'equipe_foto2_url_atual', 'eq2');
                 const urlEquipe3 = await fazerUploadImagem('equipe_foto3', 'equipe_foto3_url_atual', 'eq3');
-                const urlRodape1 = await fazerUploadImagem('rodape_foto1', 'rodape_foto1_url_atual', 'rod1');
+                const urlModOnline = await fazerUploadImagem('modalidade_online', 'modalidade_online_url_atual', 'mod_on');
+                const urlModPresencial = await fazerUploadImagem('modalidade_presencial', 'modalidade_presencial_url_atual', 'mod_pre');
 
                 const novosDados = [
                     { secao: 'hero', chave: 'titulo', valor: document.getElementById('hero_titulo').value },
@@ -336,35 +186,25 @@
                     { secao: 'equipe', chave: 'foto_1', valor: urlEquipe1 },
                     { secao: 'equipe', chave: 'foto_2', valor: urlEquipe2 },
                     { secao: 'equipe', chave: 'foto_3', valor: urlEquipe3 },
-                    { secao: 'rodape', chave: 'foto_1', valor: urlRodape1 }
+                    { secao: 'modalidades', chave: 'foto_online', valor: urlModOnline },
+                    { secao: 'modalidades', chave: 'foto_presencial', valor: urlModPresencial }
                 ];
 
                 for (const item of novosDados) {
-                    const { error } = await supabaseClient
-                        .from('conteudo_site')
-                        .update({ valor: item.valor })
-                        .eq('secao', item.secao)
-                        .eq('chave', item.chave);
-
-                    if (error) throw error;
+                    await supabaseClient.from('conteudo_site').update({ valor: item.valor }).eq('secao', item.secao).eq('chave', item.chave);
                 }
 
-                // Atualiza as variáveis locais para refletir o estado salvo
                 document.getElementById('hero_imagem_url_atual').value = urlHero;
                 document.getElementById('equipe_foto1_url_atual').value = urlEquipe1;
                 document.getElementById('equipe_foto2_url_atual').value = urlEquipe2;
                 document.getElementById('equipe_foto3_url_atual').value = urlEquipe3;
-                document.getElementById('rodape_foto1_url_atual').value = urlRodape1;
+                document.getElementById('modalidade_online_url_atual').value = urlModOnline;
+                document.getElementById('modalidade_presencial_url_atual').value = urlModPresencial;
 
-                statusSalvar.style.color = "green";
-                statusSalvar.innerText = "Sucesso! O site e todas as imagens foram atualizados.";
+                status.style.color = "green"; status.innerText = "Sucesso! O site foi atualizado.";
             } catch (error) {
-                console.error("Erro ao salvar:", error.message);
-                statusSalvar.style.color = "red";
-                statusSalvar.innerText = "Erro ao salvar: " + error.message;
-            } finally {
-                btnSalvar.disabled = false;
-            }
+                status.style.color = "red"; status.innerText = "Erro ao salvar: " + error.message;
+            } finally { btn.disabled = false; }
         }
     </script>
 </body>
