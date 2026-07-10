@@ -311,27 +311,31 @@
                         if (heroImg) {
                         heroImg.src = item.valor;
                     }
-                   // 1. Fotos da secção "Quem vai te atender" (Equipe)
-                    if (item.secao === 'equipe' && item.chave === 'foto_1') {
-                        const foto1 = document.querySelector('.team-grid .team-card:nth-child(1) img');
-                        if (foto1) foto1.src = item.valor;
+                  // ==========================================
+                    // 1. FOTOS DA SEÇÃO QUEM VAI TE ATENDER (EQUIPE)
+                    // ==========================================
+                    const fotosEquipe = document.querySelectorAll('.team-grid .team-card img');
+                    
+                    if (item.secao === 'equipe' && item.chave === 'foto_1' && fotosEquipe[0]) {
+                        fotosEquipe[0].src = item.valor;
                     }
-                    if (item.secao === 'equipe' && item.chave === 'foto_2') {
-                        const foto2 = document.querySelector('.team-grid .team-card:nth-child(2) img');
-                        if (foto2) foto2.src = item.valor;
+                    if (item.secao === 'equipe' && item.chave === 'foto_2' && fotosEquipe[1]) {
+                        fotosEquipe[1].src = item.valor;
                     }
-                    if (item.secao === 'equipe' && item.chave === 'foto_3') {
-                        const foto3 = document.querySelector('.team-grid .team-card:nth-child(3) img');
-                        if (foto3) foto3.src = item.valor;
+                    if (item.secao === 'equipe' && item.chave === 'foto_3' && fotosEquipe[2]) {
+                        fotosEquipe[2].src = item.valor;
                     }
-                    // 2. Imagens das Modalidades de Atendimento (Online e Presencial)
-                    if (item.secao === 'modalidades' && item.chave === 'foto_online') {
-                        const fotoOnline = document.querySelector('.modalities-grid .modality-card:nth-child(1) img');
-                        if (fotoOnline) fotoOnline.src = item.valor;
+
+                    // ==========================================
+                    // 2. IMAGENS DAS MODALIDADES DE ATENDIMENTO
+                    // ==========================================
+                    const fotosModalidades = document.querySelectorAll('.modalities-grid .modality-card img');
+                    
+                    if (item.secao === 'modalidades' && item.chave === 'foto_online' && fotosModalidades[0]) {
+                        fotosModalidades[0].src = item.valor;
                     }
-                    if (item.secao === 'modalidades' && item.chave === 'foto_presencial') {
-                        const fotoPresencial = document.querySelector('.modalities-grid .modality-card:nth-child(2) img');
-                        if (fotoPresencial) fotoPresencial.src = item.valor;
+                    if (item.secao === 'modalidades' && item.chave === 'foto_presencial' && fotosModalidades[1]) {
+                        fotosModalidades[1].src = item.valor;
                     }
                 }
                 });
