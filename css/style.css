@@ -485,3 +485,37 @@ h1, h2, h3, h4 {
     opacity: 0.7;
     text-decoration: underline;
 }
+/* ==========================================================
+   MUDANÇA DE ESTILO: HERO FULL-SCREEN (IGUAL À REFERÊNCIA)
+   ========================================================== */
+.hero-section {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: #2c302e;
+}
+
+/* Força a imagem a ocupar o fundo inteiro e remove o formato de círculo antigo */
+.hero-image {
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    z-index: 1 !important;
+    border-radius: 0 !important; /* Remove o border-radius antigo */
+}
+
+.hero-image img {
+    width: 100% !important;
+    height: 100% !important;
+    max-width: none !important;
+    object-fit: cover !important;
+    display: block !important;
+    border-radius: 0 !important; /* Remove o border-radius antigo */
+}
