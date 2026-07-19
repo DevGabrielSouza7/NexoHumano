@@ -101,21 +101,28 @@
         /* AJUSTES PARA TELEMÓVEL (MOBILE RESPONSIVO) */
         /* ========================================== */
         @media (max-width: 992px) {
+            /* NOVA REGRA: Reduz a altura para a foto não levar tanto "zoom" lateral */
+            .hero-section {
+                height: 75vh !important; /* Ocupa apenas 75% da altura da tela */
+                min-height: 550px !important;
+            }
+
+            /* (O resto do teu código mobile continua igualzinho) */
             .hero-content h1 { 
                 font-size: 2.8rem !important; 
                 margin-bottom: 40px !important; 
             }
             .hero-buttons { 
-                flex-direction: column !important; /* Empilha os botões */
+                flex-direction: column !important;
                 align-items: center !important;
                 gap: 15px !important; 
             }
             .btn-outline { 
-                width: 90% !important; /* Botões mais largos para toque fácil */
+                width: 90% !important; 
                 padding: 16px 20px !important; 
             }
             .main-nav { 
-                display: none !important; /* Esconde o menu extenso no telemóvel */
+                display: none !important; 
             }
             .header-container { 
                 justify-content: center !important; 
@@ -123,8 +130,8 @@
             .logo img {
                 max-height: 70px !important;
             }
-        }
-                        /* ========================================== */
+        }              
+        /* ========================================== */
         /* 🚨 KIT DE EMERGÊNCIA MOBILE (TELEMÓVEL) 🚨 */
         /* ========================================== */
         @media (max-width: 768px) {
