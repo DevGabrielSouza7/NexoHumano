@@ -124,6 +124,57 @@
                 max-height: 70px !important;
             }
         }
+                        /* ========================================== */
+        /* 🚨 KIT DE EMERGÊNCIA MOBILE (TELEMÓVEL) 🚨 */
+        /* ========================================== */
+        @media (max-width: 768px) {
+            
+            /* 1. Limita a largura geral e dá respiro nas bordas */
+            .container {
+                padding-left: 20px !important;
+                padding-right: 20px !important;
+                width: 100% !important;
+                overflow-x: hidden !important;
+            }
+
+            /* 2. Força TODAS as grelhas a ficarem numa só coluna */
+            .activities-grid, 
+            .team-grid, 
+            .modalities-grid, 
+            .faq-grid, 
+            .journey-grid, 
+            .info-grid {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 30px !important; /* Espaço entre os blocos */
+            }
+
+            /* 3. Ajusta o formulário de contato e textos lado a lado */
+            .contact-layout {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 40px !important;
+            }
+            .form-row {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 15px !important;
+            }
+
+            /* 4. Títulos mais amigáveis para ecrãs pequenos */
+            .section-title {
+                font-size: 2rem !important;
+                line-height: 1.3 !important;
+            }
+            
+            /* 5. Ajuste fino na Secção Hero para não cortar testas/cabeças */
+            .hero-content {
+                margin-top: 0px !important; 
+            }
+            .hero-content h1 {
+                font-size: 2.5rem !important;
+            }
+        }
             </style>
 </head>
 <body>
