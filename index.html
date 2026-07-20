@@ -50,7 +50,6 @@
             text-align: center !important; margin-bottom: 50px !important; text-shadow: 2px 2px 10px rgba(0,0,0,0.5) !important; line-height: 1.2 !important;
         }
         
-        /* BOTÕES DA HERO (UM DE CADA LADO) */
         .hero-buttons { 
             display: flex !important; justify-content: space-between !important; width: 100% !important; gap: 20px !important; 
         }
@@ -61,19 +60,22 @@
         }
         .btn-outline:hover { background: #ffffff !important; color: #2c302e !important; }
 
-        /* BARRA FLUTUANTE DE BOTÕES (ACOMPANHA O SCROLL) */
-        .floating-bar {
-            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 9999;
-            display: flex; gap: 15px; background: rgba(255, 255, 255, 0.9); padding: 12px 25px;
-            border-radius: 50px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.6);
+        /* ========================================== */
+        /* MENU FLUTUANTE DISCRETO (NOVO DESIGN)      */
+        /* ========================================== */
+        .floating-action-menu {
+            position: fixed; bottom: 30px; right: 30px; z-index: 9999;
+            display: flex; flex-direction: column; gap: 12px;
         }
-        .floating-bar a {
-            color: #ffffff !important; background-color: #5a6659 !important; text-decoration: none !important;
-            padding: 12px 24px !important; border-radius: 30px; font-size: 0.85rem !important; font-weight: 600;
-            letter-spacing: 1px; text-transform: uppercase; transition: 0.3s ease; white-space: nowrap;
+        .floating-btn {
+            background-color: #5a6659; color: #ffffff !important;
+            padding: 14px 24px; border-radius: 50px; font-size: 0.85rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 1px; text-decoration: none;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2); transition: 0.3s ease; text-align: center;
         }
-        .floating-bar a:hover { background-color: #3f473e !important; transform: translateY(-2px); }
+        .floating-btn:hover { background-color: #3f473e; transform: translateY(-3px); }
+        .floating-btn.secondary { background-color: #ffffff; color: #5a6659 !important; border: 1px solid #5a6659; }
+        .floating-btn.secondary:hover { background-color: #f0f0f0; }
 
         /* LAYOUT DA SECÇÃO SOBRE */
         .sobre-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; }
@@ -102,18 +104,19 @@
             .form-row { display: flex !important; flex-direction: column !important; gap: 15px !important; }
             .section-title { font-size: 2rem !important; line-height: 1.3 !important; }
             
-            /* Ajuste da Barra Flutuante no Mobile */
-            .floating-bar { width: 90%; flex-direction: column; gap: 10px; padding: 15px; border-radius: 20px; bottom: 15px; }
-            .floating-bar a { text-align: center; width: 100%; padding: 15px 20px !important; }
+            /* Transforma o Menu Flutuante numa Barra de App no Celular */
+            .floating-action-menu { bottom: 0; right: 0; left: 0; flex-direction: row; gap: 0; }
+            .floating-btn { border-radius: 0; flex: 1; padding: 16px 10px; font-size: 0.75rem; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); }
+            .floating-btn.secondary { border: none; border-left: 1px solid #e0e0e0; }
         }
     </style>
 </head>
 <body>
 
-    <!-- BARRA FLUTUANTE GLOBAL -->
-    <div class="floating-bar" data-aos="fade-up" data-aos-delay="1000">
-        <a href="#contato">Agendar consulta &rarr;</a>
-        <a href="#atividades">Plantão Psicológico &rarr;</a>
+    <!-- MENU FLUTUANTE DISCRETO -->
+    <div class="floating-action-menu" data-aos="fade-up" data-aos-delay="1000">
+        <a href="#contato" class="floating-btn">Agendar consulta</a>
+        <a href="#atividades" class="floating-btn secondary">Plantão Psicológico</a>
     </div>
 
     <header class="main-header" data-aos="fade-down" data-aos-duration="1000">
@@ -150,14 +153,13 @@
             </div>
         </section>
 
-        <!-- 2. SECÇÃO SOBRE (Fundo Bege) -->
+        <!-- 2. SECÇÃO SOBRE -->
         <section id="sobre" class="bg-beige">
             <div class="container">
                 <div class="sobre-header" data-aos="fade-up">
                     <h2 class="sobre-title">Sobre Nexo Psicologia<br>Humanista</h2>
                     <img src="img/logo-nexo-completa.png" alt="Nexo Icon" style="max-height: 60px; opacity: 0.7;">
                 </div>
-                
                 <div class="sobre-content">
                     <div class="sobre-image" data-aos="fade-right">
                         <img src="img/adriana.png" alt="Sobre a Clínica"> 
@@ -171,7 +173,7 @@
             </div>
         </section>
 
-        <!-- 3. ATIVIDADES (Fundo Branco) -->
+        <!-- 3. ATIVIDADES -->
         <section id="atividades" class="bg-white">
             <div class="container text-center">
                 <h2 class="section-title text-center" data-aos="fade-up">Conheça nossas<br>atividades</h2>
@@ -200,7 +202,7 @@
             </div>
         </section>
 
-        <!-- 4. EQUIPE (Fundo Bege) -->
+        <!-- 4. EQUIPE -->
         <section id="equipe" class="bg-beige section-relative">
             <div class="container">
                 <h2 class="section-title" data-aos="fade-right">Conheça quem<br>vai te atender</h2>
@@ -224,7 +226,7 @@
             </div>
         </section>
 
-        <!-- 5. MODALIDADES (Fundo Branco) -->
+        <!-- 5. MODALIDADES -->
         <section id="modalidades" class="bg-white">
             <div class="container">
                 <h2 class="section-title" data-aos="fade-up">Modalidades de<br>Atendimento</h2>
@@ -241,7 +243,7 @@
             </div>
         </section>
 
-        <!-- 6. TEXTO E FORMULÁRIO (Fundo Bege) -->
+        <!-- 6. TEXTO E FORMULÁRIO -->
         <section id="contato" class="bg-beige">
             <div class="container contact-layout">
                 <div class="contact-text" data-aos="fade-right">
@@ -290,7 +292,7 @@
             </div>
         </section>
 
-        <!-- 7. DÚVIDAS FREQUENTES (Fundo Branco) -->
+        <!-- 7. DÚVIDAS FREQUENTES -->
         <section id="duvidas" class="bg-white section-relative">
             <div class="container">
                 <h2 class="sobre-title" data-aos="fade-up" style="margin-bottom: 40px;">Dúvidas<br>frequentes</h2>
@@ -311,7 +313,7 @@
             </div>
         </section>
 
-        <!-- 8. JORNADA DE RECUPERAÇÃO (Fundo Bege) -->
+        <!-- 8. JORNADA DE RECUPERAÇÃO -->
         <section class="bg-beige" style="padding-bottom: 60px;">
             <div class="container">
                 <h2 class="section-title" data-aos="fade-up">Jornada de<br>recuperação</h2>
@@ -348,7 +350,7 @@
             </div>
         </section>
 
-        <!-- 9. SEÇÃO DE INFORMAÇÕES DE CONTATO (Fundo Branco) -->
+        <!-- 9. SEÇÃO DE INFORMAÇÕES DE CONTATO -->
          <section class="info-section bg-white" style="padding-bottom: 100px;">
             <div class="container">
                 <div class="info-grid">
@@ -397,14 +399,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Inicializa a Biblioteca de Animações
-        AOS.init({
-            duration: 800, 
-            once: true,    
-            offset: 100    
-        });
+        AOS.init({ duration: 800, once: true, offset: 100 });
 
-        // Configuração do Supabase
         const supabaseUrl = 'https://aywlhxvljukjsmcspplc.supabase.co'; 
         const supabaseKey = 'sb_publishable_EEuGEXGAAMSTKXS94LTihA_Q9QWrDaT';
         const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
@@ -415,9 +411,7 @@
                 if (error) throw error;
 
                 const dbMap = {};
-                data.forEach(item => {
-                    dbMap[item.secao + "_" + item.chave] = item.valor;
-                });
+                data.forEach(item => { dbMap[item.secao + "_" + item.chave] = item.valor; });
 
                 if (dbMap['hero_titulo']) document.querySelector('.hero-content h1').innerHTML = dbMap['hero_titulo'];
                 if (dbMap['terapia_titulo']) document.querySelector('.contact-text h2').innerHTML = dbMap['terapia_titulo'];
@@ -478,7 +472,6 @@
 
         document.addEventListener('DOMContentLoaded', carregarConteudoDinamico);
 
-        // Script da Máscara do WhatsApp e Envio do Formulário
         const formularioNexo = document.querySelector('.nexo-form');
         const whatsappInput = document.getElementById('whatsapp');
 
