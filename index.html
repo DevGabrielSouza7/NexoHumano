@@ -8,15 +8,12 @@
     <link rel="icon" type="image/png" href="img/favicon.png">
     <link rel="stylesheet" href="css/style.css">
     
-    <!-- Biblioteca de Animações AOS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
-    <!-- Fontes do Google -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Lato:wght@300;400;700&family=Lora:ital,wght@0,400..700;1,400..700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600&family=Oswald:wght@300;400;500&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@300;400;500;600&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 
-    <!-- ESTILOS BLINDADOS DO CABEÇALHO, HERO E MOBILE -->
     <style>
         html { scroll-behavior: smooth; }
         
@@ -125,7 +122,6 @@
     </header>
 
     <main>
-        <!-- 1. HERO SECTION -->
         <section id="inicio" class="hero-section">
             <div class="hero-image">
                 <img src="img/equipe-hero.png" alt="Equipe Nexo">
@@ -140,7 +136,6 @@
             </div>
         </section>
 
-        <!-- 2. ATIVIDADES -->
         <section id="atividades" class="bg-white">
             <div class="container text-center">
                 <h2 class="section-title text-center" data-aos="fade-up">Conheça nossas<br>atividades</h2>
@@ -172,7 +167,6 @@
             </div>
         </section>
 
-        <!-- 3. EQUIPE -->
         <section id="equipe" class="bg-beige section-relative">
             <div class="container">
                 <h2 class="section-title" data-aos="fade-right">Conheça quem<br>vai te atender</h2>
@@ -200,8 +194,26 @@
             </div>
         </section>
 
-        <!-- 4. TEXTO E FORMULÁRIO -->
-        <section id="contato" class="bg-white">
+        <section id="modalidades" class="bg-white">
+            <div class="container">
+                <h2 class="section-title" data-aos="fade-up">Modalidades de<br>Atendimento</h2>
+                <div class="modalities-grid">
+                    <div class="modality-card" data-aos="zoom-in" data-aos-delay="100">
+                        <img src="img/online.png" alt="Atendimento Online">
+                        <h3>Psicoterapia Online</h3>
+                    </div>
+                    <div class="modality-card" data-aos="zoom-in" data-aos-delay="250">
+                        <img src="img/presencial.png" alt="Consultório Presencial">
+                        <h3>Psicoterapia Presencial</h3>
+                    </div>
+                </div>
+                <div class="text-center" data-aos="fade-up">
+                    <a href="#contato" class="btn-primary">Marque sua consulta</a>
+                </div>
+            </div>
+        </section>
+
+        <section id="contato" class="bg-beige">
             <div class="container contact-layout">
                 <div class="contact-text" data-aos="fade-right">
                     <h2>Porque fazer<br>terapia?</h2>
@@ -249,27 +261,6 @@
             </div>
         </section>
 
-        <!-- 5. MODALIDADES -->
-        <section id="modalidades" class="bg-beige">
-            <div class="container">
-                <h2 class="section-title" data-aos="fade-up">Modalidades de<br>Atendimento</h2>
-                <div class="modalities-grid">
-                    <div class="modality-card" data-aos="zoom-in" data-aos-delay="100">
-                        <img src="img/online.png" alt="Atendimento Online">
-                        <h3>Psicoterapia Online</h3>
-                    </div>
-                    <div class="modality-card" data-aos="zoom-in" data-aos-delay="250">
-                        <img src="img/presencial.png" alt="Consultório Presencial">
-                        <h3>Psicoterapia Presencial</h3>
-                    </div>
-                </div>
-                <div class="text-center" data-aos="fade-up">
-                    <a href="#contato" class="btn-primary">Marque sua consulta</a>
-                </div>
-            </div>
-        </section>
-
-        <!-- 6. DÚVIDAS FREQUENTES -->
         <section id="duvidas" class="bg-white section-relative">
             <div class="container">
                 <h2 class="section-title" data-aos="fade-up">Dúvidas<br>frequentes</h2>
@@ -291,7 +282,6 @@
             </div>
         </section>
 
-        <!-- 7. JORNADA DE RECUPERAÇÃO COM ANIMAÇÃO SEQUENCIAL -->
         <section class="bg-beige">
             <div class="container">
                 <h2 class="section-title" data-aos="fade-up">Jornada de<br>recuperação</h2>
@@ -328,8 +318,7 @@
             </div>
         </section>
 
-        <!-- 8. SEÇÃO DE INFORMAÇÕES DE CONTATO -->
-         <section class="info-section">
+        <section class="info-section">
             <div class="container">
                 <div class="info-grid">
                     <div class="info-col" data-aos="fade-up" data-aos-delay="100">
@@ -373,15 +362,14 @@
         </div>
     </footer>
 
-    <!-- Scripts do Formulário, Supabase e AOS -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         // Inicializa a Biblioteca de Animações
         AOS.init({
-            duration: 800, // Duração base das animações
-            once: true,    // Anima apenas uma vez quando rola para baixo
-            offset: 100    // Dispara a animação 100px antes de aparecer na tela
+            duration: 800, 
+            once: true,    
+            offset: 100    
         });
 
         // Configuração do Supabase
