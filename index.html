@@ -8,12 +8,15 @@
     <link rel="icon" type="image/png" href="img/favicon.png">
     <link rel="stylesheet" href="css/style.css">
     
+    <!-- Biblioteca de Animações AOS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
+    <!-- Fontes do Google -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Lato:wght@300;400;700&family=Lora:ital,wght@0,400..700;1,400..700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@300;400;500;600&family=Oswald:wght@300;400;500&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:wght@300;400;500;600&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
 
+    <!-- ESTILOS BLINDADOS -->
     <style>
         html { scroll-behavior: smooth; }
         
@@ -47,14 +50,10 @@
             text-align: center !important; margin-bottom: 50px !important; text-shadow: 2px 2px 10px rgba(0,0,0,0.5) !important; line-height: 1.2 !important;
         }
         
-        /* LAYOUT DOS BOTÕES ESQUERDA-DIREITA */
-        .hero-buttons, .spaced-buttons { 
-            display: flex !important; 
-            justify-content: space-between !important; /* Empurra um para cada lado */
-            width: 100% !important; 
-            gap: 20px !important; 
+        /* BOTÕES DA HERO (UM DE CADA LADO) */
+        .hero-buttons { 
+            display: flex !important; justify-content: space-between !important; width: 100% !important; gap: 20px !important; 
         }
-        
         .btn-outline {
             color: #ffffff !important; text-decoration: none !important; border: 1px solid #ffffff !important; padding: 15px 30px !important;
             font-size: 0.9rem !important; letter-spacing: 1.5px !important; text-transform: uppercase !important;
@@ -62,18 +61,24 @@
         }
         .btn-outline:hover { background: #ffffff !important; color: #2c302e !important; }
 
-        /* Botões com texto escuro para as secções claras */
-        .btn-outline-dark {
-            color: #5a6659 !important; text-decoration: none !important; border: 1px solid #5a6659 !important; padding: 12px 28px !important;
-            font-size: 0.85rem !important; letter-spacing: 1px !important; text-transform: uppercase !important;
-            background: transparent !important; transition: 0.3s ease !important; text-align: center !important;
+        /* BARRA FLUTUANTE DE BOTÕES (ACOMPANHA O SCROLL) */
+        .floating-bar {
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); z-index: 9999;
+            display: flex; gap: 15px; background: rgba(255, 255, 255, 0.9); padding: 12px 25px;
+            border-radius: 50px; box-shadow: 0 10px 30px rgba(0,0,0,0.15); backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.6);
         }
-        .btn-outline-dark:hover { background: #5a6659 !important; color: #ffffff !important; }
+        .floating-bar a {
+            color: #ffffff !important; background-color: #5a6659 !important; text-decoration: none !important;
+            padding: 12px 24px !important; border-radius: 30px; font-size: 0.85rem !important; font-weight: 600;
+            letter-spacing: 1px; text-transform: uppercase; transition: 0.3s ease; white-space: nowrap;
+        }
+        .floating-bar a:hover { background-color: #3f473e !important; transform: translateY(-2px); }
 
-        /* LAYOUT DA NOVA SECÇÃO SOBRE */
+        /* LAYOUT DA SECÇÃO SOBRE */
         .sobre-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; }
         .sobre-title { font-size: 3rem; line-height: 1.1; font-weight: 400; font-family: 'Playfair Display', serif; color: #2c302e; }
-        .sobre-content { display: flex; gap: 40px; align-items: center; margin-bottom: 40px; }
+        .sobre-content { display: flex; gap: 40px; align-items: center; margin-bottom: 20px; }
         .sobre-image { flex: 1; border-radius: 40px 40px 10px 40px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
         .sobre-image img { width: 100%; height: auto; display: block; object-fit: cover; }
         .sobre-text { flex: 1.5; font-size: 0.95rem; line-height: 1.8; text-align: justify; color: #4a4a4a; }
@@ -82,8 +87,8 @@
         @media (max-width: 992px) {
             .hero-section { height: 75vh !important; min-height: 550px !important; }
             .hero-content h1 { font-size: 2.8rem !important; margin-bottom: 40px !important; }
-            .hero-buttons, .spaced-buttons { flex-direction: column !important; align-items: center !important; gap: 15px !important; }
-            .btn-outline, .btn-outline-dark { width: 100% !important; padding: 16px 20px !important; }
+            .hero-buttons { flex-direction: column !important; align-items: center !important; gap: 15px !important; }
+            .btn-outline { width: 100% !important; padding: 16px 20px !important; }
             .main-nav { display: none !important; }
             .sobre-content { flex-direction: column; }
             .sobre-header { flex-direction: column; gap: 20px; }
@@ -96,10 +101,20 @@
             .contact-layout { display: flex !important; flex-direction: column !important; gap: 40px !important; }
             .form-row { display: flex !important; flex-direction: column !important; gap: 15px !important; }
             .section-title { font-size: 2rem !important; line-height: 1.3 !important; }
+            
+            /* Ajuste da Barra Flutuante no Mobile */
+            .floating-bar { width: 90%; flex-direction: column; gap: 10px; padding: 15px; border-radius: 20px; bottom: 15px; }
+            .floating-bar a { text-align: center; width: 100%; padding: 15px 20px !important; }
         }
     </style>
 </head>
 <body>
+
+    <!-- BARRA FLUTUANTE GLOBAL -->
+    <div class="floating-bar" data-aos="fade-up" data-aos-delay="1000">
+        <a href="#contato">Agendar consulta &rarr;</a>
+        <a href="#atividades">Plantão Psicológico &rarr;</a>
+    </div>
 
     <header class="main-header" data-aos="fade-down" data-aos-duration="1000">
         <div class="header-container">
@@ -120,6 +135,7 @@
     </header>
 
     <main>
+        <!-- 1. HERO SECTION -->
         <section id="inicio" class="hero-section">
             <div class="hero-image">
                 <img src="img/equipe-hero.png" alt="Equipe Nexo">
@@ -127,7 +143,6 @@
             </div>
             <div class="hero-content" data-aos="zoom-out" data-aos-duration="1200">
                 <h1>Lugar de escuta e cuidado!</h1>
-                
                 <div class="hero-buttons">
                     <a href="#contato" class="btn-outline">Agendar consulta &rarr;</a>
                     <a href="#atividades" class="btn-outline">Plantão Psicológico &rarr;</a>
@@ -135,6 +150,7 @@
             </div>
         </section>
 
+        <!-- 2. SECÇÃO SOBRE (Fundo Bege) -->
         <section id="sobre" class="bg-beige">
             <div class="container">
                 <div class="sobre-header" data-aos="fade-up">
@@ -152,14 +168,10 @@
                         <p>Texto Para apresentar a clínica e nós três. Texto Para apresentar a clínica e nós três.</p>
                     </div>
                 </div>
-
-                <div class="spaced-buttons" data-aos="fade-up">
-                    <a href="#contato" class="btn-outline-dark">Agendar consulta &rarr;</a>
-                    <a href="#atividades" class="btn-outline-dark">Plantão Psicológico &rarr;</a>
-                </div>
             </div>
         </section>
 
+        <!-- 3. ATIVIDADES (Fundo Branco) -->
         <section id="atividades" class="bg-white">
             <div class="container text-center">
                 <h2 class="section-title text-center" data-aos="fade-up">Conheça nossas<br>atividades</h2>
@@ -181,18 +193,14 @@
                     </div>
                     <div class="activity-card" data-aos="fade-up" data-aos-delay="400">
                         <div class="icon-circle">🌿</div>
-                        <h3>Orientação<br>Vocacional</h3>
+                        <h3>Terapia de<br>Grupo</h3>
                         <p>Aulas teóricas e práticas de realinhamento social.</p>
                     </div>
-                </div>
-                
-                <div class="spaced-buttons" data-aos="fade-up">
-                    <a href="#contato" class="btn-outline-dark">Agendar consulta &rarr;</a>
-                    <a href="#atividades" class="btn-outline-dark">Plantão Psicológico &rarr;</a>
                 </div>
             </div>
         </section>
 
+        <!-- 4. EQUIPE (Fundo Bege) -->
         <section id="equipe" class="bg-beige section-relative">
             <div class="container">
                 <h2 class="section-title" data-aos="fade-right">Conheça quem<br>vai te atender</h2>
@@ -213,14 +221,10 @@
                         <p class="crp">CRP: 19/5704</p>
                     </div>
                 </div>
-                
-                <div class="spaced-buttons" data-aos="fade-up">
-                    <a href="#contato" class="btn-outline-dark">Agendar consulta &rarr;</a>
-                    <a href="#atividades" class="btn-outline-dark">Plantão Psicológico &rarr;</a>
-                </div>
             </div>
         </section>
 
+        <!-- 5. MODALIDADES (Fundo Branco) -->
         <section id="modalidades" class="bg-white">
             <div class="container">
                 <h2 class="section-title" data-aos="fade-up">Modalidades de<br>Atendimento</h2>
@@ -234,14 +238,10 @@
                         <h3>Psicoterapia Presencial</h3>
                     </div>
                 </div>
-                
-                <div class="spaced-buttons" data-aos="fade-up">
-                    <a href="#contato" class="btn-outline-dark">Agendar consulta &rarr;</a>
-                    <a href="#atividades" class="btn-outline-dark">Plantão Psicológico &rarr;</a>
-                </div>
             </div>
         </section>
 
+        <!-- 6. TEXTO E FORMULÁRIO (Fundo Bege) -->
         <section id="contato" class="bg-beige">
             <div class="container contact-layout">
                 <div class="contact-text" data-aos="fade-right">
@@ -290,6 +290,7 @@
             </div>
         </section>
 
+        <!-- 7. DÚVIDAS FREQUENTES (Fundo Branco) -->
         <section id="duvidas" class="bg-white section-relative">
             <div class="container">
                 <h2 class="sobre-title" data-aos="fade-up" style="margin-bottom: 40px;">Dúvidas<br>frequentes</h2>
@@ -309,9 +310,81 @@
                 </div>
             </div>
         </section>
+
+        <!-- 8. JORNADA DE RECUPERAÇÃO (Fundo Bege) -->
+        <section class="bg-beige" style="padding-bottom: 60px;">
+            <div class="container">
+                <h2 class="section-title" data-aos="fade-up">Jornada de<br>recuperação</h2>
+                <div class="journey-grid">
+                    <div class="journey-step" data-aos="fade-left" data-aos-delay="100">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Internação voluntária</h3>
+                            <p>Internação agendada e chegada do paciente no centro.</p>
+                        </div>
+                    </div>
+                    <div class="journey-step" data-aos="fade-left" data-aos-delay="250">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Diagnóstico</h3>
+                            <p>Conversa com o paciente e responsáveis para diagnóstico.</p>
+                        </div>
+                    </div>
+                    <div class="journey-step" data-aos="fade-left" data-aos-delay="400">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>Desintoxicação &<br>Terapia</h3>
+                            <p>Desintoxicação química se necessário e terapia acompanhada.</p>
+                        </div>
+                    </div>
+                    <div class="journey-step" data-aos="fade-left" data-aos-delay="550">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Atividades de<br>recuperação</h3>
+                            <p>Atividades sociais e físicas monitoradas.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. SEÇÃO DE INFORMAÇÕES DE CONTATO (Fundo Branco) -->
+         <section class="info-section bg-white" style="padding-bottom: 100px;">
+            <div class="container">
+                <div class="info-grid">
+                    <div class="info-col" data-aos="fade-up" data-aos-delay="100">
+                        <h3>Para pedir ajuda, entre<br>em contato. Tudo será<br>confidencial.</h3>
+                        <p class="contact-details">
+                            <strong>Tel:</strong> (12) 3456-7890<br>
+                            <strong>E-mail:</strong> ola@grandesite.com.br
+                        </p>
+                    </div>
+                    <div class="info-col" data-aos="fade-up" data-aos-delay="200">
+                        <h3>Horário de<br>funcionamento</h3>
+                        <p>
+                            <strong>Segunda a sexta</strong><br>
+                            Das 08h às 20h
+                        </p>
+                        <p style="margin-top: 15px;">
+                            <strong>Sábado, domingo e feriados</strong><br>
+                            Das 09h às 18h
+                        </p>
+                    </div>
+                    <div class="info-col" data-aos="fade-up" data-aos-delay="300">
+                        <h3>Venha. Você será bem<br>recebido.</h3>
+                        <ul class="units-list">
+                            <li><strong>Unidade 1:</strong> Rua Botânica, 55, Curitiba</li>
+                            <li><strong>Unidade 2:</strong> Rua Sonora, 95, Manaus</li>
+                            <li><strong>Unidade 3:</strong> Avenida João de Barro, 400, Natal</li>
+                            <li><strong>Unidade 4:</strong> Rua dos Libertadores, 73, Teresina</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+         </section>
     </main>
 
-    <footer class="simple-footer bg-white">
+    <footer class="simple-footer bg-white" style="padding-bottom: 80px;">
         <div class="container" style="padding: 30px 0; text-align: center;">
             <p>&copy; 2026 Nexo Psicologia Humanista. Todos os direitos reservados.</p>
             <p class="developer-credit">
@@ -320,11 +393,18 @@
         </div>
     </footer>
 
+    <!-- Scripts do Formulário, Supabase e AOS -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({ duration: 800, once: true, offset: 100 });
-        
+        // Inicializa a Biblioteca de Animações
+        AOS.init({
+            duration: 800, 
+            once: true,    
+            offset: 100    
+        });
+
+        // Configuração do Supabase
         const supabaseUrl = 'https://aywlhxvljukjsmcspplc.supabase.co'; 
         const supabaseKey = 'sb_publishable_EEuGEXGAAMSTKXS94LTihA_Q9QWrDaT';
         const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
@@ -333,11 +413,124 @@
             try {
                 const { data, error } = await supabaseClient.from('conteudo_site').select('*');
                 if (error) throw error;
-                const dbMap = {}; data.forEach(item => { dbMap[item.secao + "_" + item.chave] = item.valor; });
+
+                const dbMap = {};
+                data.forEach(item => {
+                    dbMap[item.secao + "_" + item.chave] = item.valor;
+                });
+
                 if (dbMap['hero_titulo']) document.querySelector('.hero-content h1').innerHTML = dbMap['hero_titulo'];
-            } catch (erro) { console.error('Erro na conexão dinâmica:', erro.message); }
+                if (dbMap['terapia_titulo']) document.querySelector('.contact-text h2').innerHTML = dbMap['terapia_titulo'];
+                if (dbMap['terapia_texto']) document.querySelector('.contact-text p').innerHTML = dbMap['terapia_texto'];
+
+                function updateImg(selector, valor) {
+                    const img = document.querySelector(selector);
+                    if (img && valor && valor.length > 5 && valor !== 'https://via.placeholder.com/300') {
+                        img.src = valor;
+                    }
+                }
+
+                function aplicarEstiloImagem(selector, dbMap, baseKey) {
+                    const img = document.querySelector(selector);
+                    if (!img) return;
+
+                    const width = dbMap[baseKey + '_width'];
+                    const height = dbMap[baseKey + '_height'];
+                    const fit = dbMap[baseKey + '_fit'];
+                    const position = dbMap[baseKey + '_position'];
+
+                    if (width) img.style.width = width;
+                    if (height) img.style.height = height;
+                    if (fit) img.style.objectFit = fit;
+                    if (position) img.style.objectPosition = position;
+                }
+
+                updateImg('.hero-image img', dbMap['hero_imagem']);
+                updateImg('.team-grid .team-card:nth-child(1) img', dbMap['equipe_foto_1']);
+                updateImg('.team-grid .team-card:nth-child(2) img', dbMap['equipe_foto_2']);
+                updateImg('.team-grid .team-card:nth-child(3) img', dbMap['equipe_foto_3']);
+                updateImg('.modalities-grid .modality-card:nth-child(1) img', dbMap['modalidades_foto_online']);
+                updateImg('.modalities-grid .modality-card:nth-child(2) img', dbMap['modalidades_foto_presencial']);
+
+                aplicarEstiloImagem('.hero-image img', dbMap, 'hero_imagem');
+                aplicarEstiloImagem('.team-grid .team-card:nth-child(1) img', dbMap, 'equipe_foto_1');
+                aplicarEstiloImagem('.team-grid .team-card:nth-child(2) img', dbMap, 'equipe_foto_1');
+                aplicarEstiloImagem('.team-grid .team-card:nth-child(3) img', dbMap, 'equipe_foto_1');
+                aplicarEstiloImagem('.modalities-grid .modality-card:nth-child(1) img', dbMap, 'modalidades_foto');
+                aplicarEstiloImagem('.modalities-grid .modality-card:nth-child(2) img', dbMap, 'modalidades_foto');
+
+                const fonteTitulos = dbMap['geral_fonte_titulos'];
+                const fonteTextos = dbMap['geral_fonte_textos'];
+                
+                if (fonteTitulos || fonteTextos) {
+                    const style = document.createElement('style');
+                    let cssDinamico = '';
+                    if (fonteTitulos) cssDinamico += `h1, h2, h3, h4, h5, h6, .section-title { font-family: '${fonteTitulos}', serif !important; } `;
+                    if (fonteTextos) cssDinamico += `body, p, a, span, button, input, select, textarea, .crp, li, label, .btn-outline { font-family: '${fonteTextos}', sans-serif !important; } `;
+                    style.innerHTML = cssDinamico;
+                    document.head.appendChild(style);
+                }
+                
+            } catch (erro) {
+                console.error('Erro na conexão dinâmica:', erro.message);
+            }
         }
+
         document.addEventListener('DOMContentLoaded', carregarConteudoDinamico);
+
+        // Script da Máscara do WhatsApp e Envio do Formulário
+        const formularioNexo = document.querySelector('.nexo-form');
+        const whatsappInput = document.getElementById('whatsapp');
+
+        if (whatsappInput) {
+            whatsappInput.addEventListener('input', (event) => {
+                let valor = event.target.value;
+                valor = valor.replace(/\D/g, ""); 
+                if (valor.length > 0) valor = "(" + valor;
+                if (valor.length > 3) valor = valor.slice(0, 3) + ") " + valor.slice(3);
+                if (valor.length > 10) valor = valor.slice(0, 10) + "-" + valor.slice(10, 15);
+                event.target.value = valor.slice(0, 15);
+            });
+        }
+
+        if (formularioNexo) {
+            formularioNexo.addEventListener('submit', async (event) => {
+                event.preventDefault(); 
+                const btnSubmit = document.getElementById('btn-submit');
+                btnSubmit.disabled = true;
+                btnSubmit.innerText = "Processando agendamento...";
+
+                const dadosFormulario = {
+                    nome: document.getElementById('nome').value,
+                    whatsapp: document.getElementById('whatsapp').value,
+                    email: document.getElementById('email').value,
+                    atendimento: document.getElementById('atendimento').value,
+                    modalidade: document.getElementById('modalidade').value,
+                    mensagem: document.getElementById('mensagem').value
+                };
+
+                try {
+                    const response = await fetch('https://nexo-api-s2dz.onrender.com/api/agendamentos', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(dadosFormulario)
+                    });
+
+                    if (response.ok) {
+                        alert('Agendamento enviado com sucesso! Entraremos em contato.');
+                        formularioNexo.reset(); 
+                    } else {
+                        alert('Erro ao processar o agendamento no servidor. Código: ' + response.status);
+                    }
+                } catch (error) {
+                    console.error('Erro de conexão:', error);
+                    alert('Estamos acordando o servidor... por favor, aguarde mais alguns segundos e tente novamente.');
+                } finally {
+                    btnSubmit.disabled = false;
+                    btnSubmit.innerText = "AGENDAR CONSULTA";
+                }
+            });
+        }
     </script>
 </body>
 </html>
