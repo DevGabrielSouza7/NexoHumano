@@ -47,11 +47,13 @@
         }
         .hero-content h1 {
             color: #ffffff !important; font-size: 4.5rem !important; font-weight: 400 !important; font-style: italic !important; 
-            text-align: center !important; margin-bottom: 50px !important; text-shadow: 2px 2px 10px rgba(0,0,0,0.5) !important; line-height: 1.2 !important;
+            text-align: center !important; margin-bottom: 30px !important; text-shadow: 2px 2px 10px rgba(0,0,0,0.5) !important; line-height: 1.2 !important;
         }
         
+        /* BOTÕES DA HERO - CENTRALIZADOS E EMPURRADOS PARA BAIXO */
         .hero-buttons { 
-            display: flex !important; justify-content: space-between !important; width: 100% !important; gap: 20px !important; 
+            display: flex !important; justify-content: center !important; width: 100% !important; 
+            gap: 30px !important; margin-top: 80px !important; 
         }
         .btn-outline {
             color: #ffffff !important; text-decoration: none !important; border: 1px solid #ffffff !important; padding: 15px 30px !important;
@@ -60,22 +62,16 @@
         }
         .btn-outline:hover { background: #ffffff !important; color: #2c302e !important; }
 
-        /* ========================================== */
-        /* MENU FLUTUANTE DISCRETO (NOVO DESIGN)      */
-        /* ========================================== */
-        .floating-action-menu {
-            position: fixed; bottom: 30px; right: 30px; z-index: 9999;
-            display: flex; flex-direction: column; gap: 12px;
+        /* BOTÕES DAS OUTRAS SECÇÕES (MANTENDO O PADRÃO ORIGINAL) */
+        .section-buttons {
+            display: flex; justify-content: center; width: 100%; gap: 20px; margin-top: 50px;
         }
-        .floating-btn {
-            background-color: #5a6659; color: #ffffff !important;
-            padding: 14px 24px; border-radius: 50px; font-size: 0.85rem; font-weight: 600;
-            text-transform: uppercase; letter-spacing: 1px; text-decoration: none;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2); transition: 0.3s ease; text-align: center;
+        .btn-outline-dark {
+            color: #5a6659 !important; text-decoration: none !important; border: 1px solid #5a6659 !important; padding: 12px 28px !important;
+            font-size: 0.85rem !important; letter-spacing: 1px !important; text-transform: uppercase !important;
+            background: transparent !important; transition: 0.3s ease !important; text-align: center !important;
         }
-        .floating-btn:hover { background-color: #3f473e; transform: translateY(-3px); }
-        .floating-btn.secondary { background-color: #ffffff; color: #5a6659 !important; border: 1px solid #5a6659; }
-        .floating-btn.secondary:hover { background-color: #f0f0f0; }
+        .btn-outline-dark:hover { background: #5a6659 !important; color: #ffffff !important; }
 
         /* LAYOUT DA SECÇÃO SOBRE */
         .sobre-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; }
@@ -88,9 +84,11 @@
         /* AJUSTES PARA MOBILE */
         @media (max-width: 992px) {
             .hero-section { height: 75vh !important; min-height: 550px !important; }
-            .hero-content h1 { font-size: 2.8rem !important; margin-bottom: 40px !important; }
-            .hero-buttons { flex-direction: column !important; align-items: center !important; gap: 15px !important; }
+            .hero-content h1 { font-size: 2.8rem !important; margin-bottom: 20px !important; }
+            .hero-buttons { flex-direction: column !important; align-items: center !important; gap: 15px !important; margin-top: 40px !important; }
             .btn-outline { width: 100% !important; padding: 16px 20px !important; }
+            .section-buttons { flex-direction: column; align-items: center; }
+            .btn-outline-dark { width: 100% !important; padding: 16px 20px !important; }
             .main-nav { display: none !important; }
             .sobre-content { flex-direction: column; }
             .sobre-header { flex-direction: column; gap: 20px; }
@@ -103,21 +101,10 @@
             .contact-layout { display: flex !important; flex-direction: column !important; gap: 40px !important; }
             .form-row { display: flex !important; flex-direction: column !important; gap: 15px !important; }
             .section-title { font-size: 2rem !important; line-height: 1.3 !important; }
-            
-            /* Transforma o Menu Flutuante numa Barra de App no Celular */
-            .floating-action-menu { bottom: 0; right: 0; left: 0; flex-direction: row; gap: 0; }
-            .floating-btn { border-radius: 0; flex: 1; padding: 16px 10px; font-size: 0.75rem; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); }
-            .floating-btn.secondary { border: none; border-left: 1px solid #e0e0e0; }
         }
     </style>
 </head>
 <body>
-
-    <!-- MENU FLUTUANTE DISCRETO -->
-    <div class="floating-action-menu" data-aos="fade-up" data-aos-delay="1000">
-        <a href="#contato" class="floating-btn">Agendar consulta</a>
-        <a href="#atividades" class="floating-btn secondary">Plantão Psicológico</a>
-    </div>
 
     <header class="main-header" data-aos="fade-down" data-aos-duration="1000">
         <div class="header-container">
@@ -153,7 +140,7 @@
             </div>
         </section>
 
-        <!-- 2. SECÇÃO SOBRE -->
+        <!-- 2. SECÇÃO SOBRE (Fundo Bege) -->
         <section id="sobre" class="bg-beige">
             <div class="container">
                 <div class="sobre-header" data-aos="fade-up">
@@ -170,10 +157,14 @@
                         <p>Texto Para apresentar a clínica e nós três. Texto Para apresentar a clínica e nós três.</p>
                     </div>
                 </div>
+                <div class="section-buttons" data-aos="fade-up">
+                    <a href="#contato" class="btn-outline-dark">Agendar consulta &rarr;</a>
+                    <a href="#atividades" class="btn-outline-dark">Plantão Psicológico &rarr;</a>
+                </div>
             </div>
         </section>
 
-        <!-- 3. ATIVIDADES -->
+        <!-- 3. ATIVIDADES (Fundo Branco) -->
         <section id="atividades" class="bg-white">
             <div class="container text-center">
                 <h2 class="section-title text-center" data-aos="fade-up">Conheça nossas<br>atividades</h2>
@@ -199,10 +190,14 @@
                         <p>Aulas teóricas e práticas de realinhamento social.</p>
                     </div>
                 </div>
+                <div class="section-buttons" data-aos="fade-up">
+                    <a href="#contato" class="btn-outline-dark">Agendar consulta &rarr;</a>
+                    <a href="#atividades" class="btn-outline-dark">Plantão Psicológico &rarr;</a>
+                </div>
             </div>
         </section>
 
-        <!-- 4. EQUIPE -->
+        <!-- 4. EQUIPE (Fundo Bege) -->
         <section id="equipe" class="bg-beige section-relative">
             <div class="container">
                 <h2 class="section-title" data-aos="fade-right">Conheça quem<br>vai te atender</h2>
@@ -223,10 +218,14 @@
                         <p class="crp">CRP: 19/5704</p>
                     </div>
                 </div>
+                <div class="section-buttons" data-aos="fade-up">
+                    <a href="#contato" class="btn-outline-dark">Agendar consulta &rarr;</a>
+                    <a href="#atividades" class="btn-outline-dark">Plantão Psicológico &rarr;</a>
+                </div>
             </div>
         </section>
 
-        <!-- 5. MODALIDADES -->
+        <!-- 5. MODALIDADES (Fundo Branco) -->
         <section id="modalidades" class="bg-white">
             <div class="container">
                 <h2 class="section-title" data-aos="fade-up">Modalidades de<br>Atendimento</h2>
@@ -240,10 +239,14 @@
                         <h3>Psicoterapia Presencial</h3>
                     </div>
                 </div>
+                <div class="section-buttons" data-aos="fade-up">
+                    <a href="#contato" class="btn-outline-dark">Agendar consulta &rarr;</a>
+                    <a href="#atividades" class="btn-outline-dark">Plantão Psicológico &rarr;</a>
+                </div>
             </div>
         </section>
 
-        <!-- 6. TEXTO E FORMULÁRIO -->
+        <!-- 6. TEXTO E FORMULÁRIO (Fundo Bege) -->
         <section id="contato" class="bg-beige">
             <div class="container contact-layout">
                 <div class="contact-text" data-aos="fade-right">
@@ -292,7 +295,7 @@
             </div>
         </section>
 
-        <!-- 7. DÚVIDAS FREQUENTES -->
+        <!-- 7. DÚVIDAS FREQUENTES (Fundo Branco) -->
         <section id="duvidas" class="bg-white section-relative">
             <div class="container">
                 <h2 class="sobre-title" data-aos="fade-up" style="margin-bottom: 40px;">Dúvidas<br>frequentes</h2>
@@ -313,7 +316,7 @@
             </div>
         </section>
 
-        <!-- 8. JORNADA DE RECUPERAÇÃO -->
+        <!-- 8. JORNADA DE RECUPERAÇÃO (Fundo Bege) -->
         <section class="bg-beige" style="padding-bottom: 60px;">
             <div class="container">
                 <h2 class="section-title" data-aos="fade-up">Jornada de<br>recuperação</h2>
@@ -350,7 +353,7 @@
             </div>
         </section>
 
-        <!-- 9. SEÇÃO DE INFORMAÇÕES DE CONTATO -->
+        <!-- 9. SEÇÃO DE INFORMAÇÕES DE CONTATO (Fundo Branco) -->
          <section class="info-section bg-white" style="padding-bottom: 100px;">
             <div class="container">
                 <div class="info-grid">
