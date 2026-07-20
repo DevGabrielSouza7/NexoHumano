@@ -374,7 +374,7 @@
         <div class="container" style="padding: 30px 0; text-align: center;">
             <p>&copy; 2026 Nexo Psicologia Humanista. Todos os direitos reservados.</p>
             <p class="developer-credit">
-                Desenvolvido por <a href="https://www.linkedin.com/in/gabriel-souza-3b80a3271" target="_blank" rel="noopener noreferrer">Gabriel Souza</a>
+                Desenvolvido por <a href="https://www.linkedin.com/in/gabriel-souza-3b80a3271" target="_blank" rel="noopener noreferrer" style="color: #5a6659; text-decoration: none; font-weight: bold;">Gabriel Souza</a>
             </p>
         </div>
     </footer>
@@ -400,6 +400,20 @@
                 if (dbMap['hero_titulo']) document.querySelector('.hero-content h1').innerHTML = dbMap['hero_titulo'];
                 if (dbMap['terapia_titulo']) document.querySelector('.contact-text h2').innerHTML = dbMap['terapia_titulo'];
                 if (dbMap['terapia_texto']) document.querySelector('.contact-text p').innerHTML = dbMap['terapia_texto'];
+
+                // NOVOS TEXTOS INJETADOS AQUI
+                if (dbMap['geral_btn_flutuante_1']) {
+                    const btn1 = document.querySelector('.floating-btn:not(.secondary)');
+                    if (btn1) btn1.innerText = dbMap['geral_btn_flutuante_1'];
+                }
+                if (dbMap['geral_btn_flutuante_2']) {
+                    const btn2 = document.querySelector('.floating-btn.secondary');
+                    if (btn2) btn2.innerText = dbMap['geral_btn_flutuante_2'];
+                }
+                if (dbMap['sobre_texto_1']) {
+                    const sobreTextos = document.querySelectorAll('.sobre-text p');
+                    if (sobreTextos.length > 0) sobreTextos[0].innerText = dbMap['sobre_texto_1'];
+                }
 
                 function updateImg(selector, valor) {
                     const img = document.querySelector(selector);
