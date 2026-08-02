@@ -82,6 +82,7 @@
         <aside class="sidebar">
             <h2>Painel Nexo</h2>
             <button class="menu-btn active" id="btn-sec-hero" onclick="mudarAba('sec-hero', this)">🏠 Seção Inicial</button>
+            <button class="menu-btn" id="btn-sec-sobre" onclick="mudarAba('sec-sobre', this)">📝 Sobre & Botões</button>
             <button class="menu-btn" id="btn-sec-terapia" onclick="mudarAba('sec-terapia', this)">🛋️ Terapia</button>
             <button class="menu-btn" id="btn-sec-equipe" onclick="mudarAba('sec-equipe', this)">👥 Equipe</button>
             <button class="menu-btn" id="btn-sec-modalidades" onclick="mudarAba('sec-modalidades', this)">💻 Modalidades</button>
@@ -92,6 +93,7 @@
             
             <nav class="sticky-nav">
                 <button class="shortcut-btn" onclick="mudarAba('sec-hero')">Hero</button>
+                <button class="shortcut-btn" onclick="mudarAba('sec-sobre')">Sobre & Botões</button>
                 <button class="shortcut-btn" onclick="mudarAba('sec-terapia')">Terapia</button>
                 <button class="shortcut-btn" onclick="mudarAba('sec-equipe')">Equipe</button>
                 <button class="shortcut-btn" onclick="mudarAba('sec-modalidades')">Modalidades</button>
@@ -140,6 +142,27 @@
                             </div>
                         </div>
                         <button type="button" class="btn" style="background-color: #1a1c1a; margin-top: 10px;" onclick="salvarEstilos(event, 'hero', 'hero_imagem')">Salvar Tamanho e Posição da Hero</button>
+                    </div>
+                </div>
+
+                <!-- NOVA ABA: SOBRE & BOTÕES FLUTUANTES -->
+                <div id="sec-sobre" class="content-section">
+                    <h3 class="section-title">Sobre Nós & Botões Flutuantes</h3>
+                    
+                    <h4 style="margin-bottom: 15px; color: var(--primary-green); font-weight: 600;">Textos dos Botões Flutuantes</h4>
+                    <div class="form-group">
+                        <label>Botão Principal (Ex: Agendar consulta)</label>
+                        <input type="text" id="btn_flutuante_1" placeholder="Ex: Agendar consulta">
+                    </div>
+                    <div class="form-group">
+                        <label>Botão Secundário (Ex: Plantão Psicológico)</label>
+                        <input type="text" id="btn_flutuante_2" placeholder="Ex: Plantão Psicológico">
+                    </div>
+
+                    <h4 style="margin-top: 35px; margin-bottom: 15px; color: var(--primary-green); font-weight: 600;">Texto da Seção Sobre</h4>
+                    <div class="form-group">
+                        <label>Primeiro Parágrafo (Apresentação)</label>
+                        <textarea id="sobre_texto_1" rows="5" placeholder="Digite a apresentação da clínica..."></textarea>
                     </div>
                 </div>
 
@@ -351,13 +374,19 @@
             try {
                 const { data, error } = await supabaseClient.from('conteudo_site').select('*');
                 if (error) throw error;
-               
+                
                 data.forEach(item => {
-                    // Textos e Imagens
+                    // Textos e Imagens Antigos
                     if (item.secao === 'hero' && item.chave === 'titulo') document.getElementById('hero_titulo').value = item.valor;
                     if (item.secao === 'terapia' && item.chave === 'titulo') document.getElementById('terapia_titulo').value = item.valor;
                     if (item.secao === 'terapia' && item.chave === 'texto') document.getElementById('terapia_texto').value = item.valor;
                     
+                    // Novos Textos (Sobre e Botões)
+                    if (item.secao === 'geral' && item.chave === 'btn_flutuante_1') document.getElementById('btn_flutuante_1').value = item.valor;
+                    if (item.secao === 'geral' && item.chave === 'btn_flutuante_2') document.getElementById('btn_flutuante_2').value = item.valor;
+                    if (item.secao === 'sobre' && item.chave === 'texto_1') document.getElementById('sobre_texto_1').value = item.valor;
+
+                    // Imagens
                     if (item.secao === 'hero' && item.chave === 'imagem') { document.getElementById('hero_imagem_url_atual').value = item.valor; document.getElementById('previewHero').src = item.valor; }
                     if (item.secao === 'equipe' && item.chave === 'foto_1') { document.getElementById('equipe_foto1_url_atual').value = item.valor; document.getElementById('previewEquipe1').src = item.valor; }
                     if (item.secao === 'equipe' && item.chave === 'foto_2') { document.getElementById('equipe_foto2_url_atual').value = item.valor; document.getElementById('previewEquipe2').src = item.valor; }
@@ -406,6 +435,11 @@
                 for (const item of novosDados) {
                     await supabaseClient.from('conteudo_site').update({ valor: item.valor }).eq('secao', item.secao).eq('chave', item.chave);
                 }
+
+                // Salvando os textos novos com 'salvarOuAtualizar' para garantir que sejam criados caso não existam
+                await salvarOuAtualizar('geral', 'btn_flutuante_1', document.getElementById('btn_flutuante_1').value);
+                await salvarOuAtualizar('geral', 'btn_flutuante_2', document.getElementById('btn_flutuante_2').value);
+                await salvarOuAtualizar('sobre', 'texto_1', document.getElementById('sobre_texto_1').value);
 
                 document.getElementById('hero_imagem_url_atual').value = urlHero;
                 document.getElementById('equipe_foto1_url_atual').value = urlEquipe1;
