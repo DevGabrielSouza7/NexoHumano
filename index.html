@@ -38,6 +38,7 @@
             position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; 
             z-index: 1 !important; border-radius: 0 !important;
         }
+        /* Ajuste do object-position para focar no topo no desktop */
         .hero-image img { width: 100% !important; height: 100% !important; object-fit: cover !important; object-position: top !important; display: block !important; border-radius: 0 !important; }
         .hero-overlay { position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; background: rgba(44, 48, 46, 0.55) !important; z-index: 2 !important; }
         
@@ -145,7 +146,7 @@
         /* RODAPÉ DE CONTACTOS VERDE ESCURO           */
         /* ========================================== */
         .info-section-dark {
-            background-color: #113A23; /* Fundo Verde Escuro */
+            background-color: #113A23; 
             color: #ffffff;
             padding: 80px 0;
         }
@@ -201,6 +202,15 @@
         }
 
         @media (max-width: 768px) {
+            /* AJUSTE ESPECÍFICO PARA A FOTO NO MOBILE (Mais larga e centralizada) */
+            .hero-section { 
+                height: 50vh !important; 
+                min-height: 380px !important; 
+            }
+            .hero-image img { 
+                object-position: center 15% !important; 
+            }
+
             .container { padding-left: 20px !important; padding-right: 20px !important; width: 100% !important; overflow-x: hidden !important; }
             .activities-grid, .team-grid, .modalities-grid, .faq-grid, .journey-grid, .info-grid { display: flex !important; flex-direction: column !important; gap: 30px !important; }
             .contact-layout { display: flex !important; flex-direction: column !important; gap: 40px !important; }
@@ -252,18 +262,18 @@
     </header>
 
     <main>
-        <!-- 1. HERO SECTION -->
+        <!-- 1. HERO SECTION (Animação Fade-in 2000ms) -->
         <section id="inicio" class="hero-section">
             <div class="hero-image">
                 <img src="img/equipe-hero.png" alt="Equipe Nexo">
                 <div class="hero-overlay"></div>
             </div>
-            <div class="hero-content" data-aos="zoom-out" data-aos-duration="1200">
+            <div class="hero-content" data-aos="fade-in" data-aos-duration="2000">
                 <h1>Lugar de escuta e cuidado</h1>
             </div>
         </section>
 
-        <!-- 2. SECÇÃO SOBRE -->
+        <!-- 2. SECÇÃO SOBRE (Animações fade-right e fade-left) -->
         <section id="sobre" class="bg-beige">
             <div class="container">
                 <div class="sobre-header" data-aos="fade-up">
@@ -275,7 +285,7 @@
                         <img src="img/QuemSomos.JPG" alt="Sobre a Clínica"> 
                     </div>
                     <div class="sobre-text" data-aos="fade-left">
-                        <p>A <strong>Nexo Psicologia Humanista</strong> nasce da coesão entre três psicólogos, que, apesar de percorrerem diferentes caminhos dentro da Psicologia, compartilham uma mesma forma de compreender o ser humano e o cuidado em saúde mental.</p>
+                        <p>A <strong> Nexo Psicologia Humanista </strong> nasce da coesão entre três psicólogos, que, apesar de percorrerem diferentes caminhos dentro da Psicologia, compartilham uma mesma forma de compreender o ser humano e o cuidado em saúde mental.</p>
                         <p> Nossa união é construída a partir de valores que nos aproximam: a escuta genuína, o respeito à singularidade, a presença e a crença no potencial de cada pessoa para construir novos sentidos e possibilidades para sua própria vida.</p>
                         <p> É dessa conexão que surge a <strong> Nexo. </strong> Nossa prática reúne diferentes perspectivas da Psicologia Humanista. São caminhos distintos, mas que se encontram em um propósito comum: oferecer um atendimento ético, acolhedor e verdadeiramente humano. Acreditamos que é justamente naquilo que nos une que nossa força se encontra. A Nexo representa esse vínculo, essa coesão e a escolha de caminhar juntos, construindo um espaço onde diferentes olhares podem coexistir sem perder aquilo que nos torna um só propósito.
                         <strong> Nexo é conexão. É o que nos une. É o que nos move. </strong>
@@ -319,17 +329,17 @@
             <div class="container">
                 <h2 class="section-title" data-aos="fade-right">Conheça quem<br>vai te atender</h2>
                 <div class="team-grid">
-                    <div class="team-card" data-aos="flip-left" data-aos-delay="100" onclick="abrirModalEquipe('adriana', this)" title="Clique para ver o perfil completo">
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="100" onclick="abrirModalEquipe('adriana', this)" title="Clique para ver o perfil completo">
                         <img src="img/adriana.png" alt="Adriana Santos">
                         <h3>Adriana Santos</h3>
                         <p class="crp">CRP: 19/5704</p>
                     </div>
-                    <div class="team-card" data-aos="flip-left" data-aos-delay="250" onclick="abrirModalEquipe('joselito', this)" title="Clique para ver o perfil completo">
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="250" onclick="abrirModalEquipe('joselito', this)" title="Clique para ver o perfil completo">
                         <img src="img/joselito.png" alt="Joselito Silva">
                         <h3>Joselito Júnior</h3>
                         <p class="crp">CRP: 19/005914</p>
                     </div>
-                    <div class="team-card" data-aos="flip-left" data-aos-delay="400" onclick="abrirModalEquipe('suzana', this)" title="Clique para ver o perfil completo">
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="400" onclick="abrirModalEquipe('suzana', this)" title="Clique para ver o perfil completo">
                         <img src="img/suzana.png" alt="Suzana M. de Araújo">
                         <h3>Suzana M. de Araújo</h3>
                         <p class="crp">CRP: 19/5694</p>
