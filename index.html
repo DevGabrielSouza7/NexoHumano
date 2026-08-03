@@ -142,7 +142,7 @@
         .modal-social svg { width: 22px; height: 22px; fill: white; }
 
         /* ========================================== */
-        /* NOVO RODAPÉ DE CONTACTOS VERDE ESCURO      */
+        /* RODAPÉ DE CONTACTOS VERDE ESCURO           */
         /* ========================================== */
         .info-section-dark {
             background-color: #113A23; /* Fundo Verde Escuro */
@@ -164,7 +164,7 @@
         .contact-number-circle {
             width: 75px;
             height: 75px;
-            background-color: #5a765d; /* Círculo verde mais claro */
+            background-color: #5a765d; 
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -190,6 +190,7 @@
             font-weight: 300;
         }
 
+        /* AJUSTES PARA MOBILE */
         @media (max-width: 992px) {
             .hero-section { height: 75vh !important; min-height: 550px !important; }
             .hero-content h1 { font-size: 2.8rem !important; margin-bottom: 20px !important; }
@@ -220,7 +221,6 @@
             .modal-desc p { text-align: left; font-size: 0.95rem; }
             .modal-social { justify-content: center; }
 
-            /* Ajuste do grid de contactos no mobile */
             .contact-grid-2x2 { grid-template-columns: 1fr; gap: 30px; }
         }
     </style>
@@ -359,8 +359,8 @@
         <section id="contato" class="bg-beige">
             <div class="container contact-layout">
                 <div class="contact-text" data-aos="fade-right">
-                    <h2 class="sobre-title">Plantão<br>Psicológico</h2>
-                    <p style="font-size: 1.1rem; line-height: 1.6; margin-top: 20px;">A psicoterapia é um espaço de escuta, acolhimento e autoconhecimento. Por meio dela, é possível compreender emoções, desenvolver recursos para lidar com desafios e fortalecer a saúde mental.</p>
+                    <h2 class="sobre-title">Por que fazer<br>terapia?</h2>
+                    <p style="font-size: 1.1rem; line-height: 1.6; margin-top: 20px;">A terapia é um lugar de acolhimento, onde você pode expressar sua experiência com liberdade, sem julgamentos ou expectativas. O processo terapêutico favorece o autoconhecimento, a autonomia emocional e relações mais saudáveis, respeitando o tempo e a singularidade de cada indivíduo. A psicoterapia promove um encontro humano baseado na empatia, na autenticidade e na aceitação, possibilitando que você se aproxime de quem realmente é.</p>
                 </div>
                 <div class="contact-form-container" data-aos="fade-left">
                     <form class="nexo-form">
@@ -404,7 +404,7 @@
             </div>
         </section>
 
-        <!-- INFORMAÇÕES DO PLANTÃO PSICOLÓGICO -->
+        <!-- 7. INFORMAÇÕES DO PLANTÃO PSICOLÓGICO -->
         <section class="bg-beige" style="padding-top: 40px; padding-bottom: 80px;">
             <div class="container">
                 <div class="plantao-container" data-aos="fade-up">
@@ -420,65 +420,72 @@
             </div>
         </section>
 
-        <!-- 7. DÚVIDAS FREQUENTES -->
-        <section id="duvidas" class="bg-white section-relative">
+        <!-- 8. DÚVIDAS FREQUENTES -->
+        <section id="duvidas" class="bg-white section-relative" style="padding-bottom: 80px;">
             <div class="container">
-                <h2 class="sobre-title" data-aos="fade-up" style="margin-bottom: 40px;">Dúvidas<br>frequentes</h2>
+                <h2 class="sobre-title" data-aos="fade-up" style="margin-bottom: 40px;">Dúvidas<br>Frequentes</h2>
                 <div class="faq-grid">
-                    <div class="faq-item" data-aos="fade-up" data-aos-delay="100">
-                        <h3>Como funciona o<br>Plantão Psicológico?</h3>
-                        <p>Não trabalhamos com esse método. Aceitamos apenas pacientes que desejem fazer o tratamento.</p>
+                    
+                    <div class="faq-item" data-aos="fade-up">
+                        <h3>Como saber se preciso de terapia?</h3>
+                        <p>Você não precisa esperar que o sofrimento se torne insuportável para buscar ajuda. A terapia pode ser um espaço para lidar com ansiedade, tristeza, conflitos nos relacionamentos, momentos de crise, mudanças de vida, dificuldades emocionais ou simplesmente para investir em autoconhecimento e desenvolvimento pessoal. Se algo tem afetado sua qualidade de vida ou faz você sentir que precisa de um espaço para ser ouvido, a terapia pode ser um importante caminho de cuidado.</p>
                     </div>
-                    <div class="faq-item" data-aos="fade-up" data-aos-delay="200">
-                        <h3>A eficácia da terapia<br>online é comprovada?</h3>
-                        <p>O tratamento só funciona se o paciente estiver disposto. Nenhum método é 100% eficaz se não houver comprometimento.</p>
+                    
+                    <div class="faq-item" data-aos="fade-up">
+                        <h3>Como funciona a primeira sessão?</h3>
+                        <p>A primeira sessão é um momento de acolhimento. Você poderá falar sobre sua história, o que motivou a busca por atendimento e quais são suas necessidades neste momento. Também será uma oportunidade para conhecer o psicólogo, compreender como funciona o processo terapêutico e esclarecer dúvidas.</p>
                     </div>
-                    <div class="faq-item" data-aos="fade-up" data-aos-delay="300">
-                        <h3>Como posso indicar<br>para um familiar ou<br>amigo?</h3>
-                        <p>Mostre nosso site e indique canais de ajuda. Com a validação do paciente, seguimos com uma conversa inicial.</p>
+                    
+                    <div class="faq-item" data-aos="fade-up">
+                        <h3>Quanto tempo dura uma sessão?</h3>
+                        <p>As sessões de psicoterapia têm duração média de 50 minutos.</p>
                     </div>
+                    
+                    <div class="faq-item" data-aos="fade-up">
+                        <h3>Com que frequência acontecem as sessões?</h3>
+                        <p>Na maioria dos casos, as sessões são semanais. Entretanto, a frequência é definida em conjunto entre psicólogo e paciente, considerando as necessidades e objetivos de cada processo.</p>
+                    </div>
+                    
+                    <div class="faq-item" data-aos="fade-up">
+                        <h3>O Plantão Psicológico substitui a psicoterapia?</h3>
+                        <p>Não. O Plantão Psicológico é um atendimento pontual, pensado para momentos de urgência emocional. Dependendo da necessidade identificada durante o encontro, poderá ser indicada a continuidade do cuidado por meio da psicoterapia.</p>
+                    </div>
+                    
+                    <div class="faq-item" data-aos="fade-up">
+                        <h3>Como funciona a psicoterapia em grupo?</h3>
+                        <p>A psicoterapia em grupo reúne pessoas que compartilham o desejo de cuidar da saúde emocional em um ambiente seguro, respeitoso e sigiloso. O grupo favorece a troca de experiências, o sentimento de pertencimento e o desenvolvimento pessoal, sempre com a mediação de psicólogos.</p>
+                    </div>
+                    
+                    <div class="faq-item" data-aos="fade-up">
+                        <h3>O que é Orientação Parental?</h3>
+                        <p>A Orientação Parental é um espaço destinado a pais, mães e cuidadores que desejam compreender melhor o desenvolvimento dos filhos, fortalecer os vínculos familiares e encontrar estratégias para lidar com desafios da educação e da convivência. O objetivo não é julgar a forma de educar, mas construir caminhos mais saudáveis para a relação familiar.</p>
+                    </div>
+                    
+                    <div class="faq-item" data-aos="fade-up">
+                        <h3>Os atendimentos são sigilosos?</h3>
+                        <p>Sim. Todo atendimento psicológico é protegido pelo sigilo profissional, conforme estabelece o Código de Ética do Psicólogo. As informações compartilhadas durante as sessões permanecem confidenciais, exceto nas situações previstas em lei.</p>
+                    </div>
+                    
+                    <div class="faq-item" data-aos="fade-up">
+                        <h3>Posso fazer terapia mesmo sem um diagnóstico psicológico ou psiquiátrico?</h3>
+                        <p>Sim. A terapia não é destinada apenas a quem possui um diagnóstico. Muitas pessoas procuram atendimento para compreender melhor suas emoções, desenvolver habilidades para lidar com desafios cotidianos, fortalecer relacionamentos ou buscar uma vida com mais equilíbrio e sentido.</p>
+                    </div>
+                    
+                    <div class="faq-item" data-aos="fade-up">
+                        <h3>A terapia online é tão eficaz quanto a presencial?</h3>
+                        <p>Sim. Quando realizada de acordo com as normas do Conselho Federal de Psicologia e em um ambiente adequado, a psicoterapia online é uma modalidade segura e eficaz, oferecendo acolhimento e qualidade técnica semelhantes ao atendimento presencial.</p>
+                    </div>
+                    
+                    <div class="faq-item" data-aos="fade-up">
+                        <h3>Como agendar um atendimento?</h3>
+                        <p>Você pode entrar em contato conosco pelos canais disponíveis no site. Nossa equipe irá orientar você sobre a modalidade de atendimento mais adequada, esclarecer dúvidas e ajudar no agendamento da sua primeira sessão.</p>
+                    </div>
+                    
                 </div>
             </div>
         </section>
 
-        <!-- 8. JORNADA DE RECUPERAÇÃO -->
-        <section class="bg-beige" style="padding-bottom: 60px;">
-            <div class="container">
-                <h2 class="section-title" data-aos="fade-up">Jornada de<br>recuperação</h2>
-                <div class="journey-grid">
-                    <div class="journey-step" data-aos="fade-left" data-aos-delay="100">
-                        <div class="step-number">1</div>
-                        <div class="step-content">
-                            <h3>Internação voluntária</h3>
-                            <p>Internação agendada e chegada do paciente no centro.</p>
-                        </div>
-                    </div>
-                    <div class="journey-step" data-aos="fade-left" data-aos-delay="250">
-                        <div class="step-number">2</div>
-                        <div class="step-content">
-                            <h3>Diagnóstico</h3>
-                            <p>Conversa com o paciente e responsáveis para diagnóstico.</p>
-                        </div>
-                    </div>
-                    <div class="journey-step" data-aos="fade-left" data-aos-delay="400">
-                        <div class="step-number">3</div>
-                        <div class="step-content">
-                            <h3>Desintoxicação &<br>Terapia</h3>
-                            <p>Desintoxicação química se necessário e terapia acompanhada.</p>
-                        </div>
-                    </div>
-                    <div class="journey-step" data-aos="fade-left" data-aos-delay="550">
-                        <div class="step-number">4</div>
-                        <div class="step-content">
-                            <h3>Atividades de<br>recuperação</h3>
-                            <p>Atividades sociais e físicas monitoradas.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- 9. NOVA SEÇÃO DE INFORMAÇÕES DE CONTATO (VERDE ESCURO COM NÚMEROS) -->
+        <!-- 9. INFORMAÇÕES DE CONTATO (VERDE ESCURO COM NÚMEROS) -->
         <section class="info-section-dark">
             <div class="container">
                 <div class="contact-grid-2x2">
@@ -570,8 +577,8 @@
                     Pós graduação em Psicologia Humanista com Abordagem Centrada na Pessoa;</p>
                     <p>Minha abordagem terapêutica é pautada no acolhimento e na escuta ativa, auxiliando meus pacientes no autoconhecimento e na construção de relações mais saudáveis.</p>
                 `,
-                insta: '#',
-                wpp: '#'
+                insta: 'https://www.instagram.com/psi.adrianastoss',
+                wpp: 'https://wa.me/557996877676'
             },
             'joselito': {
                 nome: 'Joselito Júnior',
@@ -581,8 +588,8 @@
                     Pós-graduado em Psicologia Sexual.</p>
                     <p>Minha prática clínica é pautada no acolhimento, na escuta qualificada e na construção de uma relação terapêutica ética e autêntica. Atuo no manejo de demandas envolvendo sexualidade, relacionamentos, questões de identidade e vivências da população negra e da comunidade LGBTQIAPN+, auxiliando cada pessoa no desenvolvimento do autoconhecimento, da autonomia e de formas mais saudáveis de se relacionar consigo, com o outro e com o mundo.</p>
                 `,
-                insta: '#',
-                wpp: '#'
+                insta: 'https://www.instagram.com/joselitosilva.psi',
+                wpp: 'https://wa.me/5579996018224'
             },
             'suzana': {
                 nome: 'Suzana M. de Araújo',
@@ -592,8 +599,8 @@
                     <p>Minha atuação está voltada para questões relacionadas à ansiedade, à depressão e a diferentes formas de sofrimento emocional. Meu trabalho é pautado pela ética, pelo respeito e pela construção de um espaço seguro de acolhimento e escuta, valorizando a singularidade de cada pessoa.</p>
                     <p>Será um privilégio caminhar ao seu lado nesse processo.</p>
                 `,
-                insta: '#',
-                wpp: '#'
+                insta: 'https://www.instagram.com/psi.suzanamelo',
+                wpp: 'https://wa.me/5579999387341'
             }
         };
 
