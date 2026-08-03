@@ -50,9 +50,6 @@
             text-align: center !important; margin-bottom: 20px !important; text-shadow: 2px 2px 10px rgba(0,0,0,0.5) !important; line-height: 1.2 !important;
         }
 
-        /* ========================================== */
-        /* MENU FLUTUANTE DISCRETO                    */
-        /* ========================================== */
         .floating-action-menu {
             position: fixed; bottom: 30px; right: 30px; z-index: 9999;
             display: flex; flex-direction: column; gap: 12px;
@@ -67,61 +64,83 @@
         .floating-btn.secondary { background-color: #ffffff; color: #5a6659 !important; border: 1px solid #5a6659; }
         .floating-btn.secondary:hover { background-color: #f0f0f0; }
 
-        /* LAYOUT DA SECÇÃO SOBRE */
         .sobre-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; }
         .sobre-title { font-size: 3rem; line-height: 1.1; font-weight: 400; font-family: 'Playfair Display', serif; color: #2c302e; }
         .sobre-content { display: flex; gap: 40px; align-items: center; margin-bottom: 20px; }
 
-        /* NOVO FORMATO ORGÂNICO DA IMAGEM */
         .sobre-image { 
             flex: 1; 
             overflow: hidden; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            /* Esta linha cria o formato orgânico (blob) */
             border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; 
             transition: all 0.6s ease-in-out;
         }
-
-        /* Efeito suave de movimento quando o rato passa por cima (Opcional, mas fica excelente) */
         .sobre-image:hover {
             border-radius: 60% 40% 30% 70% / 50% 50% 40% 60%;
         }
-
         .sobre-image img { 
-            width: 100%; 
-            height: 100%; 
-            min-height: 400px;
-            object-fit: cover; 
-            display: block; 
+            width: 100%; height: 100%; min-height: 400px;
+            object-fit: cover; display: block; 
         }
-
         .sobre-text { flex: 1.5; font-size: 0.95rem; line-height: 1.8; text-align: justify; color: #4a4a4a; }
 
-        /* SECÇÃO EXTRA: PLANTÃO PSICOLÓGICO */
         .plantao-container {
-            max-width: 900px;
-            margin: 0 auto;
-            background-color: #ffffff;
-            padding: 50px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            max-width: 900px; margin: 0 auto; background-color: #ffffff;
+            padding: 50px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
-        .plantao-texto p {
-            font-size: 1.05rem;
-            line-height: 1.8;
-            color: #4a4a4a;
-            margin-bottom: 25px;
-            text-align: left;
-        }
-        .plantao-texto p:last-child {
-            margin-bottom: 0;
-        }
-        .plantao-texto strong {
-            font-weight: 600;
-            color: #2c302e;
-        }
+        .plantao-texto p { font-size: 1.05rem; line-height: 1.8; color: #4a4a4a; margin-bottom: 25px; text-align: left; }
+        .plantao-texto p:last-child { margin-bottom: 0; }
+        .plantao-texto strong { font-weight: 600; color: #2c302e; }
 
-        /* AJUSTES PARA MOBILE */
+        /* ========================================== */
+        /* MODAL DOS PSICÓLOGOS (NOVO)                */
+        /* ========================================== */
+        .team-card { cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .team-card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); border-radius: 10px; }
+        
+        .modal-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.65); z-index: 10000; align-items: center; justify-content: center;
+            opacity: 0; transition: opacity 0.3s ease; padding: 20px; backdrop-filter: blur(4px);
+        }
+        .modal-overlay.active { display: flex; opacity: 1; }
+        
+        .modal-box {
+            background: #ffffff; width: 100%; max-width: 950px; border-radius: 20px;
+            position: relative; padding: 50px 40px; box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            transform: translateY(30px); transition: transform 0.3s ease;
+            max-height: 90vh; overflow-y: auto;
+        }
+        .modal-overlay.active .modal-box { transform: translateY(0); }
+        
+        .modal-close {
+            position: absolute; top: 20px; right: 25px; font-size: 2.5rem; border: none;
+            background: transparent; cursor: pointer; color: #a0a0a0; line-height: 1; transition: color 0.2s;
+        }
+        .modal-close:hover { color: #2c302e; }
+        
+        .modal-content-flex { display: flex; gap: 40px; align-items: center; }
+        
+        .modal-img-container { flex: 1; text-align: center; }
+        .modal-img-container img {
+            width: 100%; max-width: 380px; aspect-ratio: 1/1; object-fit: cover;
+            border-radius: 50%; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border: 8px solid #efebe4;
+        }
+        
+        .modal-text-container { flex: 1.4; text-align: left; }
+        .modal-text-container h2 { font-size: 2.8rem; font-family: 'Playfair Display', serif; color: #4b5860; margin-bottom: 25px; font-weight: 400; line-height: 1.1; }
+        .modal-desc p { font-size: 1.05rem; line-height: 1.8; color: #4a4a4a; margin-bottom: 15px; text-align: justify; }
+        
+        .modal-social { display: flex; gap: 15px; margin-top: 30px; justify-content: flex-start; }
+        .modal-social a {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 45px; height: 45px; border-radius: 50%; transition: transform 0.2s;
+        }
+        .modal-social a:hover { transform: scale(1.1); }
+        .btn-insta { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+        .btn-wpp { background: #25D366; }
+        .modal-social svg { width: 22px; height: 22px; fill: white; }
+
         @media (max-width: 992px) {
             .hero-section { height: 75vh !important; min-height: 550px !important; }
             .hero-content h1 { font-size: 2.8rem !important; margin-bottom: 20px !important; }
@@ -138,14 +157,20 @@
             .form-row { display: flex !important; flex-direction: column !important; gap: 15px !important; }
             .section-title { font-size: 2rem !important; line-height: 1.3 !important; }
             
-            /* Transforma o Menu Flutuante numa Barra de App no Celular */
             .floating-action-menu { bottom: 0; right: 0; left: 0; flex-direction: row; gap: 0; }
             .floating-btn { border-radius: 0; flex: 1; padding: 16px 10px; font-size: 0.75rem; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); }
             .floating-btn.secondary { border: none; border-left: 1px solid #e0e0e0; }
             
-            .plantao-container {
-                padding: 30px 20px;
-            }
+            .plantao-container { padding: 30px 20px; }
+            
+            /* Ajustes do Modal para Mobile */
+            .modal-content-flex { flex-direction: column; gap: 20px; text-align: center; }
+            .modal-box { padding: 40px 20px; }
+            .modal-img-container img { max-width: 220px; border-width: 5px; }
+            .modal-text-container h2 { font-size: 2.2rem; text-align: center; }
+            .modal-text-container { text-align: center; }
+            .modal-desc p { text-align: left; font-size: 0.95rem; }
+            .modal-social { justify-content: center; }
         }
     </style>
 </head>
@@ -199,25 +224,11 @@
                         <img src="img/QuemSomos.JPG" alt="Sobre a Clínica"> 
                     </div>
                     <div class="sobre-text" data-aos="fade-left">
-                        <p>A <strong> Nexo Psicologia Humanista </strong> nasce da coesão entre três psicólogos, que,
-                            apesar de percorrerem diferentes caminhos dentro da Psicologia,
-                            compartilham uma mesma forma de compreender o ser humano e o cuidado
-                            em saúde mental.
-                        </p>
-                        <p> Nossa união é construída a partir de valores que nos aproximam: a escuta
-                            genuína, o respeito à singularidade, a presença e a crença no potencial de
-                            cada pessoa para construir novos sentidos e possibilidades para sua própria
-                            vida.</p>
-                        <p> É dessa conexão que surge a <strong> Nexo. </strong>
-                            Nossa prática reúne diferentes perspectivas da Psicologia Humanista. São
-                            caminhos distintos, mas que se encontram em um propósito comum:
-                            oferecer um atendimento ético, acolhedor e verdadeiramente humano.
-                            Acreditamos que é justamente naquilo que nos une que nossa força se
-                            encontra. A Nexo representa esse vínculo, essa coesão e a escolha de
-                            caminhar juntos, construindo um espaço onde diferentes olhares podem
-                            coexistir sem perder aquilo que nos torna um só propósito.
-                            <strong> Nexo é conexão. É o que nos une. É o que nos move. </strong>
-                            E é desse encontro que nasce o nosso compromisso com você.</p>
+                        <p>A <strong> Nexo Psicologia Humanista </strong> nasce da coesão entre três psicólogos, que, apesar de percorrerem diferentes caminhos dentro da Psicologia, compartilham uma mesma forma de compreender o ser humano e o cuidado em saúde mental.</p>
+                        <p> Nossa união é construída a partir de valores que nos aproximam: a escuta genuína, o respeito à singularidade, a presença e a crença no potencial de cada pessoa para construir novos sentidos e possibilidades para sua própria vida.</p>
+                        <p> É dessa conexão que surge a <strong> Nexo. </strong> Nossa prática reúne diferentes perspectivas da Psicologia Humanista. São caminhos distintos, mas que se encontram em um propósito comum: oferecer um atendimento ético, acolhedor e verdadeiramente humano. Acreditamos que é justamente naquilo que nos une que nossa força se encontra. A Nexo representa esse vínculo, essa coesão e a escolha de caminhar juntos, construindo um espaço onde diferentes olhares podem coexistir sem perder aquilo que nos torna um só propósito.
+                        <strong> Nexo é conexão. É o que nos une. É o que nos move. </strong>
+                        E é desse encontro que nasce o nosso compromisso com você.</p>
                     </div>
                 </div>
             </div>
@@ -252,25 +263,25 @@
             </div>
         </section>
 
-        <!-- 4. EQUIPE -->
+        <!-- 4. EQUIPE (AQUI ADICIONÁMOS O ONCLICK) -->
         <section id="equipe" class="bg-beige section-relative">
             <div class="container">
                 <h2 class="section-title" data-aos="fade-right">Conheça quem<br>vai te atender</h2>
                 <div class="team-grid">
-                    <div class="team-card" data-aos="flip-left" data-aos-delay="100">
+                    <div class="team-card" data-aos="flip-left" data-aos-delay="100" onclick="abrirModalEquipe('adriana', this)" title="Clique para ver o perfil completo">
                         <img src="img/adriana.png" alt="Adriana Santos">
                         <h3>Adriana Santos</h3>
                         <p class="crp">CRP: 19/5704</p>
                     </div>
-                    <div class="team-card" data-aos="flip-left" data-aos-delay="250">
+                    <div class="team-card" data-aos="flip-left" data-aos-delay="250" onclick="abrirModalEquipe('joselito', this)" title="Clique para ver o perfil completo">
                         <img src="img/joselito.png" alt="Joselito Silva">
-                        <h3>Joselito Silva</h3>
-                        <p class="crp">CRP: 19/5704</p>
+                        <h3>Joselito Júnior</h3>
+                        <p class="crp">CRP: 19/005914</p>
                     </div>
-                    <div class="team-card" data-aos="flip-left" data-aos-delay="400">
-                        <img src="img/suzana.png" alt="Suzana Melo">
-                        <h3>Suzana Melo</h3>
-                        <p class="crp">CRP: 19/5704</p>
+                    <div class="team-card" data-aos="flip-left" data-aos-delay="400" onclick="abrirModalEquipe('suzana', this)" title="Clique para ver o perfil completo">
+                        <img src="img/suzana.png" alt="Suzana M. de Araújo">
+                        <h3>Suzana M. de Araújo</h3>
+                        <p class="crp">CRP: 19/5694</p>
                     </div>
                 </div>
             </div>
@@ -350,11 +361,8 @@
                     
                     <div class="plantao-texto">
                         <p>O <strong>Plantão Psicológico da Nexo Psicologia</strong> foi criado para oferecer um espaço de acolhimento e escuta qualificada em momentos de sofrimento emocional ou crise, proporcionando suporte psicológico de forma rápida e acessível.</p>
-                        
                         <p>A sessão tem <strong>duração de até 50 minutos</strong> e o investimento é de <strong>R$ 30,00</strong>.</p>
-                        
                         <p><strong>Importante:</strong> O Plantão Psicológico é um atendimento pontual, voltado ao acolhimento e à avaliação da demanda apresentada. Ele não substitui o processo de psicoterapia, mas pode ser o primeiro passo para quem necessita de apoio emocional imediato e, quando necessário, de encaminhamento para um acompanhamento psicológico contínuo.</p>
-                        
                         <p>Cada pessoa poderá utilizar o serviço de Plantão Psicológico <strong>uma vez a cada mês</strong>, garantindo que o atendimento permaneça disponível para quem estiver vivenciando situações de urgência emocional.</p>
                     </div>
                 </div>
@@ -464,12 +472,108 @@
         </div>
     </footer>
 
+    <!-- ESTRUTURA DO MODAL DA EQUIPE -->
+    <div id="modal-equipe" class="modal-overlay">
+        <div class="modal-box">
+            <button class="modal-close" onclick="fecharModalEquipe()">&times;</button>
+            <div class="modal-content-flex">
+                <div class="modal-img-container">
+                    <img id="modal-img" src="" alt="Foto Psicólogo">
+                </div>
+                <div class="modal-text-container">
+                    <h2 id="modal-nome">Nome</h2>
+                    <div id="modal-desc" class="modal-desc"></div>
+                    
+                    <div class="modal-social">
+                        <!-- Instagram Ícone SVG -->
+                        <a href="#" id="modal-insta" target="_blank" class="btn-insta" title="Instagram">
+                            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                        <!-- WhatsApp Ícone SVG -->
+                        <a href="#" id="modal-wpp" target="_blank" class="btn-wpp" title="WhatsApp">
+                            <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.423-14.416c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm.029 18.88c-1.161 0-2.305-.292-3.318-.844l-3.677.964.984-3.595c-.607-1.052-.927-2.246-.926-3.468.001-5.824 4.74-10.563 10.564-10.563 5.826 0 10.564 4.738 10.564 10.563 0 5.827-4.739 10.563-10.564 10.563z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts do Formulário, Supabase e AOS -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 800, once: true, offset: 100 });
 
+        // DADOS DOS PSICÓLOGOS PARA O MODAL
+        const dadosEquipe = {
+            'adriana': {
+                nome: 'Adriana Santos',
+                descricao: `
+                    <p>Sou psicóloga Clínica (CRP 19/5704);<br>
+                    Formação e Mentoria para Atuação aos Sofrimentos Extremos;<br>
+                    Pós Graduação em Suicidologia;<br>
+                    Pós graduação em Psicologia Humanista com Abordagem Centrada na Pessoa;</p>
+                    <p>Minha abordagem terapêutica é pautada no acolhimento e na escuta ativa, auxiliando meus pacientes no autoconhecimento e na construção de relações mais saudáveis.</p>
+                `,
+                insta: '#', // Adiciona aqui o link do instagram dela
+                wpp: '#'    // Adiciona aqui o link do wpp dela
+            },
+            'joselito': {
+                nome: 'Joselito Júnior',
+                descricao: `
+                    <p>Sou psicólogo Clínico (CRP 19/005914);<br>
+                    Especialista em Gestalt-Terapia;<br>
+                    Pós-graduado em Psicologia Sexual.</p>
+                    <p>Minha prática clínica é pautada no acolhimento, na escuta qualificada e na construção de uma relação terapêutica ética e autêntica. Atuo no manejo de demandas envolvendo sexualidade, relacionamentos, questões de identidade e vivências da população negra e da comunidade LGBTQIAPN+, auxiliando cada pessoa no desenvolvimento do autoconhecimento, da autonomia e de formas mais saudáveis de se relacionar consigo, com o outro e com o mundo.</p>
+                `,
+                insta: '#',
+                wpp: '#'
+            },
+            'suzana': {
+                nome: 'Suzana M. de Araújo',
+                descricao: `
+                    <p>Sou psicóloga Clínica (CRP 19/5694);<br>
+                    Pós-graduada em Psicologia Hospitalar e da Saúde.</p>
+                    <p>Minha atuação está voltada para questões relacionadas à ansiedade, à depressão e a diferentes formas de sofrimento emocional. Meu trabalho é pautado pela ética, pelo respeito e pela construção de um espaço seguro de acolhimento e escuta, valorizando a singularidade de cada pessoa.</p>
+                    <p>Será um privilégio caminhar ao seu lado nesse processo.</p>
+                `,
+                insta: '#',
+                wpp: '#'
+            }
+        };
+
+        function abrirModalEquipe(id, elementoCard) {
+            const modal = document.getElementById('modal-equipe');
+            
+            // Puxa dinamicamente a foto que estiver no card (mesmo que venha do Supabase)
+            const imgCard = elementoCard.querySelector('img').src;
+            
+            document.getElementById('modal-img').src = imgCard;
+            document.getElementById('modal-nome').innerHTML = dadosEquipe[id].nome;
+            document.getElementById('modal-desc').innerHTML = dadosEquipe[id].descricao;
+            document.getElementById('modal-insta').href = dadosEquipe[id].insta;
+            document.getElementById('modal-wpp').href = dadosEquipe[id].wpp;
+
+            modal.style.display = 'flex';
+            setTimeout(() => modal.classList.add('active'), 10);
+        }
+
+        function fecharModalEquipe() {
+            const modal = document.getElementById('modal-equipe');
+            modal.classList.remove('active');
+            setTimeout(() => modal.style.display = 'none', 300);
+        }
+
+        // Fechar o modal ao clicar fora da caixa branca
+        window.addEventListener('click', function(e) {
+            const modal = document.getElementById('modal-equipe');
+            if (e.target === modal) {
+                fecharModalEquipe();
+            }
+        });
+
+        // CONEXÃO SUPABASE
         const supabaseUrl = 'https://aywlhxvljukjsmcspplc.supabase.co'; 
         const supabaseKey = 'sb_publishable_EEuGEXGAAMSTKXS94LTihA_Q9QWrDaT';
         const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
@@ -486,7 +590,6 @@
                 if (dbMap['terapia_titulo']) document.querySelector('.contact-text h2').innerHTML = dbMap['terapia_titulo'];
                 if (dbMap['terapia_texto']) document.querySelector('.contact-text p').innerHTML = dbMap['terapia_texto'];
 
-                // NOVOS TEXTOS INJETADOS AQUI
                 if (dbMap['geral_btn_flutuante_1']) {
                     const btn1 = document.querySelector('.floating-btn:not(.secondary)');
                     if (btn1) btn1.innerText = dbMap['geral_btn_flutuante_1'];
@@ -497,7 +600,7 @@
                 }
                 if (dbMap['sobre_texto_1']) {
                     const sobreTextos = document.querySelectorAll('.sobre-text p');
-                    if (sobreTextos.length > 0) sobreTextos[0].innerHTML = dbMap['sobre_texto_1']; /* Alterado para innerHTML */
+                    if (sobreTextos.length > 0) sobreTextos[0].innerHTML = dbMap['sobre_texto_1']; 
                 }
 
                 function updateImg(selector, valor) {
