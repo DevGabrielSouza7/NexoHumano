@@ -38,7 +38,7 @@
             position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; 
             z-index: 1 !important; border-radius: 0 !important;
         }
-        /* Ajuste do object-position para focar no topo no desktop */
+        /* Ajuste do topo da imagem no PC para não cortar cabeças */
         .hero-image img { width: 100% !important; height: 100% !important; object-fit: cover !important; object-position: top !important; display: block !important; border-radius: 0 !important; }
         .hero-overlay { position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; background: rgba(44, 48, 46, 0.55) !important; z-index: 2 !important; }
         
@@ -146,7 +146,7 @@
         /* RODAPÉ DE CONTACTOS VERDE ESCURO           */
         /* ========================================== */
         .info-section-dark {
-            background-color: #113A23; 
+            background-color: #113A23; /* Fundo Verde Escuro */
             color: #ffffff;
             padding: 80px 0;
         }
@@ -202,14 +202,12 @@
         }
 
         @media (max-width: 768px) {
-            /* AJUSTE ESPECÍFICO PARA A FOTO NO MOBILE (Mais larga e centralizada) */
-            .hero-section { 
-                height: 50vh !important; 
-                min-height: 380px !important; 
-            }
-            .hero-image img { 
-                object-position: center 15% !important; 
-            }
+            /* AJUSTES DA HERO PARA MOSTRAR TODOS NO CELULAR */
+            .hero-section { height: 50vh !important; min-height: 380px !important; }
+            .hero-image img { object-position: center 15% !important; }
+
+            /* AJUSTE DA FOTO DO "QUEM SOMOS" NO CELULAR */
+            .sobre-image img { min-height: 280px !important; height: 280px !important; }
 
             .container { padding-left: 20px !important; padding-right: 20px !important; width: 100% !important; overflow-x: hidden !important; }
             .activities-grid, .team-grid, .modalities-grid, .faq-grid, .journey-grid, .info-grid { display: flex !important; flex-direction: column !important; gap: 30px !important; }
@@ -262,10 +260,10 @@
     </header>
 
     <main>
-        <!-- 1. HERO SECTION (Animação Fade-in 2000ms) -->
+        <!-- 1. HERO SECTION -->
         <section id="inicio" class="hero-section">
             <div class="hero-image">
-                <img src="img/equipe-hero.png" alt="Equipe Nexo">
+                <img src="img/Home.JPG" alt="Equipe Nexo">
                 <div class="hero-overlay"></div>
             </div>
             <div class="hero-content" data-aos="fade-in" data-aos-duration="2000">
@@ -273,7 +271,7 @@
             </div>
         </section>
 
-        <!-- 2. SECÇÃO SOBRE (Animações fade-right e fade-left) -->
+        <!-- 2. SECÇÃO SOBRE -->
         <section id="sobre" class="bg-beige">
             <div class="container">
                 <div class="sobre-header" data-aos="fade-up">
@@ -353,11 +351,11 @@
             <div class="container">
                 <h2 class="section-title" data-aos="fade-up">Modalidades de<br>Atendimento</h2>
                 <div class="modalities-grid">
-                    <div class="modality-card" data-aos="zoom-in" data-aos-delay="100">
+                    <div class="modality-card" data-aos="fade-up" data-aos-delay="100">
                         <img src="img/online.png" alt="Atendimento Online">
                         <h3>Psicoterapia Online</h3>
                     </div>
-                    <div class="modality-card" data-aos="zoom-in" data-aos-delay="250">
+                    <div class="modality-card" data-aos="fade-up" data-aos-delay="250">
                         <img src="img/presencial.png" alt="Consultório Presencial">
                         <h3>Psicoterapia Presencial</h3>
                     </div>
