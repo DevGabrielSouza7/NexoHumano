@@ -68,35 +68,60 @@
         .floating-btn.secondary:hover { background-color: #f0f0f0; }
 
         /* LAYOUT DA SECÇÃO SOBRE */
-    .sobre-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; }
-    .sobre-title { font-size: 3rem; line-height: 1.1; font-weight: 400; font-family: 'Playfair Display', serif; color: #2c302e; }
-    .sobre-content { display: flex; gap: 40px; align-items: center; margin-bottom: 20px; }
+        .sobre-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; }
+        .sobre-title { font-size: 3rem; line-height: 1.1; font-weight: 400; font-family: 'Playfair Display', serif; color: #2c302e; }
+        .sobre-content { display: flex; gap: 40px; align-items: center; margin-bottom: 20px; }
 
-    /* NOVO FORMATO ORGÂNICO DA IMAGEM */
-    .sobre-image { 
-    flex: 1; 
-    overflow: hidden; 
-    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-    /* Esta linha cria o formato orgânico (blob) */
-    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; 
-    transition: all 0.6s ease-in-out;
-    }
+        /* NOVO FORMATO ORGÂNICO DA IMAGEM */
+        .sobre-image { 
+            flex: 1; 
+            overflow: hidden; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            /* Esta linha cria o formato orgânico (blob) */
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; 
+            transition: all 0.6s ease-in-out;
+        }
 
-    /* Efeito suave de movimento quando o rato passa por cima (Opcional, mas fica excelente) */
-    .sobre-image:hover {
-   border-radius: 60% 40% 30% 70% / 50% 50% 40% 60%;
-    }
+        /* Efeito suave de movimento quando o rato passa por cima (Opcional, mas fica excelente) */
+        .sobre-image:hover {
+            border-radius: 60% 40% 30% 70% / 50% 50% 40% 60%;
+        }
 
-    .sobre-image img { 
-    width: 100%; 
-    height: 100%; 
-    min-height: 400px;
-    object-fit: cover; 
-    display: block; 
-    }
+        .sobre-image img { 
+            width: 100%; 
+            height: 100%; 
+            min-height: 400px;
+            object-fit: cover; 
+            display: block; 
+        }
 
-    .sobre-text { flex: 1.5; font-size: 0.95rem; line-height: 1.8; text-align: justify; color: #4a4a4a; }
-            /* AJUSTES PARA MOBILE */
+        .sobre-text { flex: 1.5; font-size: 0.95rem; line-height: 1.8; text-align: justify; color: #4a4a4a; }
+
+        /* SECÇÃO EXTRA: PLANTÃO PSICOLÓGICO */
+        .plantao-container {
+            max-width: 900px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 50px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        .plantao-texto p {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: #4a4a4a;
+            margin-bottom: 25px;
+            text-align: left;
+        }
+        .plantao-texto p:last-child {
+            margin-bottom: 0;
+        }
+        .plantao-texto strong {
+            font-weight: 600;
+            color: #2c302e;
+        }
+
+        /* AJUSTES PARA MOBILE */
         @media (max-width: 992px) {
             .hero-section { height: 75vh !important; min-height: 550px !important; }
             .hero-content h1 { font-size: 2.8rem !important; margin-bottom: 20px !important; }
@@ -117,6 +142,10 @@
             .floating-action-menu { bottom: 0; right: 0; left: 0; flex-direction: row; gap: 0; }
             .floating-btn { border-radius: 0; flex: 1; padding: 16px 10px; font-size: 0.75rem; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); }
             .floating-btn.secondary { border: none; border-left: 1px solid #e0e0e0; }
+            
+            .plantao-container {
+                padding: 30px 20px;
+            }
         }
     </style>
 </head>
@@ -168,13 +197,13 @@
                 <div class="sobre-content">
                     <div class="sobre-image" data-aos="fade-right">
                         <img src="img/QuemSomos.JPG" alt="Sobre a Clínica"> 
-                          </div>
+                    </div>
                     <div class="sobre-text" data-aos="fade-left">
                         <p>A <strong> Nexo Psicologia Humanista </strong> nasce da coesão entre três psicólogos, que,
                             apesar de percorrerem diferentes caminhos dentro da Psicologia,
                             compartilham uma mesma forma de compreender o ser humano e o cuidado
                             em saúde mental.
-                           </p>
+                        </p>
                         <p> Nossa união é construída a partir de valores que nos aproximam: a escuta
                             genuína, o respeito à singularidade, a presença e a crença no potencial de
                             cada pessoa para construir novos sentidos e possibilidades para sua própria
@@ -190,8 +219,6 @@
                             <strong> Nexo é conexão. É o que nos une. É o que nos move. </strong>
                             E é desse encontro que nasce o nosso compromisso com você.</p>
                     </div>
-                    </div>
-                    <div class="sobre-text" data-aos="fade-left"> 
                 </div>
             </div>
         </section>
@@ -311,6 +338,25 @@
                         </div>
                         <button type="submit" class="btn-primary" id="btn-submit" style="width: 100%; background-color: #5a6659; border:none; padding:15px; color:white; font-weight:bold; cursor:pointer;">AGENDAR CONSULTA</button>
                     </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- NOVA SECÇÃO: INFORMAÇÕES DO PLANTÃO PSICOLÓGICO -->
+        <section class="bg-beige" style="padding-top: 40px; padding-bottom: 80px;">
+            <div class="container">
+                <div class="plantao-container" data-aos="fade-up">
+                    <h2 class="sobre-title" style="margin-bottom: 40px;">Plantão Psicológico</h2>
+                    
+                    <div class="plantao-texto">
+                        <p>O <strong>Plantão Psicológico da Nexo Psicologia</strong> foi criado para oferecer um espaço de acolhimento e escuta qualificada em momentos de sofrimento emocional ou crise, proporcionando suporte psicológico de forma rápida e acessível.</p>
+                        
+                        <p>A sessão tem <strong>duração de até 50 minutos</strong> e o investimento é de <strong>R$ 30,00</strong>.</p>
+                        
+                        <p><strong>Importante:</strong> O Plantão Psicológico é um atendimento pontual, voltado ao acolhimento e à avaliação da demanda apresentada. Ele não substitui o processo de psicoterapia, mas pode ser o primeiro passo para quem necessita de apoio emocional imediato e, quando necessário, de encaminhamento para um acompanhamento psicológico contínuo.</p>
+                        
+                        <p>Cada pessoa poderá utilizar o serviço de Plantão Psicológico <strong>uma vez a cada mês</strong>, garantindo que o atendimento permaneça disponível para quem estiver vivenciando situações de urgência emocional.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -451,7 +497,7 @@
                 }
                 if (dbMap['sobre_texto_1']) {
                     const sobreTextos = document.querySelectorAll('.sobre-text p');
-                    if (sobreTextos.length > 0) sobreTextos[0].innerText = dbMap['sobre_texto_1'];
+                    if (sobreTextos.length > 0) sobreTextos[0].innerHTML = dbMap['sobre_texto_1']; /* Alterado para innerHTML */
                 }
 
                 function updateImg(selector, valor) {
