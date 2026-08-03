@@ -93,7 +93,7 @@
         .plantao-texto strong { font-weight: 600; color: #2c302e; }
 
         /* ========================================== */
-        /* MODAL DOS PSICÓLOGOS (NOVO)                */
+        /* MODAL DOS PSICÓLOGOS                       */
         /* ========================================== */
         .team-card { cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .team-card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); border-radius: 10px; }
@@ -141,6 +141,55 @@
         .btn-wpp { background: #25D366; }
         .modal-social svg { width: 22px; height: 22px; fill: white; }
 
+        /* ========================================== */
+        /* NOVO RODAPÉ DE CONTACTOS VERDE ESCURO      */
+        /* ========================================== */
+        .info-section-dark {
+            background-color: #113A23; /* Fundo Verde Escuro */
+            color: #ffffff;
+            padding: 80px 0;
+        }
+        .contact-grid-2x2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px 30px;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+        .contact-item-nexo {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+        .contact-number-circle {
+            width: 75px;
+            height: 75px;
+            background-color: #5a765d; /* Círculo verde mais claro */
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-family: 'Playfair Display', serif;
+            color: #ffffff;
+            flex-shrink: 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .contact-text-nexo h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin: 0 0 5px 0;
+            font-weight: 400;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+        }
+        .contact-text-nexo p {
+            margin: 0;
+            font-size: 1.05rem;
+            color: #d1d8d4;
+            font-weight: 300;
+        }
+
         @media (max-width: 992px) {
             .hero-section { height: 75vh !important; min-height: 550px !important; }
             .hero-content h1 { font-size: 2.8rem !important; margin-bottom: 20px !important; }
@@ -163,7 +212,6 @@
             
             .plantao-container { padding: 30px 20px; }
             
-            /* Ajustes do Modal para Mobile */
             .modal-content-flex { flex-direction: column; gap: 20px; text-align: center; }
             .modal-box { padding: 40px 20px; }
             .modal-img-container img { max-width: 220px; border-width: 5px; }
@@ -171,6 +219,9 @@
             .modal-text-container { text-align: center; }
             .modal-desc p { text-align: left; font-size: 0.95rem; }
             .modal-social { justify-content: center; }
+
+            /* Ajuste do grid de contactos no mobile */
+            .contact-grid-2x2 { grid-template-columns: 1fr; gap: 30px; }
         }
     </style>
 </head>
@@ -263,7 +314,7 @@
             </div>
         </section>
 
-        <!-- 4. EQUIPE (AQUI ADICIONÁMOS O ONCLICK) -->
+        <!-- 4. EQUIPE -->
         <section id="equipe" class="bg-beige section-relative">
             <div class="container">
                 <h2 class="section-title" data-aos="fade-right">Conheça quem<br>vai te atender</h2>
@@ -353,7 +404,7 @@
             </div>
         </section>
 
-        <!-- NOVA SECÇÃO: INFORMAÇÕES DO PLANTÃO PSICOLÓGICO -->
+        <!-- INFORMAÇÕES DO PLANTÃO PSICOLÓGICO -->
         <section class="bg-beige" style="padding-top: 40px; padding-bottom: 80px;">
             <div class="container">
                 <div class="plantao-container" data-aos="fade-up">
@@ -427,40 +478,46 @@
             </div>
         </section>
 
-        <!-- 9. SEÇÃO DE INFORMAÇÕES DE CONTATO -->
-         <section class="info-section bg-white" style="padding-bottom: 100px;">
+        <!-- 9. NOVA SEÇÃO DE INFORMAÇÕES DE CONTATO (VERDE ESCURO COM NÚMEROS) -->
+        <section class="info-section-dark">
             <div class="container">
-                <div class="info-grid">
-                    <div class="info-col" data-aos="fade-up" data-aos-delay="100">
-                        <h3>Para pedir ajuda, entre<br>em contato. Tudo será<br>confidencial.</h3>
-                        <p class="contact-details">
-                            <strong>Tel:</strong> (12) 3456-7890<br>
-                            <strong>E-mail:</strong> ola@grandesite.com.br
-                        </p>
+                <div class="contact-grid-2x2">
+                    
+                    <div class="contact-item-nexo" data-aos="fade-up" data-aos-delay="100">
+                        <div class="contact-number-circle">1</div>
+                        <div class="contact-text-nexo">
+                            <h4>Email</h4>
+                            <p>nexopsicologia@gmail.com</p>
+                        </div>
                     </div>
-                    <div class="info-col" data-aos="fade-up" data-aos-delay="200">
-                        <h3>Horário de<br>funcionamento</h3>
-                        <p>
-                            <strong>Segunda a sexta</strong><br>
-                            Das 08h às 20h
-                        </p>
-                        <p style="margin-top: 15px;">
-                            <strong>Sábado, domingo e feriados</strong><br>
-                            Das 09h às 18h
-                        </p>
+                    
+                    <div class="contact-item-nexo" data-aos="fade-up" data-aos-delay="200">
+                        <div class="contact-number-circle">3</div>
+                        <div class="contact-text-nexo">
+                            <h4>WhatsApp</h4>
+                            <p>79 9983-8695</p>
+                        </div>
                     </div>
-                    <div class="info-col" data-aos="fade-up" data-aos-delay="300">
-                        <h3>Venha. Você será bem<br>recebido.</h3>
-                        <ul class="units-list">
-                            <li><strong>Unidade 1:</strong> Rua Botânica, 55, Curitiba</li>
-                            <li><strong>Unidade 2:</strong> Rua Sonora, 95, Manaus</li>
-                            <li><strong>Unidade 3:</strong> Avenida João de Barro, 400, Natal</li>
-                            <li><strong>Unidade 4:</strong> Rua dos Libertadores, 73, Teresina</li>
-                        </ul>
+                    
+                    <div class="contact-item-nexo" data-aos="fade-up" data-aos-delay="300">
+                        <div class="contact-number-circle">2</div>
+                        <div class="contact-text-nexo">
+                            <h4>Telefone</h4>
+                            <p>79 9983-8695</p>
+                        </div>
                     </div>
+                    
+                    <div class="contact-item-nexo" data-aos="fade-up" data-aos-delay="400">
+                        <div class="contact-number-circle">4</div>
+                        <div class="contact-text-nexo">
+                            <h4>Instagram</h4>
+                            <p>@nexohumanista</p>
+                        </div>
+                    </div>
+
                 </div>
             </div>
-         </section>
+        </section>
     </main>
 
     <footer class="simple-footer bg-white" style="padding-bottom: 80px;">
@@ -485,11 +542,9 @@
                     <div id="modal-desc" class="modal-desc"></div>
                     
                     <div class="modal-social">
-                        <!-- Instagram Ícone SVG -->
                         <a href="#" id="modal-insta" target="_blank" class="btn-insta" title="Instagram">
                             <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
                         </a>
-                        <!-- WhatsApp Ícone SVG -->
                         <a href="#" id="modal-wpp" target="_blank" class="btn-wpp" title="WhatsApp">
                             <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.423-14.416c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm.029 18.88c-1.161 0-2.305-.292-3.318-.844l-3.677.964.984-3.595c-.607-1.052-.927-2.246-.926-3.468.001-5.824 4.74-10.563 10.564-10.563 5.826 0 10.564 4.738 10.564 10.563 0 5.827-4.739 10.563-10.564 10.563z"/></svg>
                         </a>
@@ -505,7 +560,6 @@
     <script>
         AOS.init({ duration: 800, once: true, offset: 100 });
 
-        // DADOS DOS PSICÓLOGOS PARA O MODAL
         const dadosEquipe = {
             'adriana': {
                 nome: 'Adriana Santos',
@@ -516,8 +570,8 @@
                     Pós graduação em Psicologia Humanista com Abordagem Centrada na Pessoa;</p>
                     <p>Minha abordagem terapêutica é pautada no acolhimento e na escuta ativa, auxiliando meus pacientes no autoconhecimento e na construção de relações mais saudáveis.</p>
                 `,
-                insta: '#', // Adiciona aqui o link do instagram dela
-                wpp: '#'    // Adiciona aqui o link do wpp dela
+                insta: '#',
+                wpp: '#'
             },
             'joselito': {
                 nome: 'Joselito Júnior',
@@ -545,8 +599,6 @@
 
         function abrirModalEquipe(id, elementoCard) {
             const modal = document.getElementById('modal-equipe');
-            
-            // Puxa dinamicamente a foto que estiver no card (mesmo que venha do Supabase)
             const imgCard = elementoCard.querySelector('img').src;
             
             document.getElementById('modal-img').src = imgCard;
@@ -565,7 +617,6 @@
             setTimeout(() => modal.style.display = 'none', 300);
         }
 
-        // Fechar o modal ao clicar fora da caixa branca
         window.addEventListener('click', function(e) {
             const modal = document.getElementById('modal-equipe');
             if (e.target === modal) {
@@ -573,7 +624,6 @@
             }
         });
 
-        // CONEXÃO SUPABASE
         const supabaseUrl = 'https://aywlhxvljukjsmcspplc.supabase.co'; 
         const supabaseKey = 'sb_publishable_EEuGEXGAAMSTKXS94LTihA_Q9QWrDaT';
         const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
