@@ -68,14 +68,35 @@
         .floating-btn.secondary:hover { background-color: #f0f0f0; }
 
         /* LAYOUT DA SECÇÃO SOBRE */
-        .sobre-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; }
-        .sobre-title { font-size: 3rem; line-height: 1.1; font-weight: 400; font-family: 'Playfair Display', serif; color: #2c302e; }
-        .sobre-content { display: flex; gap: 40px; align-items: center; margin-bottom: 20px; }
-        .sobre-image { flex: 1; border-radius: 40px 40px 10px 40px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
-        .sobre-image img { width: 100%; height: auto; display: block; object-fit: cover; }
-        .sobre-text { flex: 1.5; font-size: 0.95rem; line-height: 1.8; text-align: justify; color: #4a4a4a; }
+    .sobre-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 40px; }
+    .sobre-title { font-size: 3rem; line-height: 1.1; font-weight: 400; font-family: 'Playfair Display', serif; color: #2c302e; }
+    .sobre-content { display: flex; gap: 40px; align-items: center; margin-bottom: 20px; }
 
-        /* AJUSTES PARA MOBILE */
+    /* NOVO FORMATO ORGÂNICO DA IMAGEM */
+    .sobre-image { 
+    flex: 1; 
+    overflow: hidden; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    /* Esta linha cria o formato orgânico (blob) */
+    border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; 
+    transition: all 0.6s ease-in-out;
+    }
+
+    /* Efeito suave de movimento quando o rato passa por cima (Opcional, mas fica excelente) */
+    .sobre-image:hover {
+   border-radius: 60% 40% 30% 70% / 50% 50% 40% 60%;
+    }
+
+    .sobre-image img { 
+    width: 100%; 
+    height: 100%; 
+    min-height: 400px;
+    object-fit: cover; 
+    display: block; 
+    }
+
+    .sobre-text { flex: 1.5; font-size: 0.95rem; line-height: 1.8; text-align: justify; color: #4a4a4a; }
+            /* AJUSTES PARA MOBILE */
         @media (max-width: 992px) {
             .hero-section { height: 75vh !important; min-height: 550px !important; }
             .hero-content h1 { font-size: 2.8rem !important; margin-bottom: 20px !important; }
