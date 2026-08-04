@@ -157,11 +157,16 @@
         }
 
         /* ========================================== */
-        /* MODAL DOS PSICÓLOGOS                       */
+        /* MODAL DOS PSICÓLOGOS E AJUSTE DAS FOTOS    */
         /* ========================================== */
         .team-card { cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .team-card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); border-radius: 10px; }
         
+        /* NOVO: Garante que as fotos não cortem o topo (as cabeças) */
+        .team-card img, .modal-img-container img {
+            object-position: top !important;
+        }
+
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.65); z-index: 10000; align-items: center; justify-content: center;
@@ -668,7 +673,6 @@
     <script>
         AOS.init({ duration: 800, once: true, offset: 100 });
 
-        // NOVO: Adicionei a propriedade imgModal para carregar a imagem correta dentro do modal
         const dadosEquipe = {
             'adriana': {
                 nome: 'Adriana Santos',
@@ -712,9 +716,7 @@
         function abrirModalEquipe(id, elementoCard) {
             const modal = document.getElementById('modal-equipe');
             
-            // NOVO: Puxa a imagem configurada no objeto acima em vez da imagem do card
             document.getElementById('modal-img').src = dadosEquipe[id].imgModal;
-            
             document.getElementById('modal-nome').innerHTML = dadosEquipe[id].nome;
             document.getElementById('modal-desc').innerHTML = dadosEquipe[id].descricao;
             document.getElementById('modal-insta').href = dadosEquipe[id].insta;
@@ -751,8 +753,6 @@
 
                 if (dbMap['hero_titulo']) document.querySelector('.hero-content h1').innerHTML = dbMap['hero_titulo'];
                 
-                // ATENÇÃO: Esta linha abaixo atualiza o texto da secção "Por que fazer terapia?"
-                // de acordo com a base de dados. Assegure-se de atualizar o texto no seu Painel Admin!
                 if (dbMap['terapia_titulo']) document.querySelector('.contact-text h2').innerHTML = dbMap['terapia_titulo'];
                 if (dbMap['terapia_texto']) document.querySelector('.contact-text p').innerHTML = dbMap['terapia_texto'];
 
