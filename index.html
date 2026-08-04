@@ -162,7 +162,7 @@
         .team-card { cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .team-card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); border-radius: 10px; }
         
-        /* NOVO: Garante que as fotos não cortem o topo (as cabeças) */
+        /* Garante que as fotos não cortem o topo (as cabeças) */
         .team-card img, .modal-img-container img {
             object-position: top !important;
         }
@@ -270,6 +270,11 @@
         }
 
         @media (max-width: 768px) {
+            /* AJUSTES DO CABEÇALHO NO CELULAR (CENTRALIZA A LOGO E DIMINUI PARA NÃO CORTAR ROSTOS) */
+            .header-container { justify-content: center !important; }
+            .logo img { max-height: 70px !important; }
+            .main-header { padding: 15px 0 !important; }
+
             /* AJUSTES DA HERO PARA MOSTRAR TODOS NO CELULAR */
             .hero-section { height: 50vh !important; min-height: 380px !important; }
             .hero-image img { object-position: center 15% !important; }
