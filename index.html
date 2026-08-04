@@ -208,33 +208,47 @@
         }
 
         /* ========================================== */
-        /* EQUIPE E CARD                              */
+        /* EQUIPE E CARD (ESTILO CORRIGIDO E SEGURO)  */
         /* ========================================== */
-        .team-grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; margin-top: 20px; }
+        .team-grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 40px; margin-top: 40px; }
         
         .team-card { 
             position: relative; 
             flex: 1; 
-            min-width: 280px; max-width: 330px; text-align: center; 
+            min-width: 250px; max-width: 300px; 
+            text-align: center; 
             cursor: pointer; 
-            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease; 
+            padding: 20px 10px;
+            border-radius: 15px;
+            transition: transform 0.4s ease, box-shadow 0.4s ease, background-color 0.4s ease; 
         }
-        .team-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); border-radius: 10px; }
+        .team-card:hover { 
+            transform: translateY(-10px); 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.08); 
+            background-color: #fcfbf8; 
+        }
         
-        .team-card img, .modal-img-container img {
-            object-position: top !important;
+        .team-card img {
+            width: 100%; max-width: 220px; aspect-ratio: 1/1; object-fit: cover;
+            border-radius: 50%; box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            object-position: top !important; 
             transition: transform 0.5s ease;
+            margin: 0 auto 20px auto;
+            display: block;
         }
         .team-card:hover img {
-            transform: scale(1.02);
+            transform: scale(1.05);
         }
+        
+        .team-card h3 { font-size: 1.8rem; font-family: 'Playfair Display', serif; color: #2c302e; margin-bottom: 5px; }
+        .team-card p.crp { font-size: 0.95rem; color: #5a6659; margin: 0; font-weight: 500; }
 
         /* ========================================== */
-        /* MODAL DOS PSICÓLOGOS                       */
+        /* MODAL DOS PSICÓLOGOS (100% FUNCIONAL)      */
         /* ========================================== */
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.65); z-index: 10000; align-items: center; justify-content: center;
+            background: rgba(0, 0, 0, 0.65); z-index: 100000; align-items: center; justify-content: center;
             opacity: 0; transition: opacity 0.3s ease; padding: 20px; backdrop-filter: blur(4px);
         }
         .modal-overlay.active { opacity: 1; }
@@ -394,6 +408,9 @@
             .container { padding-left: 20px !important; padding-right: 20px !important; width: 100% !important; overflow-x: hidden !important; }
             .activities-grid, .modalities-grid, .faq-grid, .journey-grid, .info-grid { display: flex !important; flex-direction: column !important; gap: 30px !important; }
             
+            /* ========================================== */
+            /* EQUIPE LADO A LADO NO CELULAR              */
+            /* ========================================== */
             .team-grid { 
                 flex-direction: row !important; 
                 flex-wrap: wrap !important; 
@@ -407,10 +424,10 @@
             }
             .team-card img { 
                 max-width: 140px !important; 
-                max-height: 180px !important; 
-                margin: 0 auto;
+                max-height: 140px !important; 
+                margin: 0 auto 10px auto;
             }
-            .team-card h3 { font-size: 1.1rem; margin-top: 10px; margin-bottom: 0; }
+            .team-card h3 { font-size: 1.2rem; margin-top: 0; margin-bottom: 0; }
             .team-card p.crp { font-size: 0.8rem; margin-top: 5px; }
 
             .contact-layout { display: flex !important; flex-direction: column !important; gap: 40px !important; }
@@ -444,7 +461,7 @@
         <a href="#plantao" class="floating-btn secondary">Plantão Psicológico</a>
     </div>
 
-    <!-- CABEÇALHO COM BOTÃO HAMBÚRGUER GERAL -->
+    <!-- CABEÇALHO -->
     <header class="main-header">
         <div class="header-container">
             <div class="logo">
@@ -534,17 +551,17 @@
             <div class="container">
                 <h2 class="section-title" data-aos="fade-right">Equipe</h2>
                 <div class="team-grid">
-                    <div class="team-card" data-aos="fade-up" data-aos-delay="100" onclick="abrirModalEquipe('adriana')" title="Clique para ver o perfil completo">
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="100" onclick="abrirModalEquipe('adriana')">
                         <img src="img/adriana.png" alt="Adriana Santos">
                         <h3>Adriana Santos</h3>
                         <p class="crp">CRP: 19/5704</p>
                     </div>
-                    <div class="team-card" data-aos="fade-up" data-aos-delay="200" onclick="abrirModalEquipe('joselito')" title="Clique para ver o perfil completo">
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="200" onclick="abrirModalEquipe('joselito')">
                         <img src="img/joselito.png" alt="Joselito Silva">
                         <h3>Joselito Júnior</h3>
                         <p class="crp">CRP: 19/005914</p>
                     </div>
-                    <div class="team-card" data-aos="fade-up" data-aos-delay="300" onclick="abrirModalEquipe('suzana')" title="Clique para ver o perfil completo">
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="300" onclick="abrirModalEquipe('suzana')">
                         <img src="img/suzana.png" alt="Suzana M. de Araújo">
                         <h3>Suzana M. de Araújo</h3>
                         <p class="crp">CRP: 19/5694</p>
@@ -877,9 +894,10 @@
             }
         };
 
-        // LÓGICA DO MODAL CLÁSSICA E SEGURA
-        function abrirModalEquipe(id) {
+        // LÓGICA DO MODAL CLÁSSICA E SEGURA RESTAURADA
+        window.abrirModalEquipe = function(id) {
             const modal = document.getElementById('modal-equipe');
+            if(!modal) return;
             
             document.getElementById('modal-img').src = dadosEquipe[id].imgModal;
             document.getElementById('modal-nome').innerHTML = dadosEquipe[id].nome;
@@ -889,13 +907,15 @@
 
             modal.style.display = 'flex';
             setTimeout(() => modal.classList.add('active'), 10);
-        }
+        };
 
-        function fecharModalEquipe() {
+        window.fecharModalEquipe = function() {
             const modal = document.getElementById('modal-equipe');
+            if(!modal) return;
+            
             modal.classList.remove('active');
             setTimeout(() => modal.style.display = 'none', 300);
-        }
+        };
 
         window.addEventListener('click', function(e) {
             const modal = document.getElementById('modal-equipe');
@@ -957,19 +977,14 @@
                 }
 
                 // =========================================================
-                // CONEXÃO COM O SUPABASE RESTAURADA CONFORME ORIGINAL
+                // CONEXÃO COM O SUPABASE PARA AS FOTOS REMOVIDA DAQUI! 
+                // O site vai ler as suas imagens LOCAIS para não as apagar!
                 // =========================================================
                 updateImg('.hero-image img', dbMap['hero_imagem']);
-                updateImg('.team-grid .team-card:nth-child(1) img', dbMap['equipe_foto_1']);
-                updateImg('.team-grid .team-card:nth-child(2) img', dbMap['equipe_foto_2']);
-                updateImg('.team-grid .team-card:nth-child(3) img', dbMap['equipe_foto_3']);
                 updateImg('.modalities-grid .modality-card:nth-child(1) img', dbMap['modalidades_foto_online']);
                 updateImg('.modalities-grid .modality-card:nth-child(2) img', dbMap['modalidades_foto_presencial']);
 
                 aplicarEstiloImagem('.hero-image img', dbMap, 'hero_imagem');
-                aplicarEstiloImagem('.team-grid .team-card:nth-child(1) img', dbMap, 'equipe_foto_1');
-                aplicarEstiloImagem('.team-grid .team-card:nth-child(2) img', dbMap, 'equipe_foto_2');
-                aplicarEstiloImagem('.team-grid .team-card:nth-child(3) img', dbMap, 'equipe_foto_3');
                 aplicarEstiloImagem('.modalities-grid .modality-card:nth-child(1) img', dbMap, 'modalidades_foto');
                 aplicarEstiloImagem('.modalities-grid .modality-card:nth-child(2) img', dbMap, 'modalidades_foto');
 
