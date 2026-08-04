@@ -140,9 +140,6 @@
             padding: 50px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
         
-        /* ========================================== */
-        /* ESTILOS DO NOVO PLANTÃO PSICOLÓGICO        */
-        /* ========================================== */
         .plantao-badges {
             display: flex;
             justify-content: space-between;
@@ -208,17 +205,16 @@
         }
 
         /* ========================================== */
-        /* EQUIPE E CARD                              */
+        /* EQUIPE E CARD (À PROVA DE FALHAS)          */
         /* ========================================== */
         .team-grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; margin-top: 20px; }
         
-        /* Removido o z-index e adicionado o pointer-events para garantir clique */
         .team-card { 
             position: relative; 
             flex: 1; 
             min-width: 280px; max-width: 330px; text-align: center; 
             cursor: pointer; 
-            pointer-events: auto !important;
+            pointer-events: auto; /* Garante que o clique funciona */
             transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease; 
         }
         .team-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); border-radius: 10px; }
@@ -232,31 +228,30 @@
         }
 
         /* ========================================== */
-        /* MODAL DOS PSICÓLOGOS (100% BLINDADO)       */
+        /* MODAL DOS PSICÓLOGOS (LÓGICA CSS SEGURA)   */
         /* ========================================== */
         .modal-overlay {
-            /* Regras de proteção total contra falhas visuais */
-            display: flex; 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.65); 
-            z-index: 99999 !important; 
-            align-items: center; justify-content: center;
-            opacity: 0; 
-            visibility: hidden; /* Esconde do clique até estar ativo */
-            pointer-events: none; /* Garante que ninguém clica em fantasmas */
-            transition: opacity 0.3s ease, visibility 0.3s ease; 
+            background: rgba(0, 0, 0, 0.65); z-index: 999999 !important; 
+            display: flex; align-items: center; justify-content: center;
             padding: 20px; backdrop-filter: blur(4px);
+            
+            /* O Segredo: Usa visibility em vez de display: none para não encravar */
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+            transition: all 0.3s ease;
         }
         .modal-overlay.active { 
-            opacity: 1; 
-            visibility: visible; 
-            pointer-events: auto; /* Permite o clique quando visível */
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
         }
         
         .modal-box {
             background: #ffffff; width: 100%; max-width: 950px; border-radius: 20px;
             position: relative; padding: 50px 40px; box-shadow: 0 20px 50px rgba(0,0,0,0.2);
-            transform: translateY(40px); transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transform: translateY(30px); transition: transform 0.3s ease;
             max-height: 90vh; overflow-y: auto;
         }
         .modal-overlay.active .modal-box { transform: translateY(0); }
@@ -458,13 +453,15 @@
         <a href="#plantao" class="floating-btn secondary">Plantão Psicológico</a>
     </div>
 
-    <!-- CABEÇALHO -->
+    <!-- CABEÇALHO COM BOTÃO HAMBÚRGUER GERAL -->
     <header class="main-header">
         <div class="header-container">
             <div class="logo">
                 <img src="img/logo-nexo-completa.png" alt="Nexo Logo" style="max-height: 90px; filter: brightness(0) invert(1);"> 
             </div>
+            
             <button class="mobile-menu-toggle" aria-label="Abrir menu">&#9776;</button>
+            
             <nav class="main-nav">
                 <ul>
                     <li><a href="#inicio">Home</a></li>
@@ -546,17 +543,18 @@
             <div class="container">
                 <h2 class="section-title" data-aos="fade-right">Equipe</h2>
                 <div class="team-grid">
-                    <div class="team-card" data-aos="fade-up" data-aos-delay="100" onclick="abrirModalEquipe('adriana')" title="Clique para ver o perfil completo">
+                    <!-- Retornei o parâmetro "this" no HTML para garantir que o clique encontra o cartão certo -->
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="100" onclick="abrirModalEquipe('adriana', this)" title="Clique para ver o perfil completo">
                         <img src="img/adriana.png" alt="Adriana Santos">
                         <h3>Adriana Santos</h3>
                         <p class="crp">CRP: 19/5704</p>
                     </div>
-                    <div class="team-card" data-aos="fade-up" data-aos-delay="200" onclick="abrirModalEquipe('joselito')" title="Clique para ver o perfil completo">
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="200" onclick="abrirModalEquipe('joselito', this)" title="Clique para ver o perfil completo">
                         <img src="img/joselito.png" alt="Joselito Silva">
                         <h3>Joselito Júnior</h3>
                         <p class="crp">CRP: 19/005914</p>
                     </div>
-                    <div class="team-card" data-aos="fade-up" data-aos-delay="300" onclick="abrirModalEquipe('suzana')" title="Clique para ver o perfil completo">
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="300" onclick="abrirModalEquipe('suzana', this)" title="Clique para ver o perfil completo">
                         <img src="img/suzana.png" alt="Suzana M. de Araújo">
                         <h3>Suzana M. de Araújo</h3>
                         <p class="crp">CRP: 19/5694</p>
@@ -889,11 +887,20 @@
             }
         };
 
-        function abrirModalEquipe(id) {
+        // LÓGICA DO MODAL TOTALMENTE BLINDADA
+        function abrirModalEquipe(id, elementoCard) {
             const modal = document.getElementById('modal-equipe');
             if(!modal) return;
             
-            document.getElementById('modal-img').src = dadosEquipe[id].imgModal;
+            // Garantia extra: Se a imagem do modal der erro, ele puxa a imagem do card
+            let fotoModal = '';
+            if (dadosEquipe[id] && dadosEquipe[id].imgModal) {
+                fotoModal = dadosEquipe[id].imgModal;
+            } else if (elementoCard) {
+                fotoModal = elementoCard.querySelector('img').src;
+            }
+
+            document.getElementById('modal-img').src = fotoModal;
             document.getElementById('modal-nome').innerHTML = dadosEquipe[id].nome;
             document.getElementById('modal-desc').innerHTML = dadosEquipe[id].descricao;
             document.getElementById('modal-insta').href = dadosEquipe[id].insta;
@@ -904,8 +911,7 @@
 
         function fecharModalEquipe() {
             const modal = document.getElementById('modal-equipe');
-            if(!modal) return;
-            modal.classList.remove('active');
+            if(modal) modal.classList.remove('active');
         }
 
         window.addEventListener('click', function(e) {
@@ -968,11 +974,6 @@
                 }
 
                 updateImg('.hero-image img', dbMap['hero_imagem']);
-                
-                /* ======================================================= */
-                /* AS 3 LINHAS QUE SOBRESCREVIAM AS FOTOS FORAM REMOVIDAS! */
-                /* ======================================================= */
-
                 updateImg('.modalities-grid .modality-card:nth-child(1) img', dbMap['modalidades_foto_online']);
                 updateImg('.modalities-grid .modality-card:nth-child(2) img', dbMap['modalidades_foto_presencial']);
 
