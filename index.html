@@ -222,14 +222,14 @@
             transform: scale(1.02);
         }
 
-        /* Lógica do Modal Corrigida: Usa Visibility para não quebrar a animação no Mobile */
+        /* Lógica do Modal Corrigida (Retorno ao Display Flex/None para segurança 100%) */
         .modal-overlay {
-            visibility: hidden; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            display: none; /* Esconde completamente por padrão */
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.65); z-index: 99999 !important; align-items: center; justify-content: center;
-            opacity: 0; transition: opacity 0.4s ease, visibility 0.4s; padding: 20px; backdrop-filter: blur(4px);
-            display: flex; /* Mantém Flex, apenas esconde a visibilidade */
+            opacity: 0; transition: opacity 0.4s ease; padding: 20px; backdrop-filter: blur(4px);
         }
-        .modal-overlay.active { visibility: visible; opacity: 1; }
+        .modal-overlay.active { opacity: 1; }
         
         .modal-box {
             background: #ffffff; width: 100%; max-width: 950px; border-radius: 20px;
@@ -546,7 +546,6 @@
             <div class="container">
                 <h2 class="section-title" data-aos="fade-right">Equipe</h2>
                 <div class="team-grid">
-                    <!-- Modificado: Retirei o "this" no onclick para usar a nova função mais limpa -->
                     <div class="team-card" data-aos="fade-up" data-aos-delay="100" onclick="abrirModalEquipe('adriana')" title="Clique para ver o perfil completo">
                         <img src="img/adriana.png" alt="Adriana Santos">
                         <h3>Adriana Santos</h3>
@@ -902,7 +901,7 @@
             }
         };
 
-        // JS DO MODAL TOTALMENTE BLINDADO
+        // JS DO MODAL CORRIGIDO COM DISPLAY NONE/FLEX (Segurança 100%)
         function abrirModalEquipe(id) {
             const modal = document.getElementById('modal-equipe');
             if(!modal) return;
@@ -913,13 +912,24 @@
             document.getElementById('modal-insta').href = dadosEquipe[id].insta;
             document.getElementById('modal-wpp').href = dadosEquipe[id].wpp;
 
-            modal.classList.add('active');
+            modal.style.display = 'flex';
+            
+            // Um pequeno tempo de espera para o navegador registrar o 'display: flex' antes da opacidade
+            setTimeout(() => {
+                modal.classList.add('active');
+            }, 10);
         }
 
         function fecharModalEquipe() {
             const modal = document.getElementById('modal-equipe');
             if(!modal) return;
+            
             modal.classList.remove('active');
+            
+            // Espera a animação de opacidade terminar (0.4s) antes de dar display: none
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 400); 
         }
 
         window.addEventListener('click', function(e) {
