@@ -27,10 +27,24 @@
             position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important;
             z-index: 100 !important; background: transparent !important; padding: 20px 0 !important;
         }
-        .header-container { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 5%; }
+        .header-container { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 5%; position: relative; }
+        
+        /* Menu Normal Desktop */
         .main-nav ul { display: flex; list-style: none; gap: 25px; margin: 0; padding: 0; }
         .main-nav a { color: #ffffff !important; text-decoration: none; font-weight: 500; font-size: 0.95rem; letter-spacing: 0.5px; transition: opacity 0.3s; }
         .main-nav a:hover { opacity: 0.7; }
+        
+        /* MENU HAMBÚRGUER OCULTO NO COMPUTADOR */
+        .mobile-menu-toggle {
+            display: none; 
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            font-size: 2.2rem;
+            cursor: pointer;
+            z-index: 1001;
+            transition: transform 0.3s ease;
+        }
         
         .hero-section {
             position: relative !important; height: 100vh !important; min-height: 600px !important;
@@ -92,9 +106,6 @@
             padding: 50px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
         
-        /* ========================================== */
-        /* ESTILOS DO NOVO PLANTÃO PSICOLÓGICO        */
-        /* ========================================== */
         .plantao-badges {
             display: flex;
             justify-content: space-between;
@@ -159,7 +170,7 @@
         }
 
         /* ========================================== */
-        /* MODAL DOS PSICÓLOGOS E EQUIPE CENTRALIZADA */
+        /* EQUIPE E CARD                              */
         /* ========================================== */
         .team-grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; margin-top: 20px; }
         .team-card { flex: 1; min-width: 280px; max-width: 330px; text-align: center; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; }
@@ -169,6 +180,9 @@
             object-position: top !important;
         }
 
+        /* ========================================== */
+        /* MODAL DOS PSICÓLOGOS (LÓGICA FUNCIONAL)    */
+        /* ========================================== */
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.65); z-index: 10000; align-items: center; justify-content: center;
@@ -233,13 +247,13 @@
             font-weight: 500;
             color: #113A23;
             cursor: pointer;
-            list-style: none; /* Remove a seta padrão */
+            list-style: none; 
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-family: 'Playfair Display', serif;
         }
-        .faq-summary::-webkit-details-marker { display: none; } /* Remove seta padrão Safari/Chrome */
+        .faq-summary::-webkit-details-marker { display: none; } 
         .faq-summary::after {
             content: '+';
             font-size: 1.8rem;
@@ -248,7 +262,7 @@
             transition: transform 0.3s ease;
         }
         .faq-details[open] .faq-summary::after {
-            transform: rotate(45deg); /* Transforma o + num x */
+            transform: rotate(45deg); 
         }
         .faq-content {
             padding: 0 25px 25px 25px;
@@ -311,31 +325,67 @@
         @media (max-width: 992px) {
             .hero-section { height: 75vh !important; min-height: 550px !important; }
             .hero-content h1 { font-size: 2.8rem !important; margin-bottom: 20px !important; }
-            .main-nav { display: none !important; }
+            
+            /* Ajuste Menu Mobile */
+            .mobile-menu-toggle { display: block; position: absolute; right: 25px; top: 25px; }
+            .header-container { justify-content: center !important; }
+            
+            .main-nav {
+                display: none; 
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: #113A23; 
+                box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+                padding: 20px 0;
+                z-index: 1000;
+            }
+            .main-nav.active { display: block; }
+            .main-nav ul { flex-direction: column; align-items: center; gap: 20px; }
+
             .sobre-content { flex-direction: column; }
             .sobre-header { flex-direction: column; gap: 20px; }
             .sobre-title { font-size: 2.2rem; }
         }
 
         @media (max-width: 768px) {
-            /* Ajuste do pulo da seção no celular */
             section { scroll-margin-top: 20px; }
 
-            /* AJUSTE DA LOGOMARCA NO CELULAR */
+            /* AJUSTE DA LOGOMARCA E HEADER NO CELULAR */
             .main-header { position: relative !important; background-color: #113A23 !important; padding: 15px 0 !important; }
-            .header-container { justify-content: center !important; }
             .logo img { max-height: 60px !important; }
+            .mobile-menu-toggle { top: 18px; right: 20px; } 
 
-            /* AJUSTES DA HERO PARA MOSTRAR TODOS NO CELULAR */
             .hero-section { height: 50vh !important; min-height: 380px !important; }
             .hero-image img { object-position: center 15% !important; }
-
-            /* AJUSTE DA FOTO DO "QUEM SOMOS" NO CELULAR */
             .sobre-image img { min-height: 280px !important; height: 280px !important; }
 
             .container { padding-left: 20px !important; padding-right: 20px !important; width: 100% !important; overflow-x: hidden !important; }
             .activities-grid, .modalities-grid, .faq-grid, .journey-grid, .info-grid { display: flex !important; flex-direction: column !important; gap: 30px !important; }
-            .team-grid { flex-direction: column !important; align-items: center; }
+            
+            /* ========================================== */
+            /* EQUIPE LADO A LADO NO CELULAR              */
+            /* ========================================== */
+            .team-grid { 
+                flex-direction: row !important; 
+                flex-wrap: wrap !important; 
+                gap: 15px !important; 
+                justify-content: center !important; 
+            }
+            .team-card { 
+                flex: 0 0 45% !important; 
+                min-width: 140px !important; 
+                padding: 10px;
+            }
+            .team-card img { 
+                max-width: 140px !important; 
+                max-height: 180px !important; 
+                margin: 0 auto;
+            }
+            .team-card h3 { font-size: 1.1rem; margin-top: 10px; margin-bottom: 0; }
+            .team-card p.crp { font-size: 0.8rem; margin-top: 5px; }
+
             .contact-layout { display: flex !important; flex-direction: column !important; gap: 40px !important; }
             .form-row { display: flex !important; flex-direction: column !important; gap: 15px !important; }
             .section-title { font-size: 2rem !important; line-height: 1.3 !important; text-align: left !important; }
@@ -345,8 +395,6 @@
             .floating-btn.secondary { border: none; border-left: 1px solid #e0e0e0; }
             
             .plantao-container { padding: 30px 20px; }
-            
-            /* Ajuste das caixinhas de plantão no telemóvel */
             .plantao-badges { flex-direction: column; }
             .badge-item { display: flex; align-items: center; text-align: left; padding: 15px; gap: 20px; }
             .badge-icon { margin-bottom: 0; }
@@ -361,7 +409,6 @@
             .modal-social { justify-content: center; }
 
             .contact-grid-2x2 { grid-template-columns: 1fr; gap: 30px; }
-            
             .faq-summary { font-size: 1.05rem; padding: 15px 20px; text-align: left; }
         }
     </style>
@@ -380,6 +427,10 @@
             <div class="logo">
                 <img src="img/logo-nexo-completa.png" alt="Nexo Logo" style="max-height: 90px; filter: brightness(0) invert(1);"> 
             </div>
+            
+            <!-- Botão Hambúrguer Mobile -->
+            <button class="mobile-menu-toggle" aria-label="Abrir menu">&#9776;</button>
+            
             <nav class="main-nav">
                 <ul>
                     <li><a href="#inicio">Home</a></li>
@@ -456,7 +507,7 @@
             </div>
         </section>
 
-        <!-- 4. EQUIPE (TÍTULO À ESQUERDA, FOTOS CENTRALIZADAS) -->
+        <!-- 4. EQUIPE -->
         <section id="equipe" class="bg-beige section-relative" style="padding-top: 80px; padding-bottom: 80px;">
             <div class="container">
                 <h2 class="section-title" data-aos="fade-right">Equipe</h2>
@@ -555,7 +606,6 @@
                     <div class="plantao-texto">
                         <p style="text-align: left; font-size: 1.1rem; margin-bottom: 30px;">O <strong>Plantão Psicológico da Nexo</strong> foi criado para oferecer um espaço de acolhimento e escuta qualificada em momentos de crise, proporcionando suporte de forma rápida e acessível.</p>
                         
-                        <!-- Badges de Destaque -->
                         <div class="plantao-badges">
                             <div class="badge-item">
                                 <span class="badge-icon">⏱️</span>
@@ -571,13 +621,11 @@
                             </div>
                         </div>
 
-                        <!-- Caixa de Alerta Atualizada -->
                         <div class="plantao-alerta">
                             <strong>Importante:</strong> Este é um atendimento pontual voltado à avaliação da demanda. Ele não substitui o processo de psicoterapia, mas é o primeiro passo para quem necessita de apoio emocional imediato.<br><br>
                             <strong>Regra de utilização:</strong> O plantão poderá ser utilizado por cada pessoa, respeitando-se o intervalo mínimo de 30 dias.
                         </div>
                         
-                        <!-- Botão de Ação -->
                         <div style="text-align: center; margin-top: 30px;">
                             <a href="#contato" class="btn-plantao-acao">Solicitar Plantão Agora</a>
                         </div>
@@ -690,7 +738,7 @@
                         <div class="contact-number-circle">3</div>
                         <div class="contact-text-nexo">
                             <h4>WhatsApp</h4>
-                            <p>79 9983-8695</p>
+                            <p>00 0000-0000</p>
                         </div>
                     </div>
                     
@@ -698,7 +746,7 @@
                         <div class="contact-number-circle">2</div>
                         <div class="contact-text-nexo">
                             <h4>Telefone</h4>
-                            <p>79 9983-8695</p>
+                            <p>00 0000-0000</p>
                         </div>
                     </div>
                     
@@ -755,6 +803,23 @@
     <script>
         AOS.init({ duration: 800, once: true, offset: 100 });
 
+        // SCRIPT: Menu Mobile Hambúrguer
+        const menuToggle = document.querySelector('.mobile-menu-toggle');
+        const mainNav = document.querySelector('.main-nav');
+        const navLinks = document.querySelectorAll('.main-nav ul li a');
+
+        if (menuToggle && mainNav) {
+            menuToggle.addEventListener('click', () => {
+                mainNav.classList.toggle('active');
+            });
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mainNav.classList.remove('active');
+                });
+            });
+        }
+
         const dadosEquipe = {
             'adriana': {
                 nome: 'Adriana Santos',
@@ -795,10 +860,19 @@
             }
         };
 
+        // LÓGICA DO MODAL 100% RESTAURADA E FUNCIONAL
         function abrirModalEquipe(id, elementoCard) {
             const modal = document.getElementById('modal-equipe');
             
-            document.getElementById('modal-img').src = dadosEquipe[id].imgModal;
+            // Segurança: Se não encontrar a imagem nova, puxa a imagem base do clique
+            let fotoParaModal = '';
+            if (dadosEquipe[id] && dadosEquipe[id].imgModal) {
+                fotoParaModal = dadosEquipe[id].imgModal;
+            } else if (elementoCard) {
+                fotoParaModal = elementoCard.querySelector('img').src;
+            }
+
+            document.getElementById('modal-img').src = fotoParaModal;
             document.getElementById('modal-nome').innerHTML = dadosEquipe[id].nome;
             document.getElementById('modal-desc').innerHTML = dadosEquipe[id].descricao;
             document.getElementById('modal-insta').href = dadosEquipe[id].insta;
@@ -873,17 +947,15 @@
                     if (position) img.style.objectPosition = position;
                 }
 
+                // =========================================================================
+                // CORREÇÃO FINAL: SUPABASE DESLIGADO PARA A EQUIPE!
+                // Assim o seu site mostra as fotos que guardou na pasta e NUNCA as apaga.
+                // =========================================================================
                 updateImg('.hero-image img', dbMap['hero_imagem']);
-                updateImg('.team-grid .team-card:nth-child(1) img', dbMap['equipe_foto_1']);
-                updateImg('.team-grid .team-card:nth-child(2) img', dbMap['equipe_foto_2']);
-                updateImg('.team-grid .team-card:nth-child(3) img', dbMap['equipe_foto_3']);
                 updateImg('.modalities-grid .modality-card:nth-child(1) img', dbMap['modalidades_foto_online']);
                 updateImg('.modalities-grid .modality-card:nth-child(2) img', dbMap['modalidades_foto_presencial']);
 
                 aplicarEstiloImagem('.hero-image img', dbMap, 'hero_imagem');
-                aplicarEstiloImagem('.team-grid .team-card:nth-child(1) img', dbMap, 'equipe_foto_1');
-                aplicarEstiloImagem('.team-grid .team-card:nth-child(2) img', dbMap, 'equipe_foto_1');
-                aplicarEstiloImagem('.team-grid .team-card:nth-child(3) img', dbMap, 'equipe_foto_1');
                 aplicarEstiloImagem('.modalities-grid .modality-card:nth-child(1) img', dbMap, 'modalidades_foto');
                 aplicarEstiloImagem('.modalities-grid .modality-card:nth-child(2) img', dbMap, 'modalidades_foto');
 
