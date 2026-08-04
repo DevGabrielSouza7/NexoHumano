@@ -208,10 +208,19 @@
         }
 
         /* ========================================== */
-        /* MODAL DOS PSICÓLOGOS E EQUIPE CENTRALIZADA */
+        /* EQUIPE E CARD                              */
         /* ========================================== */
         .team-grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; margin-top: 20px; }
-        .team-card { position: relative; z-index: 10; flex: 1; min-width: 280px; max-width: 330px; text-align: center; cursor: pointer; transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease; }
+        
+        /* Removido o z-index e adicionado o pointer-events para garantir clique */
+        .team-card { 
+            position: relative; 
+            flex: 1; 
+            min-width: 280px; max-width: 330px; text-align: center; 
+            cursor: pointer; 
+            pointer-events: auto !important;
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease; 
+        }
         .team-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); border-radius: 10px; }
         
         .team-card img, .modal-img-container img {
@@ -222,19 +231,32 @@
             transform: scale(1.02);
         }
 
-        /* Lógica do Modal Corrigida (Retorno ao Display Flex/None para segurança 100%) */
+        /* ========================================== */
+        /* MODAL DOS PSICÓLOGOS (100% BLINDADO)       */
+        /* ========================================== */
         .modal-overlay {
-            display: none; /* Esconde completamente por padrão */
+            /* Regras de proteção total contra falhas visuais */
+            display: flex; 
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.65); z-index: 99999 !important; align-items: center; justify-content: center;
-            opacity: 0; transition: opacity 0.4s ease; padding: 20px; backdrop-filter: blur(4px);
+            background: rgba(0, 0, 0, 0.65); 
+            z-index: 99999 !important; 
+            align-items: center; justify-content: center;
+            opacity: 0; 
+            visibility: hidden; /* Esconde do clique até estar ativo */
+            pointer-events: none; /* Garante que ninguém clica em fantasmas */
+            transition: opacity 0.3s ease, visibility 0.3s ease; 
+            padding: 20px; backdrop-filter: blur(4px);
         }
-        .modal-overlay.active { opacity: 1; }
+        .modal-overlay.active { 
+            opacity: 1; 
+            visibility: visible; 
+            pointer-events: auto; /* Permite o clique quando visível */
+        }
         
         .modal-box {
             background: #ffffff; width: 100%; max-width: 950px; border-radius: 20px;
             position: relative; padding: 50px 40px; box-shadow: 0 20px 50px rgba(0,0,0,0.2);
-            transform: translateY(40px); transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+            transform: translateY(40px); transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             max-height: 90vh; overflow-y: auto;
         }
         .modal-overlay.active .modal-box { transform: translateY(0); }
@@ -373,34 +395,19 @@
         }
 
         @media (max-width: 768px) {
-            /* Ajuste do pulo da seção no celular */
             section { scroll-margin-top: 20px; }
-
-            /* AJUSTE DA LOGOMARCA E HEADER NO CELULAR */
             .main-header { position: relative !important; background-color: #113A23 !important; padding: 15px 0 !important; }
             .header-container { justify-content: center !important; }
             .logo img { max-height: 60px !important; }
-            
-            /* Ajuste do botão hambúrguer no celular */
             .mobile-menu-toggle { position: absolute; right: 20px; top: 18px; }
-            
-            /* Ajuste do dropdown no mobile */
             .main-nav { right: 0; left: 0; top: 100%; border-radius: 0; box-shadow: 0 10px 20px rgba(0,0,0,0.2); padding: 20px; }
             .main-nav ul { align-items: center; }
-
-            /* AJUSTES DA HERO PARA MOSTRAR TODOS NO CELULAR */
             .hero-section { height: 50vh !important; min-height: 380px !important; }
             .hero-image img { object-position: center 15% !important; }
-
-            /* AJUSTE DA FOTO DO "QUEM SOMOS" NO CELULAR */
             .sobre-image img { min-height: 280px !important; height: 280px !important; }
-
             .container { padding-left: 20px !important; padding-right: 20px !important; width: 100% !important; overflow-x: hidden !important; }
             .activities-grid, .modalities-grid, .faq-grid, .journey-grid, .info-grid { display: flex !important; flex-direction: column !important; gap: 30px !important; }
             
-            /* ========================================== */
-            /* SOLUÇÃO PARA A EQUIPE NO CELULAR           */
-            /* ========================================== */
             .team-grid { 
                 flex-direction: row !important; 
                 flex-wrap: wrap !important; 
@@ -423,17 +430,14 @@
             .contact-layout { display: flex !important; flex-direction: column !important; gap: 40px !important; }
             .form-row { display: flex !important; flex-direction: column !important; gap: 15px !important; }
             .section-title { font-size: 2rem !important; line-height: 1.3 !important; text-align: left !important; }
-            
             .floating-action-menu { bottom: 0; right: 0; left: 0; flex-direction: row; gap: 0; }
             .floating-btn { border-radius: 0; flex: 1; padding: 16px 10px; font-size: 0.75rem; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); }
             .floating-btn.secondary { border: none; border-left: 1px solid #e0e0e0; }
-            
             .plantao-container { padding: 30px 20px; }
             .plantao-badges { flex-direction: column; }
             .badge-item { display: flex; align-items: center; text-align: left; padding: 15px; gap: 20px; }
             .badge-icon { margin-bottom: 0; }
             .badge-info strong { display: inline; margin-top: 0; }
-            
             .modal-content-flex { flex-direction: column; gap: 20px; text-align: center; }
             .modal-box { padding: 40px 20px; }
             .modal-img-container img { max-width: 200px !important; max-height: 200px !important; border-width: 5px; }
@@ -441,7 +445,6 @@
             .modal-text-container { text-align: center; }
             .modal-desc p { text-align: left; font-size: 0.95rem; }
             .modal-social { justify-content: center; }
-
             .contact-grid-2x2 { grid-template-columns: 1fr; gap: 30px; }
             .faq-summary { font-size: 1.05rem; padding: 15px 20px; text-align: left; }
         }
@@ -455,16 +458,13 @@
         <a href="#plantao" class="floating-btn secondary">Plantão Psicológico</a>
     </div>
 
-    <!-- CABEÇALHO COM BOTÃO HAMBÚRGUER GERAL -->
+    <!-- CABEÇALHO -->
     <header class="main-header">
         <div class="header-container">
             <div class="logo">
                 <img src="img/logo-nexo-completa.png" alt="Nexo Logo" style="max-height: 90px; filter: brightness(0) invert(1);"> 
             </div>
-            
-            <!-- Botão de Menu -->
             <button class="mobile-menu-toggle" aria-label="Abrir menu">&#9776;</button>
-            
             <nav class="main-nav">
                 <ul>
                     <li><a href="#inicio">Home</a></li>
@@ -640,7 +640,6 @@
                     <div class="plantao-texto">
                         <p style="text-align: left; font-size: 1.1rem; margin-bottom: 30px;">O <strong>Plantão Psicológico da Nexo</strong> foi criado para oferecer um espaço de acolhimento e escuta qualificada em momentos de crise, proporcionando suporte de forma rápida e acessível.</p>
                         
-                        <!-- Badges de Destaque -->
                         <div class="plantao-badges">
                             <div class="badge-item">
                                 <span class="badge-icon">⏱️</span>
@@ -656,13 +655,11 @@
                             </div>
                         </div>
 
-                        <!-- Caixa de Alerta -->
                         <div class="plantao-alerta">
                             <strong>Importante:</strong> Este é um atendimento pontual voltado à avaliação da demanda. Ele não substitui o processo de psicoterapia, mas é o primeiro passo para quem necessita de apoio emocional imediato.<br><br>
                             <strong>Regra de utilização:</strong> O plantão poderá ser utilizado por cada pessoa, respeitando-se o intervalo mínimo de 30 dias.
                         </div>
                         
-                        <!-- Botão de Ação -->
                         <div style="text-align: center; margin-top: 30px;">
                             <a href="#contato" class="btn-plantao-acao">Solicitar Plantão Agora</a>
                         </div>
@@ -758,7 +755,7 @@
             </div>
         </section>
 
-        <!-- 9. INFORMAÇÕES DE CONTATO (VERDE ESCURO COM NÚMEROS) -->
+        <!-- 9. INFORMAÇÕES DE CONTATO -->
         <section class="info-section-dark">
             <div class="container">
                 <div class="contact-grid-2x2">
@@ -835,15 +832,8 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // ANIMAÇÕES SUAVIZADAS E COM DURAÇÃO AUMENTADA
-        AOS.init({ 
-            duration: 1200, 
-            easing: 'ease-in-out-sine', 
-            once: true, 
-            offset: 50 
-        });
+        AOS.init({ duration: 1200, easing: 'ease-in-out-sine', once: true, offset: 50 });
 
-        // SCRIPT NOVO: Controle do Menu Mobile Hambúrguer
         const menuToggle = document.querySelector('.mobile-menu-toggle');
         const mainNav = document.querySelector('.main-nav');
         const navLinks = document.querySelectorAll('.main-nav ul li a');
@@ -852,8 +842,6 @@
             menuToggle.addEventListener('click', () => {
                 mainNav.classList.toggle('active');
             });
-
-            // Fecha o menu ao clicar em qualquer atalho
             navLinks.forEach(link => {
                 link.addEventListener('click', () => {
                     mainNav.classList.remove('active');
@@ -901,7 +889,6 @@
             }
         };
 
-        // JS DO MODAL CORRIGIDO COM DISPLAY NONE/FLEX (Segurança 100%)
         function abrirModalEquipe(id) {
             const modal = document.getElementById('modal-equipe');
             if(!modal) return;
@@ -912,24 +899,13 @@
             document.getElementById('modal-insta').href = dadosEquipe[id].insta;
             document.getElementById('modal-wpp').href = dadosEquipe[id].wpp;
 
-            modal.style.display = 'flex';
-            
-            // Um pequeno tempo de espera para o navegador registrar o 'display: flex' antes da opacidade
-            setTimeout(() => {
-                modal.classList.add('active');
-            }, 10);
+            modal.classList.add('active');
         }
 
         function fecharModalEquipe() {
             const modal = document.getElementById('modal-equipe');
             if(!modal) return;
-            
             modal.classList.remove('active');
-            
-            // Espera a animação de opacidade terminar (0.4s) antes de dar display: none
-            setTimeout(() => {
-                modal.style.display = 'none';
-            }, 400); 
         }
 
         window.addEventListener('click', function(e) {
@@ -992,16 +968,15 @@
                 }
 
                 updateImg('.hero-image img', dbMap['hero_imagem']);
-                updateImg('.team-grid .team-card:nth-child(1) img', dbMap['equipe_foto_1']);
-                updateImg('.team-grid .team-card:nth-child(2) img', dbMap['equipe_foto_2']);
-                updateImg('.team-grid .team-card:nth-child(3) img', dbMap['equipe_foto_3']);
+                
+                /* ======================================================= */
+                /* AS 3 LINHAS QUE SOBRESCREVIAM AS FOTOS FORAM REMOVIDAS! */
+                /* ======================================================= */
+
                 updateImg('.modalities-grid .modality-card:nth-child(1) img', dbMap['modalidades_foto_online']);
                 updateImg('.modalities-grid .modality-card:nth-child(2) img', dbMap['modalidades_foto_presencial']);
 
                 aplicarEstiloImagem('.hero-image img', dbMap, 'hero_imagem');
-                aplicarEstiloImagem('.team-grid .team-card:nth-child(1) img', dbMap, 'equipe_foto_1');
-                aplicarEstiloImagem('.team-grid .team-card:nth-child(2) img', dbMap, 'equipe_foto_1');
-                aplicarEstiloImagem('.team-grid .team-card:nth-child(3) img', dbMap, 'equipe_foto_1');
                 aplicarEstiloImagem('.modalities-grid .modality-card:nth-child(1) img', dbMap, 'modalidades_foto');
                 aplicarEstiloImagem('.modalities-grid .modality-card:nth-child(2) img', dbMap, 'modalidades_foto');
 
