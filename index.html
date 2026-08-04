@@ -33,7 +33,7 @@
         /* MENU HAMBÚRGUER (MOBILE E DESKTOP)         */
         /* ========================================== */
         .mobile-menu-toggle {
-            display: block; /* Agora aparece sempre */
+            display: block; 
             background: transparent;
             border: none;
             color: #ffffff;
@@ -47,11 +47,11 @@
         }
         
         .main-nav {
-            display: none; /* Escondido por padrão, aberto pelo JS */
+            display: none; 
             position: absolute;
             top: 100%;
             right: 5%;
-            background-color: rgba(17, 58, 35, 0.95); /* Fundo Verde da Clínica */
+            background-color: rgba(17, 58, 35, 0.95); 
             backdrop-filter: blur(10px);
             padding: 25px 40px;
             border-radius: 12px;
@@ -93,7 +93,6 @@
         .hero-content h1 {
             color: #ffffff !important; font-size: 4.5rem !important; font-weight: 400 !important; font-style: italic !important; 
             text-align: center !important; margin-bottom: 20px !important; text-shadow: 2px 2px 10px rgba(0,0,0,0.5) !important; line-height: 1.2 !important;
-            /* Nova Animação CSS para a Hero funcionar sempre */
             opacity: 0;
             animation: heroFade 1.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s forwards;
         }
@@ -212,7 +211,7 @@
         /* MODAL DOS PSICÓLOGOS E EQUIPE CENTRALIZADA */
         /* ========================================== */
         .team-grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; margin-top: 20px; }
-        .team-card { flex: 1; min-width: 280px; max-width: 330px; text-align: center; cursor: pointer; transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease; }
+        .team-card { position: relative; z-index: 10; flex: 1; min-width: 280px; max-width: 330px; text-align: center; cursor: pointer; transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease; }
         .team-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); border-radius: 10px; }
         
         .team-card img, .modal-img-container img {
@@ -223,12 +222,14 @@
             transform: scale(1.02);
         }
 
+        /* Lógica do Modal Corrigida: Usa Visibility para não quebrar a animação no Mobile */
         .modal-overlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.65); z-index: 10000; align-items: center; justify-content: center;
-            opacity: 0; transition: opacity 0.4s ease; padding: 20px; backdrop-filter: blur(4px);
+            visibility: hidden; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.65); z-index: 99999 !important; align-items: center; justify-content: center;
+            opacity: 0; transition: opacity 0.4s ease, visibility 0.4s; padding: 20px; backdrop-filter: blur(4px);
+            display: flex; /* Mantém Flex, apenas esconde a visibilidade */
         }
-        .modal-overlay.active { display: flex; opacity: 1; }
+        .modal-overlay.active { visibility: visible; opacity: 1; }
         
         .modal-box {
             background: #ffffff; width: 100%; max-width: 950px; border-radius: 20px;
@@ -399,7 +400,6 @@
             
             /* ========================================== */
             /* SOLUÇÃO PARA A EQUIPE NO CELULAR           */
-            /* Reduz o tamanho das fotos e coloca lado a lado */
             /* ========================================== */
             .team-grid { 
                 flex-direction: row !important; 
@@ -408,12 +408,12 @@
                 justify-content: center !important; 
             }
             .team-card { 
-                flex: 0 0 45% !important; /* Faz caberem 2 por linha */
+                flex: 0 0 45% !important; 
                 min-width: 140px !important; 
                 padding: 10px;
             }
             .team-card img { 
-                max-width: 140px !important; /* Limita drasticamente o tamanho do oval */
+                max-width: 140px !important; 
                 max-height: 180px !important; 
                 margin: 0 auto;
             }
@@ -485,7 +485,6 @@
                 <img src="img/Home.JPG" alt="Equipe Nexo">
                 <div class="hero-overlay"></div>
             </div>
-            <!-- REMOVIDO o AOS daqui. Usando a animação CSS nativa para garantir a suavidade. -->
             <div class="hero-content">
                 <h1>Lugar de escuta e cuidado</h1>
             </div>
@@ -547,17 +546,18 @@
             <div class="container">
                 <h2 class="section-title" data-aos="fade-right">Equipe</h2>
                 <div class="team-grid">
-                    <div class="team-card" data-aos="fade-up" data-aos-delay="100" onclick="abrirModalEquipe('adriana', this)" title="Clique para ver o perfil completo">
+                    <!-- Modificado: Retirei o "this" no onclick para usar a nova função mais limpa -->
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="100" onclick="abrirModalEquipe('adriana')" title="Clique para ver o perfil completo">
                         <img src="img/adriana.png" alt="Adriana Santos">
                         <h3>Adriana Santos</h3>
                         <p class="crp">CRP: 19/5704</p>
                     </div>
-                    <div class="team-card" data-aos="fade-up" data-aos-delay="200" onclick="abrirModalEquipe('joselito', this)" title="Clique para ver o perfil completo">
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="200" onclick="abrirModalEquipe('joselito')" title="Clique para ver o perfil completo">
                         <img src="img/joselito.png" alt="Joselito Silva">
                         <h3>Joselito Júnior</h3>
                         <p class="crp">CRP: 19/005914</p>
                     </div>
-                    <div class="team-card" data-aos="fade-up" data-aos-delay="300" onclick="abrirModalEquipe('suzana', this)" title="Clique para ver o perfil completo">
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="300" onclick="abrirModalEquipe('suzana')" title="Clique para ver o perfil completo">
                         <img src="img/suzana.png" alt="Suzana M. de Araújo">
                         <h3>Suzana M. de Araújo</h3>
                         <p class="crp">CRP: 19/5694</p>
@@ -776,7 +776,7 @@
                         <div class="contact-number-circle">3</div>
                         <div class="contact-text-nexo">
                             <h4>WhatsApp</h4>
-                            <p>(00) 0000-0000</p>
+                            <p>00 0000-0000</p>
                         </div>
                     </div>
                     
@@ -784,7 +784,7 @@
                         <div class="contact-number-circle">2</div>
                         <div class="contact-text-nexo">
                             <h4>Telefone</h4>
-                            <p>(00) 0000-0000</p>
+                            <p>00 0000-0000</p>
                         </div>
                     </div>
                     
@@ -902,8 +902,10 @@
             }
         };
 
-        function abrirModalEquipe(id, elementoCard) {
+        // JS DO MODAL TOTALMENTE BLINDADO
+        function abrirModalEquipe(id) {
             const modal = document.getElementById('modal-equipe');
+            if(!modal) return;
             
             document.getElementById('modal-img').src = dadosEquipe[id].imgModal;
             document.getElementById('modal-nome').innerHTML = dadosEquipe[id].nome;
@@ -911,14 +913,13 @@
             document.getElementById('modal-insta').href = dadosEquipe[id].insta;
             document.getElementById('modal-wpp').href = dadosEquipe[id].wpp;
 
-            modal.style.display = 'flex';
-            setTimeout(() => modal.classList.add('active'), 10);
+            modal.classList.add('active');
         }
 
         function fecharModalEquipe() {
             const modal = document.getElementById('modal-equipe');
+            if(!modal) return;
             modal.classList.remove('active');
-            setTimeout(() => modal.style.display = 'none', 300);
         }
 
         window.addEventListener('click', function(e) {
