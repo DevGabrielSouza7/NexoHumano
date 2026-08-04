@@ -140,6 +140,9 @@
             padding: 50px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
         
+        /* ========================================== */
+        /* ESTILOS DO NOVO PLANTÃO PSICOLÓGICO        */
+        /* ========================================== */
         .plantao-badges {
             display: flex;
             justify-content: space-between;
@@ -205,7 +208,7 @@
         }
 
         /* ========================================== */
-        /* EQUIPE E CARD (À PROVA DE FALHAS)          */
+        /* EQUIPE E CARD                              */
         /* ========================================== */
         .team-grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; margin-top: 20px; }
         
@@ -214,7 +217,6 @@
             flex: 1; 
             min-width: 280px; max-width: 330px; text-align: center; 
             cursor: pointer; 
-            pointer-events: auto; /* Garante que o clique funciona */
             transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease; 
         }
         .team-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); border-radius: 10px; }
@@ -228,30 +230,19 @@
         }
 
         /* ========================================== */
-        /* MODAL DOS PSICÓLOGOS (LÓGICA CSS SEGURA)   */
+        /* MODAL DOS PSICÓLOGOS                       */
         /* ========================================== */
         .modal-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.65); z-index: 999999 !important; 
-            display: flex; align-items: center; justify-content: center;
-            padding: 20px; backdrop-filter: blur(4px);
-            
-            /* O Segredo: Usa visibility em vez de display: none para não encravar */
-            opacity: 0;
-            visibility: hidden;
-            pointer-events: none;
-            transition: all 0.3s ease;
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.65); z-index: 10000; align-items: center; justify-content: center;
+            opacity: 0; transition: opacity 0.3s ease; padding: 20px; backdrop-filter: blur(4px);
         }
-        .modal-overlay.active { 
-            opacity: 1;
-            visibility: visible;
-            pointer-events: auto;
-        }
+        .modal-overlay.active { opacity: 1; }
         
         .modal-box {
             background: #ffffff; width: 100%; max-width: 950px; border-radius: 20px;
             position: relative; padding: 50px 40px; box-shadow: 0 20px 50px rgba(0,0,0,0.2);
-            transform: translateY(30px); transition: transform 0.3s ease;
+            transform: translateY(30px); transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
             max-height: 90vh; overflow-y: auto;
         }
         .modal-overlay.active .modal-box { transform: translateY(0); }
@@ -543,18 +534,17 @@
             <div class="container">
                 <h2 class="section-title" data-aos="fade-right">Equipe</h2>
                 <div class="team-grid">
-                    <!-- Retornei o parâmetro "this" no HTML para garantir que o clique encontra o cartão certo -->
-                    <div class="team-card" data-aos="fade-up" data-aos-delay="100" onclick="abrirModalEquipe('adriana', this)" title="Clique para ver o perfil completo">
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="100" onclick="abrirModalEquipe('adriana')" title="Clique para ver o perfil completo">
                         <img src="img/adriana.png" alt="Adriana Santos">
                         <h3>Adriana Santos</h3>
                         <p class="crp">CRP: 19/5704</p>
                     </div>
-                    <div class="team-card" data-aos="fade-up" data-aos-delay="200" onclick="abrirModalEquipe('joselito', this)" title="Clique para ver o perfil completo">
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="200" onclick="abrirModalEquipe('joselito')" title="Clique para ver o perfil completo">
                         <img src="img/joselito.png" alt="Joselito Silva">
                         <h3>Joselito Júnior</h3>
                         <p class="crp">CRP: 19/005914</p>
                     </div>
-                    <div class="team-card" data-aos="fade-up" data-aos-delay="300" onclick="abrirModalEquipe('suzana', this)" title="Clique para ver o perfil completo">
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="300" onclick="abrirModalEquipe('suzana')" title="Clique para ver o perfil completo">
                         <img src="img/suzana.png" alt="Suzana M. de Araújo">
                         <h3>Suzana M. de Araújo</h3>
                         <p class="crp">CRP: 19/5694</p>
@@ -887,31 +877,24 @@
             }
         };
 
-        // LÓGICA DO MODAL TOTALMENTE BLINDADA
-        function abrirModalEquipe(id, elementoCard) {
+        // LÓGICA DO MODAL CLÁSSICA E SEGURA
+        function abrirModalEquipe(id) {
             const modal = document.getElementById('modal-equipe');
-            if(!modal) return;
             
-            // Garantia extra: Se a imagem do modal der erro, ele puxa a imagem do card
-            let fotoModal = '';
-            if (dadosEquipe[id] && dadosEquipe[id].imgModal) {
-                fotoModal = dadosEquipe[id].imgModal;
-            } else if (elementoCard) {
-                fotoModal = elementoCard.querySelector('img').src;
-            }
-
-            document.getElementById('modal-img').src = fotoModal;
+            document.getElementById('modal-img').src = dadosEquipe[id].imgModal;
             document.getElementById('modal-nome').innerHTML = dadosEquipe[id].nome;
             document.getElementById('modal-desc').innerHTML = dadosEquipe[id].descricao;
             document.getElementById('modal-insta').href = dadosEquipe[id].insta;
             document.getElementById('modal-wpp').href = dadosEquipe[id].wpp;
 
-            modal.classList.add('active');
+            modal.style.display = 'flex';
+            setTimeout(() => modal.classList.add('active'), 10);
         }
 
         function fecharModalEquipe() {
             const modal = document.getElementById('modal-equipe');
-            if(modal) modal.classList.remove('active');
+            modal.classList.remove('active');
+            setTimeout(() => modal.style.display = 'none', 300);
         }
 
         window.addEventListener('click', function(e) {
@@ -973,11 +956,20 @@
                     if (position) img.style.objectPosition = position;
                 }
 
+                // =========================================================
+                // CONEXÃO COM O SUPABASE RESTAURADA CONFORME ORIGINAL
+                // =========================================================
                 updateImg('.hero-image img', dbMap['hero_imagem']);
+                updateImg('.team-grid .team-card:nth-child(1) img', dbMap['equipe_foto_1']);
+                updateImg('.team-grid .team-card:nth-child(2) img', dbMap['equipe_foto_2']);
+                updateImg('.team-grid .team-card:nth-child(3) img', dbMap['equipe_foto_3']);
                 updateImg('.modalities-grid .modality-card:nth-child(1) img', dbMap['modalidades_foto_online']);
                 updateImg('.modalities-grid .modality-card:nth-child(2) img', dbMap['modalidades_foto_presencial']);
 
                 aplicarEstiloImagem('.hero-image img', dbMap, 'hero_imagem');
+                aplicarEstiloImagem('.team-grid .team-card:nth-child(1) img', dbMap, 'equipe_foto_1');
+                aplicarEstiloImagem('.team-grid .team-card:nth-child(2) img', dbMap, 'equipe_foto_2');
+                aplicarEstiloImagem('.team-grid .team-card:nth-child(3) img', dbMap, 'equipe_foto_3');
                 aplicarEstiloImagem('.modalities-grid .modality-card:nth-child(1) img', dbMap, 'modalidades_foto');
                 aplicarEstiloImagem('.modalities-grid .modality-card:nth-child(2) img', dbMap, 'modalidades_foto');
 
