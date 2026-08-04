@@ -437,7 +437,8 @@
             <div class="container contact-layout">
                 <div class="contact-text" data-aos="fade-right">
                     <h2 class="sobre-title">Por que fazer<br>terapia?</h2>
-                    <p style="font-size: 1.1rem; line-height: 1.6; margin-top: 20px;">A terapia é um lugar de acolhimento, onde você pode expressar sua experiência com liberdade, sem julgamentos ou expectativas. O processo terapêutico favorece o autoconhecimento, a autonomia emocional e relações mais saudáveis, respeitando o tempo e a singularidade de cada indivíduo. A psicoterapia promove um encontro humano baseado na empatia, na autenticidade e na aceitação, possibilitando que você se aproxime de quem realmente é.</p>
+                    <!-- TEXTO ATUALIZADO ABAIXO -->
+                    <p style="font-size: 1.1rem; line-height: 1.6; margin-top: 20px;">A psicoterapia é um espaço de escuta, acolhimento e autoconhecimento. Por meio dela, é possível compreender emoções, desenvolver recursos para lidar com desafios e fortalecer a saúde mental.</p>
                 </div>
                 <div class="contact-form-container" data-aos="fade-left">
                     <form class="nexo-form">
@@ -667,9 +668,11 @@
     <script>
         AOS.init({ duration: 800, once: true, offset: 100 });
 
+        // NOVO: Adicionei a propriedade imgModal para carregar a imagem correta dentro do modal
         const dadosEquipe = {
             'adriana': {
                 nome: 'Adriana Santos',
+                imgModal: 'img/PaginaAdriana.JPG',
                 descricao: `
                     <p>Sou psicóloga Clínica (CRP 19/5704);<br>
                     Formação e Mentoria para Atuação aos Sofrimentos Extremos;<br>
@@ -682,6 +685,7 @@
             },
             'joselito': {
                 nome: 'Joselito Júnior',
+                imgModal: 'img/PaginaJoselito.JPG',
                 descricao: `
                     <p>Sou psicólogo Clínico (CRP 19/005914);<br>
                     Especialista em Gestalt-Terapia;<br>
@@ -693,6 +697,7 @@
             },
             'suzana': {
                 nome: 'Suzana M. de Araújo',
+                imgModal: 'img/PaginaSuzana.JPG',
                 descricao: `
                     <p>Sou psicóloga Clínica (CRP 19/5694);<br>
                     Pós-graduada em Psicologia Hospitalar e da Saúde.</p>
@@ -706,9 +711,10 @@
 
         function abrirModalEquipe(id, elementoCard) {
             const modal = document.getElementById('modal-equipe');
-            const imgCard = elementoCard.querySelector('img').src;
             
-            document.getElementById('modal-img').src = imgCard;
+            // NOVO: Puxa a imagem configurada no objeto acima em vez da imagem do card
+            document.getElementById('modal-img').src = dadosEquipe[id].imgModal;
+            
             document.getElementById('modal-nome').innerHTML = dadosEquipe[id].nome;
             document.getElementById('modal-desc').innerHTML = dadosEquipe[id].descricao;
             document.getElementById('modal-insta').href = dadosEquipe[id].insta;
@@ -744,6 +750,9 @@
                 data.forEach(item => { dbMap[item.secao + "_" + item.chave] = item.valor; });
 
                 if (dbMap['hero_titulo']) document.querySelector('.hero-content h1').innerHTML = dbMap['hero_titulo'];
+                
+                // ATENÇÃO: Esta linha abaixo atualiza o texto da secção "Por que fazer terapia?"
+                // de acordo com a base de dados. Assegure-se de atualizar o texto no seu Painel Admin!
                 if (dbMap['terapia_titulo']) document.querySelector('.contact-text h2').innerHTML = dbMap['terapia_titulo'];
                 if (dbMap['terapia_texto']) document.querySelector('.contact-text p').innerHTML = dbMap['terapia_texto'];
 
