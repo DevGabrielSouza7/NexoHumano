@@ -157,12 +157,12 @@
         }
 
         /* ========================================== */
-        /* MODAL DOS PSICÓLOGOS E AJUSTE DAS FOTOS    */
+        /* MODAL DOS PSICÓLOGOS E EQUIPE CENTRALIZADA */
         /* ========================================== */
-        .team-card { cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .team-grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; }
+        .team-card { flex: 1; min-width: 280px; max-width: 330px; text-align: center; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .team-card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); border-radius: 10px; }
         
-        /* Garante que as fotos não cortem o topo (as cabeças) */
         .team-card img, .modal-img-container img {
             object-position: top !important;
         }
@@ -211,10 +211,55 @@
         .modal-social svg { width: 22px; height: 22px; fill: white; }
 
         /* ========================================== */
+        /* ACORDEÃO DAS DÚVIDAS FREQUENTES            */
+        /* ========================================== */
+        .faq-details {
+            background-color: #f7f5f0;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #e8e5dc;
+            transition: all 0.3s ease;
+        }
+        .faq-details[open] {
+            background-color: #ffffff;
+            border-color: #5a6659;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .faq-summary {
+            padding: 20px 25px;
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: #113A23;
+            cursor: pointer;
+            list-style: none; /* Remove a seta padrão */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Playfair Display', serif;
+        }
+        .faq-summary::-webkit-details-marker { display: none; } /* Remove seta padrão Safari/Chrome */
+        .faq-summary::after {
+            content: '+';
+            font-size: 1.8rem;
+            color: #5a6659;
+            font-weight: 300;
+            transition: transform 0.3s ease;
+        }
+        .faq-details[open] .faq-summary::after {
+            transform: rotate(45deg); /* Transforma o + num x */
+        }
+        .faq-content {
+            padding: 0 25px 25px 25px;
+            color: #4a4a4a;
+            line-height: 1.7;
+            font-size: 0.95rem;
+        }
+
+        /* ========================================== */
         /* RODAPÉ DE CONTACTOS VERDE ESCURO           */
         /* ========================================== */
         .info-section-dark {
-            background-color: #113A23; /* Fundo Verde Escuro */
+            background-color: #113A23;
             color: #ffffff;
             padding: 80px 0;
         }
@@ -270,10 +315,10 @@
         }
 
         @media (max-width: 768px) {
-            /* AJUSTES DO CABEÇALHO NO CELULAR (CENTRALIZA A LOGO E DIMINUI PARA NÃO CORTAR ROSTOS) */
+            /* AJUSTE DA LOGOMARCA NO CELULAR (CRIA UMA BARRA EXCLUSIVA PARA NÃO COBRIR ROSTOS) */
+            .main-header { position: relative !important; background-color: #113A23 !important; padding: 15px 0 !important; }
             .header-container { justify-content: center !important; }
-            .logo img { max-height: 70px !important; }
-            .main-header { padding: 15px 0 !important; }
+            .logo img { max-height: 60px !important; }
 
             /* AJUSTES DA HERO PARA MOSTRAR TODOS NO CELULAR */
             .hero-section { height: 50vh !important; min-height: 380px !important; }
@@ -283,7 +328,8 @@
             .sobre-image img { min-height: 280px !important; height: 280px !important; }
 
             .container { padding-left: 20px !important; padding-right: 20px !important; width: 100% !important; overflow-x: hidden !important; }
-            .activities-grid, .team-grid, .modalities-grid, .faq-grid, .journey-grid, .info-grid { display: flex !important; flex-direction: column !important; gap: 30px !important; }
+            .activities-grid, .modalities-grid, .faq-grid, .journey-grid, .info-grid { display: flex !important; flex-direction: column !important; gap: 30px !important; }
+            .team-grid { flex-direction: column !important; align-items: center; }
             .contact-layout { display: flex !important; flex-direction: column !important; gap: 40px !important; }
             .form-row { display: flex !important; flex-direction: column !important; gap: 15px !important; }
             .section-title { font-size: 2rem !important; line-height: 1.3 !important; }
@@ -309,6 +355,8 @@
             .modal-social { justify-content: center; }
 
             .contact-grid-2x2 { grid-template-columns: 1fr; gap: 30px; }
+            
+            .faq-summary { font-size: 1.05rem; padding: 15px 20px; }
         }
     </style>
 </head>
@@ -320,6 +368,7 @@
         <a href="#plantao" class="floating-btn secondary">Plantão Psicológico</a>
     </div>
 
+    <!-- CABEÇALHO COM LINKS CORRIGIDOS -->
     <header class="main-header" data-aos="fade-down" data-aos-duration="1000">
         <div class="header-container">
             <div class="logo">
@@ -329,8 +378,8 @@
                 <ul>
                     <li><a href="#inicio">Home</a></li>
                     <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#atividades">Serviços</a></li>
                     <li><a href="#equipe">Equipe</a></li>
-                    <li><a href="#modalidades">Serviços</a></li>
                     <li><a href="#duvidas">Dúvidas</a></li>
                     <li><a href="#contato">Contato</a></li>
                 </ul>
@@ -401,10 +450,10 @@
             </div>
         </section>
 
-        <!-- 4. EQUIPE -->
+        <!-- 4. EQUIPE (CENTRALIZADA) -->
         <section id="equipe" class="bg-beige section-relative">
             <div class="container">
-                <h2 class="section-title" data-aos="fade-right"><br>Equipe</h2>
+                <h2 class="section-title" style="text-align: center;" data-aos="fade-up">Equipe</h2>
                 <div class="team-grid">
                     <div class="team-card" data-aos="fade-up" data-aos-delay="100" onclick="abrirModalEquipe('adriana', this)" title="Clique para ver o perfil completo">
                         <img src="img/adriana.png" alt="Adriana Santos">
@@ -447,7 +496,6 @@
             <div class="container contact-layout">
                 <div class="contact-text" data-aos="fade-right">
                     <h2 class="sobre-title">Por que fazer<br>terapia?</h2>
-                    <!-- TEXTO ATUALIZADO ABAIXO -->
                     <p style="font-size: 1.1rem; line-height: 1.6; margin-top: 20px;">A psicoterapia é um espaço de escuta, acolhimento e autoconhecimento. Por meio dela, é possível compreender emoções, desenvolver recursos para lidar com desafios e fortalecer a saúde mental.</p>
                 </div>
                 <div class="contact-form-container" data-aos="fade-left">
@@ -517,9 +565,10 @@
                             </div>
                         </div>
 
-                        <!-- Caixa de Alerta -->
+                        <!-- Caixa de Alerta Atualizada -->
                         <div class="plantao-alerta">
-                            <strong>Importante:</strong> Este é um atendimento pontual voltado à avaliação da demanda. Ele não substitui o processo de psicoterapia, mas é o primeiro passo para quem necessita de apoio emocional imediato.
+                            <strong>Importante:</strong> Este é um atendimento pontual voltado à avaliação da demanda. Ele não substitui o processo de psicoterapia, mas é o primeiro passo para quem necessita de apoio emocional imediato.<br><br>
+                            <strong>Regra de utilização:</strong> O plantão poderá ser utilizado por cada pessoa, respeitando-se o intervalo mínimo de 30 dias.
                         </div>
                         
                         <!-- Botão de Ação -->
@@ -531,66 +580,88 @@
             </div>
         </section>
 
-        <!-- 8. DÚVIDAS FREQUENTES -->
+        <!-- 8. DÚVIDAS FREQUENTES (ACORDEÃO OCULTO) -->
         <section id="duvidas" class="bg-white section-relative" style="padding-bottom: 80px;">
             <div class="container">
-                <h2 class="sobre-title" data-aos="fade-up" style="margin-bottom: 40px;">Dúvidas<br>Frequentes</h2>
-                <div class="faq-grid">
+                <h2 class="sobre-title" data-aos="fade-up" style="margin-bottom: 40px; text-align: center;">Dúvidas Frequentes</h2>
+                <div class="faq-grid" style="max-width: 900px; margin: 0 auto; display: block;">
                     
-                    <div class="faq-item" data-aos="fade-up">
-                        <h3>Como saber se preciso de terapia?</h3>
-                        <p>Você não precisa esperar que o sofrimento se torne insuportável para buscar ajuda. A terapia pode ser um espaço para lidar com ansiedade, tristeza, conflitos nos relacionamentos, momentos de crise, mudanças de vida, dificuldades emocionais ou simplesmente para investir em autoconhecimento e desenvolvimento pessoal. Se algo tem afetado sua qualidade de vida ou faz você sentir que precisa de um espaço para ser ouvido, a terapia pode ser um importante caminho de cuidado.</p>
-                    </div>
+                    <details class="faq-details" data-aos="fade-up">
+                        <summary class="faq-summary">Como saber se preciso de terapia?</summary>
+                        <div class="faq-content">
+                            <p>Você não precisa esperar que o sofrimento se torne insuportável para buscar ajuda. A terapia pode ser um espaço para lidar com ansiedade, tristeza, conflitos nos relacionamentos, momentos de crise, mudanças de vida, dificuldades emocionais ou simplesmente para investir em autoconhecimento e desenvolvimento pessoal. Se algo tem afetado sua qualidade de vida ou faz você sentir que precisa de um espaço para ser ouvido, a terapia pode ser um importante caminho de cuidado.</p>
+                        </div>
+                    </details>
                     
-                    <div class="faq-item" data-aos="fade-up">
-                        <h3>Como funciona a primeira sessão?</h3>
-                        <p>A primeira sessão é um momento de acolhimento. Você poderá falar sobre sua história, o que motivou a busca por atendimento e quais são suas necessidades neste momento. Também será uma oportunidade para conhecer o psicólogo, compreender como funciona o processo terapêutico e esclarecer dúvidas.</p>
-                    </div>
+                    <details class="faq-details" data-aos="fade-up">
+                        <summary class="faq-summary">Como funciona a primeira sessão?</summary>
+                        <div class="faq-content">
+                            <p>A primeira sessão é um momento de acolhimento. Você poderá falar sobre sua história, o que motivou a busca por atendimento e quais são suas necessidades neste momento. Também será uma oportunidade para conhecer o psicólogo, compreender como funciona o processo terapêutico e esclarecer dúvidas.</p>
+                        </div>
+                    </details>
                     
-                    <div class="faq-item" data-aos="fade-up">
-                        <h3>Quanto tempo dura uma sessão?</h3>
-                        <p>As sessões de psicoterapia têm duração média de 50 minutos.</p>
-                    </div>
+                    <details class="faq-details" data-aos="fade-up">
+                        <summary class="faq-summary">Quanto tempo dura uma sessão?</summary>
+                        <div class="faq-content">
+                            <p>As sessões de psicoterapia têm duração média de 50 minutos.</p>
+                        </div>
+                    </details>
                     
-                    <div class="faq-item" data-aos="fade-up">
-                        <h3>Com que frequência acontecem as sessões?</h3>
-                        <p>Na maioria dos casos, as sessões são semanais. Entretanto, a frequência é definida em conjunto entre psicólogo e paciente, considerando as necessidades e objetivos de cada processo.</p>
-                    </div>
+                    <details class="faq-details" data-aos="fade-up">
+                        <summary class="faq-summary">Com que frequência acontecem as sessões?</summary>
+                        <div class="faq-content">
+                            <p>Na maioria dos casos, as sessões são semanais. Entretanto, a frequência é definida em conjunto entre psicólogo e paciente, considerando as necessidades e objetivos de cada processo.</p>
+                        </div>
+                    </details>
                     
-                    <div class="faq-item" data-aos="fade-up">
-                        <h3>O Plantão Psicológico substitui a psicoterapia?</h3>
-                        <p>Não. O Plantão Psicológico é um atendimento pontual, pensado para momentos de urgência emocional. Dependendo da necessidade identificada durante o encontro, poderá ser indicada a continuidade do cuidado por meio da psicoterapia.</p>
-                    </div>
+                    <details class="faq-details" data-aos="fade-up">
+                        <summary class="faq-summary">O Plantão Psicológico substitui a psicoterapia?</summary>
+                        <div class="faq-content">
+                            <p>Não. O Plantão Psicológico é um atendimento pontual, pensado para momentos de urgência emocional. Dependendo da necessidade identificada durante o encontro, poderá ser indicada a continuidade do cuidado por meio da psicoterapia.</p>
+                        </div>
+                    </details>
                     
-                    <div class="faq-item" data-aos="fade-up">
-                        <h3>Como funciona a psicoterapia em grupo?</h3>
-                        <p>A psicoterapia em grupo reúne pessoas que compartilham o desejo de cuidar da saúde emocional em um ambiente seguro, respeitoso e sigiloso. O grupo favorece a troca de experiências, o sentimento de pertencimento e o desenvolvimento pessoal, sempre com a mediação de psicólogos.</p>
-                    </div>
+                    <details class="faq-details" data-aos="fade-up">
+                        <summary class="faq-summary">Como funciona a psicoterapia em grupo?</summary>
+                        <div class="faq-content">
+                            <p>A psicoterapia em grupo reúne pessoas que compartilham o desejo de cuidar da saúde emocional em um ambiente seguro, respeitoso e sigiloso. O grupo favorece a troca de experiências, o sentimento de pertencimento e o desenvolvimento pessoal, sempre com a mediação de psicólogos.</p>
+                        </div>
+                    </details>
                     
-                    <div class="faq-item" data-aos="fade-up">
-                        <h3>O que é Orientação Parental?</h3>
-                        <p>A Orientação Parental é um espaço destinado a pais, mães e cuidadores que desejam compreender melhor o desenvolvimento dos filhos, fortalecer os vínculos familiares e encontrar estratégias para lidar com desafios da educação e da convivência. O objetivo não é julgar a forma de educar, mas construir caminhos mais saudáveis para a relação familiar.</p>
-                    </div>
+                    <details class="faq-details" data-aos="fade-up">
+                        <summary class="faq-summary">O que é Orientação Parental?</summary>
+                        <div class="faq-content">
+                            <p>A Orientação Parental é um espaço destinado a pais, mães e cuidadores que desejam compreender melhor o desenvolvimento dos filhos, fortalecer os vínculos familiares e encontrar estratégias para lidar com desafios da educação e da convivência. O objetivo não é julgar a forma de educar, mas construir caminhos mais saudáveis para a relação familiar.</p>
+                        </div>
+                    </details>
                     
-                    <div class="faq-item" data-aos="fade-up">
-                        <h3>Os atendimentos são sigilosos?</h3>
-                        <p>Sim. Todo atendimento psicológico é protegido pelo sigilo profissional, conforme estabelece o Código de Ética do Psicólogo. As informações compartilhadas durante as sessões permanecem confidenciais, exceto nas situações previstas em lei.</p>
-                    </div>
+                    <details class="faq-details" data-aos="fade-up">
+                        <summary class="faq-summary">Os atendimentos são sigilosos?</summary>
+                        <div class="faq-content">
+                            <p>Sim. Todo atendimento psicológico é protegido pelo sigilo profissional, conforme estabelece o Código de Ética do Psicólogo. As informações compartilhadas durante as sessões permanecem confidenciais, exceto nas situações previstas em lei.</p>
+                        </div>
+                    </details>
                     
-                    <div class="faq-item" data-aos="fade-up">
-                        <h3>Posso fazer terapia mesmo sem um diagnóstico psicológico ou psiquiátrico?</h3>
-                        <p>Sim. A terapia não é destinada apenas a quem possui um diagnóstico. Muitas pessoas procuram atendimento para compreender melhor suas emoções, desenvolver habilidades para lidar com desafios cotidianos, fortalecer relacionamentos ou buscar uma vida com mais equilíbrio e sentido.</p>
-                    </div>
+                    <details class="faq-details" data-aos="fade-up">
+                        <summary class="faq-summary">Posso fazer terapia mesmo sem um diagnóstico?</summary>
+                        <div class="faq-content">
+                            <p>Sim. A terapia não é destinada apenas a quem possui um diagnóstico psicológico ou psiquiátrico. Muitas pessoas procuram atendimento para compreender melhor suas emoções, desenvolver habilidades para lidar com desafios cotidianos, fortalecer relacionamentos ou buscar uma vida com mais equilíbrio e sentido.</p>
+                        </div>
+                    </details>
                     
-                    <div class="faq-item" data-aos="fade-up">
-                        <h3>A terapia online é tão eficaz quanto a presencial?</h3>
-                        <p>Sim. Quando realizada de acordo com as normas do Conselho Federal de Psicologia e em um ambiente adequado, a psicoterapia online é uma modalidade segura e eficaz, oferecendo acolhimento e qualidade técnica semelhantes ao atendimento presencial.</p>
-                    </div>
+                    <details class="faq-details" data-aos="fade-up">
+                        <summary class="faq-summary">A terapia online é tão eficaz quanto a presencial?</summary>
+                        <div class="faq-content">
+                            <p>Sim. Quando realizada de acordo com as normas do Conselho Federal de Psicologia e em um ambiente adequado, a psicoterapia online é uma modalidade segura e eficaz, oferecendo acolhimento e qualidade técnica semelhantes ao atendimento presencial.</p>
+                        </div>
+                    </details>
                     
-                    <div class="faq-item" data-aos="fade-up">
-                        <h3>Como agendar um atendimento?</h3>
-                        <p>Você pode entrar em contato conosco pelos canais disponíveis no site. Nossa equipe irá orientar você sobre a modalidade de atendimento mais adequada, esclarecer dúvidas e ajudar no agendamento da sua primeira sessão.</p>
-                    </div>
+                    <details class="faq-details" data-aos="fade-up">
+                        <summary class="faq-summary">Como agendar um atendimento?</summary>
+                        <div class="faq-content">
+                            <p>Você pode entrar em contato conosco pelos canais disponíveis no site ou pelo formulário. Nossa equipe irá orientar você sobre a modalidade de atendimento mais adequada, esclarecer dúvidas e ajudar no agendamento da sua primeira sessão.</p>
+                        </div>
+                    </details>
                     
                 </div>
             </div>
