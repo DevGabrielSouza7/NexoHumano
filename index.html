@@ -29,22 +29,51 @@
         }
         .header-container { display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto; padding: 0 5%; position: relative; }
         
-        /* Menu Normal Desktop */
-        .main-nav ul { display: flex; list-style: none; gap: 25px; margin: 0; padding: 0; }
-        .main-nav a { color: #ffffff !important; text-decoration: none; font-weight: 500; font-size: 0.95rem; letter-spacing: 0.5px; transition: opacity 0.3s; }
-        .main-nav a:hover { opacity: 0.7; }
-        
-        /* NOVO: Botão Hambúrguer oculto no PC */
+        /* ========================================== */
+        /* MENU HAMBÚRGUER (MOBILE E DESKTOP)         */
+        /* ========================================== */
         .mobile-menu-toggle {
-            display: none;
+            display: block; /* Agora aparece sempre */
             background: transparent;
             border: none;
             color: #ffffff;
-            font-size: 2rem;
+            font-size: 2.2rem;
             cursor: pointer;
             z-index: 1001;
+            transition: transform 0.3s ease;
+        }
+        .mobile-menu-toggle:hover {
+            transform: scale(1.1);
         }
         
+        .main-nav {
+            display: none; /* Escondido por padrão, aberto pelo JS */
+            position: absolute;
+            top: 100%;
+            right: 5%;
+            background-color: rgba(17, 58, 35, 0.95); /* Fundo Verde da Clínica */
+            backdrop-filter: blur(10px);
+            padding: 25px 40px;
+            border-radius: 12px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            z-index: 1000;
+        }
+        .main-nav.active { 
+            display: block; 
+            animation: dropDown 0.4s cubic-bezier(0.165, 0.84, 0.44, 1) forwards; 
+        }
+        @keyframes dropDown {
+            from { opacity: 0; transform: translateY(-15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .main-nav ul { display: flex; flex-direction: column; list-style: none; gap: 20px; margin: 0; padding: 0; align-items: flex-end; }
+        .main-nav a { color: #ffffff !important; text-decoration: none; font-weight: 500; font-size: 1.1rem; letter-spacing: 0.5px; transition: opacity 0.3s; }
+        .main-nav a:hover { opacity: 0.7; }
+        
+        /* ========================================== */
+        /* HERO SECTION E ANIMAÇÃO NATIVA             */
+        /* ========================================== */
         .hero-section {
             position: relative !important; height: 100vh !important; min-height: 600px !important;
             display: flex !important; align-items: center !important; justify-content: center !important; 
@@ -64,6 +93,13 @@
         .hero-content h1 {
             color: #ffffff !important; font-size: 4.5rem !important; font-weight: 400 !important; font-style: italic !important; 
             text-align: center !important; margin-bottom: 20px !important; text-shadow: 2px 2px 10px rgba(0,0,0,0.5) !important; line-height: 1.2 !important;
+            /* Nova Animação CSS para a Hero funcionar sempre */
+            opacity: 0;
+            animation: heroFade 1.8s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s forwards;
+        }
+        @keyframes heroFade {
+            0% { opacity: 0; transform: translateY(30px); filter: blur(5px); }
+            100% { opacity: 1; transform: translateY(0); filter: blur(0); }
         }
 
         .floating-action-menu {
@@ -121,11 +157,12 @@
             border-radius: 10px;
             text-align: center;
             border: 1px solid #e8e5dc;
-            transition: transform 0.3s ease;
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
         .badge-item:hover {
-            transform: translateY(-5px);
+            transform: translateY(-8px);
             border-color: #5a6659;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
         }
         .badge-icon {
             font-size: 2rem;
@@ -175,31 +212,35 @@
         /* MODAL DOS PSICÓLOGOS E EQUIPE CENTRALIZADA */
         /* ========================================== */
         .team-grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; margin-top: 20px; }
-        .team-card { flex: 1; min-width: 280px; max-width: 330px; text-align: center; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; }
-        .team-card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); border-radius: 10px; }
+        .team-card { flex: 1; min-width: 280px; max-width: 330px; text-align: center; cursor: pointer; transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease; }
+        .team-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.1); border-radius: 10px; }
         
         .team-card img, .modal-img-container img {
             object-position: top !important;
+            transition: transform 0.5s ease;
+        }
+        .team-card:hover img {
+            transform: scale(1.02);
         }
 
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.65); z-index: 10000; align-items: center; justify-content: center;
-            opacity: 0; transition: opacity 0.3s ease; padding: 20px; backdrop-filter: blur(4px);
+            opacity: 0; transition: opacity 0.4s ease; padding: 20px; backdrop-filter: blur(4px);
         }
         .modal-overlay.active { display: flex; opacity: 1; }
         
         .modal-box {
             background: #ffffff; width: 100%; max-width: 950px; border-radius: 20px;
             position: relative; padding: 50px 40px; box-shadow: 0 20px 50px rgba(0,0,0,0.2);
-            transform: translateY(30px); transition: transform 0.3s ease;
+            transform: translateY(40px); transition: transform 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
             max-height: 90vh; overflow-y: auto;
         }
         .modal-overlay.active .modal-box { transform: translateY(0); }
         
         .modal-close {
             position: absolute; top: 20px; right: 25px; font-size: 2.5rem; border: none;
-            background: transparent; cursor: pointer; color: #a0a0a0; line-height: 1; transition: color 0.2s;
+            background: transparent; cursor: pointer; color: #a0a0a0; line-height: 1; transition: color 0.3s;
         }
         .modal-close:hover { color: #2c302e; }
         
@@ -218,9 +259,9 @@
         .modal-social { display: flex; gap: 15px; margin-top: 30px; justify-content: flex-start; }
         .modal-social a {
             display: inline-flex; align-items: center; justify-content: center;
-            width: 45px; height: 45px; border-radius: 50%; transition: transform 0.2s;
+            width: 45px; height: 45px; border-radius: 50%; transition: transform 0.3s;
         }
-        .modal-social a:hover { transform: scale(1.1); }
+        .modal-social a:hover { transform: scale(1.15); }
         .btn-insta { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
         .btn-wpp { background: #25D366; }
         .modal-social svg { width: 22px; height: 22px; fill: white; }
@@ -233,12 +274,12 @@
             border-radius: 10px;
             margin-bottom: 15px;
             border: 1px solid #e8e5dc;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
         }
         .faq-details[open] {
             background-color: #ffffff;
             border-color: #5a6659;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
         }
         .faq-summary {
             padding: 20px 25px;
@@ -246,22 +287,22 @@
             font-weight: 500;
             color: #113A23;
             cursor: pointer;
-            list-style: none; /* Remove a seta padrão */
+            list-style: none;
             display: flex;
             justify-content: space-between;
             align-items: center;
             font-family: 'Playfair Display', serif;
         }
-        .faq-summary::-webkit-details-marker { display: none; } /* Remove seta padrão Safari/Chrome */
+        .faq-summary::-webkit-details-marker { display: none; }
         .faq-summary::after {
             content: '+';
             font-size: 1.8rem;
             color: #5a6659;
             font-weight: 300;
-            transition: transform 0.3s ease;
+            transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
         }
         .faq-details[open] .faq-summary::after {
-            transform: rotate(45deg); /* Transforma o + num x */
+            transform: rotate(45deg);
         }
         .faq-content {
             padding: 0 25px 25px 25px;
@@ -320,31 +361,11 @@
             font-weight: 300;
         }
 
-        /* ========================================== */
-        /* AJUSTES PARA TELAS MÉDIAS E CELULARES      */
-        /* ========================================== */
+        /* AJUSTES PARA TELAS MÉDIAS E CELULARES */
         @media (max-width: 992px) {
             .hero-section { height: 75vh !important; min-height: 550px !important; }
             .hero-content h1 { font-size: 2.8rem !important; margin-bottom: 20px !important; }
             
-            /* Lógica do Menu Hambúrguer (Substitui o display:none do menu antigo) */
-            .mobile-menu-toggle { display: block; position: absolute; right: 25px; top: 25px; }
-            .header-container { justify-content: center !important; }
-            
-            .main-nav {
-                display: none; /* Escondido por padrão, aberto pelo JS */
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: #113A23; /* Fundo Verde da Clínica */
-                box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-                padding: 20px 0;
-                z-index: 1000;
-            }
-            .main-nav.active { display: block; }
-            .main-nav ul { flex-direction: column; align-items: center; gap: 20px; }
-
             .sobre-content { flex-direction: column; }
             .sobre-header { flex-direction: column; gap: 20px; }
             .sobre-title { font-size: 2.2rem; }
@@ -356,8 +377,15 @@
 
             /* AJUSTE DA LOGOMARCA E HEADER NO CELULAR */
             .main-header { position: relative !important; background-color: #113A23 !important; padding: 15px 0 !important; }
+            .header-container { justify-content: center !important; }
             .logo img { max-height: 60px !important; }
-            .mobile-menu-toggle { top: 18px; right: 20px; } /* Ajuste de altura do botão no celular */
+            
+            /* Ajuste do botão hambúrguer no celular */
+            .mobile-menu-toggle { position: absolute; right: 20px; top: 18px; }
+            
+            /* Ajuste do dropdown no mobile */
+            .main-nav { right: 0; left: 0; top: 100%; border-radius: 0; box-shadow: 0 10px 20px rgba(0,0,0,0.2); padding: 20px; }
+            .main-nav ul { align-items: center; }
 
             /* AJUSTES DA HERO PARA MOSTRAR TODOS NO CELULAR */
             .hero-section { height: 50vh !important; min-height: 380px !important; }
@@ -368,7 +396,30 @@
 
             .container { padding-left: 20px !important; padding-right: 20px !important; width: 100% !important; overflow-x: hidden !important; }
             .activities-grid, .modalities-grid, .faq-grid, .journey-grid, .info-grid { display: flex !important; flex-direction: column !important; gap: 30px !important; }
-            .team-grid { flex-direction: column !important; align-items: center; }
+            
+            /* ========================================== */
+            /* SOLUÇÃO PARA A EQUIPE NO CELULAR           */
+            /* Reduz o tamanho das fotos e coloca lado a lado */
+            /* ========================================== */
+            .team-grid { 
+                flex-direction: row !important; 
+                flex-wrap: wrap !important; 
+                gap: 15px !important; 
+                justify-content: center !important; 
+            }
+            .team-card { 
+                flex: 0 0 45% !important; /* Faz caberem 2 por linha */
+                min-width: 140px !important; 
+                padding: 10px;
+            }
+            .team-card img { 
+                max-width: 140px !important; /* Limita drasticamente o tamanho do oval */
+                max-height: 180px !important; 
+                margin: 0 auto;
+            }
+            .team-card h3 { font-size: 1.1rem; margin-top: 10px; margin-bottom: 0; }
+            .team-card p.crp { font-size: 0.8rem; margin-top: 5px; }
+
             .contact-layout { display: flex !important; flex-direction: column !important; gap: 40px !important; }
             .form-row { display: flex !important; flex-direction: column !important; gap: 15px !important; }
             .section-title { font-size: 2rem !important; line-height: 1.3 !important; text-align: left !important; }
@@ -378,8 +429,6 @@
             .floating-btn.secondary { border: none; border-left: 1px solid #e0e0e0; }
             
             .plantao-container { padding: 30px 20px; }
-            
-            /* Ajuste das caixinhas de plantão no telemóvel */
             .plantao-badges { flex-direction: column; }
             .badge-item { display: flex; align-items: center; text-align: left; padding: 15px; gap: 20px; }
             .badge-icon { margin-bottom: 0; }
@@ -387,14 +436,13 @@
             
             .modal-content-flex { flex-direction: column; gap: 20px; text-align: center; }
             .modal-box { padding: 40px 20px; }
-            .modal-img-container img { max-width: 220px; border-width: 5px; }
+            .modal-img-container img { max-width: 200px !important; max-height: 200px !important; border-width: 5px; }
             .modal-text-container h2 { font-size: 2.2rem; text-align: center; }
             .modal-text-container { text-align: center; }
             .modal-desc p { text-align: left; font-size: 0.95rem; }
             .modal-social { justify-content: center; }
 
             .contact-grid-2x2 { grid-template-columns: 1fr; gap: 30px; }
-            
             .faq-summary { font-size: 1.05rem; padding: 15px 20px; text-align: left; }
         }
     </style>
@@ -402,19 +450,19 @@
 <body>
 
     <!-- MENU FLUTUANTE -->
-    <div class="floating-action-menu" data-aos="fade-up" data-aos-delay="1000">
+    <div class="floating-action-menu" data-aos="fade-up" data-aos-delay="500">
         <a href="#contato" class="floating-btn">Agendar consulta</a>
         <a href="#plantao" class="floating-btn secondary">Plantão Psicológico</a>
     </div>
 
-    <!-- CABEÇALHO COM BOTÃO HAMBÚRGUER -->
-    <header class="main-header" data-aos="fade-down" data-aos-duration="1000">
+    <!-- CABEÇALHO COM BOTÃO HAMBÚRGUER GERAL -->
+    <header class="main-header">
         <div class="header-container">
             <div class="logo">
                 <img src="img/logo-nexo-completa.png" alt="Nexo Logo" style="max-height: 90px; filter: brightness(0) invert(1);"> 
             </div>
             
-            <!-- Botão de Menu Mobile (Apenas visível no telemóvel) -->
+            <!-- Botão de Menu -->
             <button class="mobile-menu-toggle" aria-label="Abrir menu">&#9776;</button>
             
             <nav class="main-nav">
@@ -437,7 +485,8 @@
                 <img src="img/Home.JPG" alt="Equipe Nexo">
                 <div class="hero-overlay"></div>
             </div>
-            <div class="hero-content" data-aos="fade-in" data-aos-duration="2000">
+            <!-- REMOVIDO o AOS daqui. Usando a animação CSS nativa para garantir a suavidade. -->
+            <div class="hero-content">
                 <h1>Lugar de escuta e cuidado</h1>
             </div>
         </section>
@@ -503,12 +552,12 @@
                         <h3>Adriana Santos</h3>
                         <p class="crp">CRP: 19/5704</p>
                     </div>
-                    <div class="team-card" data-aos="fade-up" data-aos-delay="250" onclick="abrirModalEquipe('joselito', this)" title="Clique para ver o perfil completo">
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="200" onclick="abrirModalEquipe('joselito', this)" title="Clique para ver o perfil completo">
                         <img src="img/joselito.png" alt="Joselito Silva">
                         <h3>Joselito Júnior</h3>
                         <p class="crp">CRP: 19/005914</p>
                     </div>
-                    <div class="team-card" data-aos="fade-up" data-aos-delay="400" onclick="abrirModalEquipe('suzana', this)" title="Clique para ver o perfil completo">
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="300" onclick="abrirModalEquipe('suzana', this)" title="Clique para ver o perfil completo">
                         <img src="img/suzana.png" alt="Suzana M. de Araújo">
                         <h3>Suzana M. de Araújo</h3>
                         <p class="crp">CRP: 19/5694</p>
@@ -526,7 +575,7 @@
                         <img src="img/online.png" alt="Atendimento Online">
                         <h3>Psicoterapia Online</h3>
                     </div>
-                    <div class="modality-card" data-aos="fade-up" data-aos-delay="250">
+                    <div class="modality-card" data-aos="fade-up" data-aos-delay="200">
                         <img src="img/presencial.png" alt="Consultório Presencial">
                         <h3>Psicoterapia Presencial</h3>
                     </div>
@@ -629,77 +678,77 @@
                 <h2 class="sobre-title" data-aos="fade-up" style="margin-bottom: 40px;">Dúvidas Frequentes</h2>
                 <div class="faq-grid" style="max-width: 900px; margin: 0 auto; display: block;">
                     
-                    <details class="faq-details" data-aos="fade-up">
+                    <details class="faq-details" data-aos="fade-up" data-aos-delay="50">
                         <summary class="faq-summary">Como saber se preciso de terapia?</summary>
                         <div class="faq-content">
                             <p>Você não precisa esperar que o sofrimento se torne insuportável para buscar ajuda. A terapia pode ser um espaço para lidar com ansiedade, tristeza, conflitos nos relacionamentos, momentos de crise, mudanças de vida, dificuldades emocionais ou simplesmente para investir em autoconhecimento e desenvolvimento pessoal. Se algo tem afetado sua qualidade de vida ou faz você sentir que precisa de um espaço para ser ouvido, a terapia pode ser um importante caminho de cuidado.</p>
                         </div>
                     </details>
                     
-                    <details class="faq-details" data-aos="fade-up">
+                    <details class="faq-details" data-aos="fade-up" data-aos-delay="100">
                         <summary class="faq-summary">Como funciona a primeira sessão?</summary>
                         <div class="faq-content">
                             <p>A primeira sessão é um momento de acolhimento. Você poderá falar sobre sua história, o que motivou a busca por atendimento e quais são suas necessidades neste momento. Também será uma oportunidade para conhecer o psicólogo, compreender como funciona o processo terapêutico e esclarecer dúvidas.</p>
                         </div>
                     </details>
                     
-                    <details class="faq-details" data-aos="fade-up">
+                    <details class="faq-details" data-aos="fade-up" data-aos-delay="150">
                         <summary class="faq-summary">Quanto tempo dura uma sessão?</summary>
                         <div class="faq-content">
                             <p>As sessões de psicoterapia têm duração média de 50 minutos.</p>
                         </div>
                     </details>
                     
-                    <details class="faq-details" data-aos="fade-up">
+                    <details class="faq-details" data-aos="fade-up" data-aos-delay="200">
                         <summary class="faq-summary">Com que frequência acontecem as sessões?</summary>
                         <div class="faq-content">
                             <p>Na maioria dos casos, as sessões são semanais. Entretanto, a frequência é definida em conjunto entre psicólogo e paciente, considerando as necessidades e objetivos de cada processo.</p>
                         </div>
                     </details>
                     
-                    <details class="faq-details" data-aos="fade-up">
+                    <details class="faq-details" data-aos="fade-up" data-aos-delay="250">
                         <summary class="faq-summary">O Plantão Psicológico substitui a psicoterapia?</summary>
                         <div class="faq-content">
                             <p>Não. O Plantão Psicológico é um atendimento pontual, pensado para momentos de urgência emocional. Dependendo da necessidade identificada durante o encontro, poderá ser indicada a continuidade do cuidado por meio da psicoterapia.</p>
                         </div>
                     </details>
                     
-                    <details class="faq-details" data-aos="fade-up">
+                    <details class="faq-details" data-aos="fade-up" data-aos-delay="300">
                         <summary class="faq-summary">Como funciona a psicoterapia em grupo?</summary>
                         <div class="faq-content">
                             <p>A psicoterapia em grupo reúne pessoas que compartilham o desejo de cuidar da saúde emocional em um ambiente seguro, respeitoso e sigiloso. O grupo favorece a troca de experiências, o sentimento de pertencimento e o desenvolvimento pessoal, sempre com a mediação de psicólogos.</p>
                         </div>
                     </details>
                     
-                    <details class="faq-details" data-aos="fade-up">
+                    <details class="faq-details" data-aos="fade-up" data-aos-delay="350">
                         <summary class="faq-summary">O que é Orientação Parental?</summary>
                         <div class="faq-content">
                             <p>A Orientação Parental é um espaço destinado a pais, mães e cuidadores que desejam compreender melhor o desenvolvimento dos filhos, fortalecer os vínculos familiares e encontrar estratégias para lidar com desafios da educação e da convivência. O objetivo não é julgar a forma de educar, mas construir caminhos mais saudáveis para a relação familiar.</p>
                         </div>
                     </details>
                     
-                    <details class="faq-details" data-aos="fade-up">
+                    <details class="faq-details" data-aos="fade-up" data-aos-delay="400">
                         <summary class="faq-summary">Os atendimentos são sigilosos?</summary>
                         <div class="faq-content">
                             <p>Sim. Todo atendimento psicológico é protegido pelo sigilo profissional, conforme estabelece o Código de Ética do Psicólogo. As informações compartilhadas durante as sessões permanecem confidenciais, exceto nas situações previstas em lei.</p>
                         </div>
                     </details>
                     
-                    <details class="faq-details" data-aos="fade-up">
+                    <details class="faq-details" data-aos="fade-up" data-aos-delay="450">
                         <summary class="faq-summary">Posso fazer terapia mesmo sem um diagnóstico?</summary>
                         <div class="faq-content">
                             <p>Sim. A terapia não é destinada apenas a quem possui um diagnóstico psicológico ou psiquiátrico. Muitas pessoas procuram atendimento para compreender melhor suas emoções, desenvolver habilidades para lidar com desafios cotidianos, fortalecer relacionamentos ou buscar uma vida com mais equilíbrio e sentido.</p>
                         </div>
                     </details>
                     
-                    <details class="faq-details" data-aos="fade-up">
+                    <details class="faq-details" data-aos="fade-up" data-aos-delay="500">
                         <summary class="faq-summary">A terapia online é tão eficaz quanto a presencial?</summary>
                         <div class="faq-content">
                             <p>Sim. Quando realizada de acordo com as normas do Conselho Federal de Psicologia e em um ambiente adequado, a psicoterapia online é uma modalidade segura e eficaz, oferecendo acolhimento e qualidade técnica semelhantes ao atendimento presencial.</p>
                         </div>
                     </details>
                     
-                    <details class="faq-details" data-aos="fade-up">
+                    <details class="faq-details" data-aos="fade-up" data-aos-delay="550">
                         <summary class="faq-summary">Como agendar um atendimento?</summary>
                         <div class="faq-content">
                             <p>Você pode entrar em contato conosco pelos canais disponíveis no site ou pelo formulário. Nossa equipe irá orientar você sobre a modalidade de atendimento mais adequada, esclarecer dúvidas e ajudar no agendamento da sua primeira sessão.</p>
@@ -787,7 +836,13 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        AOS.init({ duration: 800, once: true, offset: 100 });
+        // ANIMAÇÕES SUAVIZADAS E COM DURAÇÃO AUMENTADA
+        AOS.init({ 
+            duration: 1200, 
+            easing: 'ease-in-out-sine', 
+            once: true, 
+            offset: 50 
+        });
 
         // SCRIPT NOVO: Controle do Menu Mobile Hambúrguer
         const menuToggle = document.querySelector('.mobile-menu-toggle');
