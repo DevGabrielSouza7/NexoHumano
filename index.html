@@ -89,9 +89,72 @@
             max-width: 900px; margin: 0 auto; background-color: #ffffff;
             padding: 50px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
-        .plantao-texto p { font-size: 1.05rem; line-height: 1.8; color: #4a4a4a; margin-bottom: 25px; text-align: left; }
-        .plantao-texto p:last-child { margin-bottom: 0; }
-        .plantao-texto strong { font-weight: 600; color: #2c302e; }
+        
+        /* ========================================== */
+        /* ESTILOS DO NOVO PLANTÃO PSICOLÓGICO        */
+        /* ========================================== */
+        .plantao-badges {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .badge-item {
+            flex: 1;
+            background-color: #f7f5f0;
+            padding: 20px 15px;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid #e8e5dc;
+            transition: transform 0.3s ease;
+        }
+        .badge-item:hover {
+            transform: translateY(-5px);
+            border-color: #5a6659;
+        }
+        .badge-icon {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .badge-info {
+            font-size: 0.95rem;
+            color: #4a4a4a;
+            line-height: 1.4;
+        }
+        .badge-info strong {
+            font-size: 1.1rem;
+            color: #113A23;
+            display: block;
+            margin-top: 5px;
+        }
+        .plantao-alerta {
+            background-color: #eaf0eb;
+            border-left: 4px solid #5a6659;
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            font-size: 0.95rem;
+            color: #333;
+            line-height: 1.6;
+        }
+        .btn-plantao-acao {
+            display: inline-block;
+            background-color: #113A23;
+            color: #ffffff !important;
+            padding: 16px 35px;
+            border-radius: 50px;
+            font-weight: bold;
+            text-decoration: none;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            box-shadow: 0 5px 15px rgba(17, 58, 35, 0.2);
+            transition: all 0.3s ease;
+        }
+        .btn-plantao-acao:hover {
+            background-color: #5a6659;
+            transform: scale(1.05);
+        }
 
         /* ========================================== */
         /* MODAL DOS PSICÓLOGOS                       */
@@ -221,6 +284,12 @@
             
             .plantao-container { padding: 30px 20px; }
             
+            /* Ajuste das caixinhas de plantão no telemóvel */
+            .plantao-badges { flex-direction: column; }
+            .badge-item { display: flex; align-items: center; text-align: left; padding: 15px; gap: 20px; }
+            .badge-icon { margin-bottom: 0; }
+            .badge-info strong { display: inline; margin-top: 0; }
+            
             .modal-content-flex { flex-direction: column; gap: 20px; text-align: center; }
             .modal-box { padding: 40px 20px; }
             .modal-img-container img { max-width: 220px; border-width: 5px; }
@@ -238,7 +307,7 @@
     <!-- MENU FLUTUANTE -->
     <div class="floating-action-menu" data-aos="fade-up" data-aos-delay="1000">
         <a href="#contato" class="floating-btn">Agendar consulta</a>
-        <a href="#atividades" class="floating-btn secondary">Plantão Psicológico</a>
+        <a href="#plantao" class="floating-btn secondary">Plantão Psicológico</a>
     </div>
 
     <header class="main-header" data-aos="fade-down" data-aos-duration="1000">
@@ -301,22 +370,22 @@
                     <div class="activity-card" data-aos="fade-up" data-aos-delay="100">
                         <div class="icon-circle">🧘</div> 
                         <h3>Psicoterapia<br>Individual</h3>
-                        <p>Processo controlado e acompanhado por especialistas.</p>
+                        <p>Espaço de acolhimento focado no seu autoconhecimento e saúde mental.</p>
                     </div>
                     <div class="activity-card" data-aos="fade-up" data-aos-delay="200">
                         <div class="icon-circle">🙏</div>
-                        <h3>Orientação Parental</h3>
-                        <p>Conversas em grupo para compartilhar experiências e progressos.</p>
+                        <h3>Orientação<br>Parental</h3>
+                        <p>Suporte para fortalecer os vínculos e lidar com desafios da educação familiar.</p>
                     </div>
                     <div class="activity-card" data-aos="fade-up" data-aos-delay="300">
                         <div class="icon-circle">⏱️</div>
-                        <h3>Plantão Psicológico</h3>
-                        <p>Atividades físicas monitoradas por profissionais.</p>
+                        <h3>Plantão<br>Psicológico</h3>
+                        <p>Acolhimento imediato e escuta qualificada em momentos de crise.</p>
                     </div>
                     <div class="activity-card" data-aos="fade-up" data-aos-delay="400">
                         <div class="icon-circle">🌿</div>
                         <h3>Terapia de<br>Grupo</h3>
-                        <p>Aulas teóricas e práticas de realinhamento social.</p>
+                        <p>Troca de experiências e desenvolvimento pessoal em um ambiente seguro.</p>
                     </div>
                 </div>
             </div>
@@ -413,16 +482,39 @@
         </section>
 
         <!-- 7. INFORMAÇÕES DO PLANTÃO PSICOLÓGICO -->
-        <section class="bg-beige" style="padding-top: 40px; padding-bottom: 80px;">
+        <section id="plantao" class="bg-beige" style="padding-top: 40px; padding-bottom: 80px;">
             <div class="container">
                 <div class="plantao-container" data-aos="fade-up">
-                    <h2 class="sobre-title" style="margin-bottom: 40px;">Plantão Psicológico</h2>
+                    <h2 class="sobre-title" style="margin-bottom: 30px; text-align: center;">Plantão Psicológico</h2>
                     
                     <div class="plantao-texto">
-                        <p>O <strong>Plantão Psicológico da Nexo Psicologia</strong> foi criado para oferecer um espaço de acolhimento e escuta qualificada em momentos de sofrimento emocional ou crise, proporcionando suporte psicológico de forma rápida e acessível.</p>
-                        <p>A sessão tem <strong>duração de até 50 minutos</strong> e o investimento é de <strong>R$ 30,00</strong>.</p>
-                        <p><strong>Importante:</strong> O Plantão Psicológico é um atendimento pontual, voltado ao acolhimento e à avaliação da demanda apresentada. Ele não substitui o processo de psicoterapia, mas pode ser o primeiro passo para quem necessita de apoio emocional imediato e, quando necessário, de encaminhamento para um acompanhamento psicológico contínuo.</p>
-                        <p>Cada pessoa poderá utilizar o serviço de Plantão Psicológico <strong>uma vez a cada mês</strong>, garantindo que o atendimento permaneça disponível para quem estiver vivenciando situações de urgência emocional.</p>
+                        <p style="text-align: center; font-size: 1.1rem; margin-bottom: 30px;">O <strong>Plantão Psicológico da Nexo</strong> foi criado para oferecer um espaço de acolhimento e escuta qualificada em momentos de crise, proporcionando suporte de forma rápida e acessível.</p>
+                        
+                        <!-- Badges de Destaque -->
+                        <div class="plantao-badges">
+                            <div class="badge-item">
+                                <span class="badge-icon">⏱️</span>
+                                <div class="badge-info">Duração de até<br><strong>50 minutos</strong></div>
+                            </div>
+                            <div class="badge-item">
+                                <span class="badge-icon">💲</span>
+                                <div class="badge-info">Investimento<br><strong>R$ 30,00</strong></div>
+                            </div>
+                            <div class="badge-item">
+                                <span class="badge-icon">📅</span>
+                                <div class="badge-info">Disponível<br><strong>1x ao mês</strong></div>
+                            </div>
+                        </div>
+
+                        <!-- Caixa de Alerta -->
+                        <div class="plantao-alerta">
+                            <strong>Importante:</strong> Este é um atendimento pontual voltado à avaliação da demanda. Ele não substitui o processo de psicoterapia, mas é o primeiro passo para quem necessita de apoio emocional imediato.
+                        </div>
+                        
+                        <!-- Botão de Ação -->
+                        <div style="text-align: center; margin-top: 30px;">
+                            <a href="#contato" class="btn-plantao-acao">Solicitar Plantão Agora</a>
+                        </div>
                     </div>
                 </div>
             </div>
