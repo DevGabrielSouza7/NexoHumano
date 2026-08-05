@@ -164,7 +164,6 @@
             font-size: 2rem;
             display: block;
             margin-bottom: 10px;
-            color: #5a6659;
         }
         .badge-info {
             font-size: 0.95rem;
@@ -206,94 +205,857 @@
         }
 
         /* ========================================== */
-  * LIGAÇÃO DA EQUIPE COM O SUPABASE RESTAURADA COM AS CHAVES CORRETAS!
-                 * Agora o painel volta a controlar as três fotos normalmente!
-                 * =========================================================================
-                 updateImg('.hero-image img', dbMap['hero_imagem']);
-                 updateImg('.team-grid .team-card:nth-child(1) img', dbMap['equipe_foto_1']);
-                 updateImg('.team-grid .team-card:nth-child(2) img', dbMap['equipe_foto_2']);
-                 updateImg('.team-grid .team-card:nth-child(3) img', dbMap['equipe_foto_3']);
-                 updateImg('.modalities-grid .modality-card:nth-child(1) img', dbMap['modalidades_foto_online']);
-                 updateImg('.modalities-grid .modality-card:nth-child(2) img', dbMap['modalidades_foto_presencial']);
- 
-                 aplicarEstiloImagem('.hero-image img', dbMap, 'hero_imagem');
-                 aplicarEstiloImagem('.team-grid .team-card:nth-child(1) img', dbMap, 'equipe_foto_1');
-                 aplicarEstiloImagem('.team-grid .team-card:nth-child(2) img', dbMap, 'equipe_foto_2');
-                 aplicarEstiloImagem('.team-grid .team-card:nth-child(3) img', dbMap, 'equipe_foto_3');
-                 aplicarEstiloImagem('.modalities-grid .modality-card:nth-child(1) img', dbMap, 'modalidades_foto');
-                 aplicarEstiloImagem('.modalities-grid .modality-card:nth-child(2) img', dbMap, 'modalidades_foto');
- 
-                 const fonteTitulos = dbMap['geral_fonte_titulos'];
-                 const fonteTextos = dbMap['geral_fonte_textos'];
-                 
-                 if (fonteTitulos || fonteTextos) {
-                     const style = document.createElement('style');
-                     let cssDinamico = '';
-                     if (fonteTitulos) cssDinamico += `h1, h2, h3, h4, h5, h6, .section-title { font-family: '${fonteTitulos}', serif !important; } `;
-                     if (fonteTextos) cssDinamico += `body, p, a, span, button, input, select, textarea, .crp, li, label, .btn-outline { font-family: '${fonteTextos}', sans-serif !important; } `;
-                     style.innerHTML = cssDinamico;
-                     document.head.appendChild(style);
-                 }
-                 
-             } catch (erro) {
-                 console.error('Erro na conexão dinâmica:', erro.message);
-             }
-         }
- 
-         document.addEventListener('DOMContentLoaded', carregarConteudoDinamico);
- 
-         const formularioNexo = document.querySelector('.nexo-form');
-         const whatsappInput = document.getElementById('whatsapp');
- 
-         if (whatsappInput) {
-             whatsappInput.addEventListener('input', (event) => {
-                 let valor = event.target.value;
-                 valor = valor.replace(/\D/g, ""); 
-                 if (valor.length > 0) valor = "(" + valor;
-                 if (valor.length > 3) valor = valor.slice(0, 3) + ") " + valor.slice(3);
-                 if (valor.length > 10) valor = valor.slice(0, 10) + "-" + valor.slice(10, 15);
-                 event.target.value = valor.slice(0, 15);
-             });
-         }
- 
-         if (formularioNexo) {
-             formularioNexo.addEventListener('submit', async (event) => {
-                 event.preventDefault(); 
-                 const btnSubmit = document.getElementById('btn-submit');
-                 btnSubmit.disabled = true;
-                 btnSubmit.innerText = "Processando agendamento...";
- 
-                 const dadosFormulario = {
-                     nome: document.getElementById('nome').value,
-                     whatsapp: document.getElementById('whatsapp').value,
-                     email: document.getElementById('email').value,
-                     atendimento: document.getElementById('atendimento').value,
-                     modalidade: document.getElementById('modalidade').value,
-                     mensagem: document.getElementById('mensagem').value
-                 };
- 
-                 try {
-                     const response = await fetch('https://nexo-api-s2dz.onrender.com/api/agendamentos', {
-                         method: 'POST',
-                         headers: { 'Content-Type': 'application/json' },
-                         body: JSON.stringify(dadosFormulario)
-                     });
- 
-                     if (response.ok) {
-                         alert('Agendamento enviado com sucesso! Entraremos em contato.');
-                         formularioNexo.reset(); 
-                     } else {
-                         alert('Erro ao processar o agendamento no servidor. Código: ' + response.status);
-                     }
-                 } catch (error) {
-                     console.error('Erro de conexão:', error);
-                     alert('Estamos acordando o servidor... por favor, aguarde mais alguns segundos e tente novamente.');
-                 } finally {
-                     btnSubmit.disabled = false;
-                     btnSubmit.innerText = "AGENDAR CONSULTA";
-                 }
-             });
-         }
-     </script>
+        /* EQUIPE E CARD                              */
+        /* ========================================== */
+        .team-grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; margin-top: 20px; }
+        .team-card { flex: 1; min-width: 280px; max-width: 330px; text-align: center; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .team-card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); border-radius: 10px; }
+        
+        .team-card img, .modal-img-container img {
+            object-position: top !important;
+        }
+
+        /* ========================================== */
+        /* MODAL DOS PSICÓLOGOS                       */
+        /* ========================================== */
+        .modal-overlay {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.65); z-index: 10000; align-items: center; justify-content: center;
+            opacity: 0; transition: opacity 0.3s ease; padding: 20px; backdrop-filter: blur(4px);
+        }
+        .modal-overlay.active { display: flex; opacity: 1; }
+        
+        .modal-box {
+            background: #ffffff; width: 100%; max-width: 950px; border-radius: 20px;
+            position: relative; padding: 50px 40px; box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            transform: translateY(30px); transition: transform 0.3s ease;
+            max-height: 90vh; overflow-y: auto;
+        }
+        .modal-overlay.active .modal-box { transform: translateY(0); }
+        
+        .modal-close {
+            position: absolute; top: 20px; right: 25px; font-size: 2.5rem; border: none;
+            background: transparent; cursor: pointer; color: #a0a0a0; line-height: 1; transition: color 0.2s;
+        }
+        .modal-close:hover { color: #2c302e; }
+        
+        .modal-content-flex { display: flex; gap: 40px; align-items: center; }
+        
+        .modal-img-container { flex: 1; text-align: center; }
+        .modal-img-container img {
+            width: 100%; max-width: 380px; aspect-ratio: 1/1; object-fit: cover;
+            border-radius: 50%; box-shadow: 0 10px 25px rgba(0,0,0,0.1); border: 8px solid #efebe4;
+        }
+        
+        .modal-text-container { flex: 1.4; text-align: left; }
+        .modal-text-container h2 { font-size: 2.8rem; font-family: 'Playfair Display', serif; color: #4b5860; margin-bottom: 25px; font-weight: 400; line-height: 1.1; }
+        .modal-desc p { font-size: 1.05rem; line-height: 1.8; color: #4a4a4a; margin-bottom: 15px; text-align: justify; }
+        
+        .modal-social { display: flex; gap: 15px; margin-top: 30px; justify-content: flex-start; }
+        .modal-social a {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 45px; height: 45px; border-radius: 50%; transition: transform 0.2s;
+        }
+        .modal-social a:hover { transform: scale(1.1); }
+        .btn-insta { background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%); }
+        .btn-wpp { background: #25D366; }
+        .modal-social svg { width: 22px; height: 22px; fill: white; }
+
+        /* ========================================== */
+        /* ACORDEÃO DAS DÚVIDAS FREQUENTES            */
+        /* ========================================== */
+        .faq-details {
+            background-color: #f7f5f0;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #e8e5dc;
+            transition: all 0.3s ease;
+        }
+        .faq-details[open] {
+            background-color: #ffffff;
+            border-color: #5a6659;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+        .faq-summary {
+            padding: 20px 25px;
+            font-size: 1.15rem;
+            font-weight: 500;
+            color: #113A23;
+            cursor: pointer;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Playfair Display', serif;
+        }
+        .faq-summary::-webkit-details-marker { display: none; }
+        .faq-summary::after {
+            content: '+';
+            font-size: 1.8rem;
+            color: #5a6659;
+            font-weight: 300;
+            transition: transform 0.3s ease;
+        }
+        .faq-details[open] .faq-summary::after {
+            transform: rotate(45deg);
+        }
+        .faq-content {
+            padding: 0 25px 25px 25px;
+            color: #4a4a4a;
+            line-height: 1.7;
+            font-size: 0.95rem;
+            text-align: left;
+        }
+
+        /* ========================================== */
+        /* RODAPÉ DE CONTACTOS VERDE ESCURO           */
+        /* ========================================== */
+        .info-section-dark {
+            background-color: #113A23;
+            color: #ffffff;
+            padding: 80px 0;
+        }
+        .contact-grid-2x2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px 30px;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+        .contact-item-nexo {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+        }
+        .contact-number-circle {
+            width: 75px;
+            height: 75px;
+            background-color: #5a765d; 
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-family: 'Playfair Display', serif;
+            color: #ffffff;
+            flex-shrink: 0;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        .contact-text-nexo h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin: 0 0 5px 0;
+            font-weight: 400;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+        }
+        .contact-text-nexo p {
+            margin: 0;
+            font-size: 1.05rem;
+            color: #d1d8d4;
+            font-weight: 300;
+        }
+
+        /* AJUSTES PARA MOBILE */
+        @media (max-width: 992px) {
+            .hero-section { height: 75vh !important; min-height: 550px !important; }
+            .hero-content h1 { font-size: 2.8rem !important; margin-bottom: 20px !important; }
+            
+            .mobile-menu-toggle { display: block; position: absolute; right: 25px; top: 25px; }
+            .header-container { justify-content: center !important; }
+            
+            .main-nav {
+                display: none; 
+                position: absolute;
+                top: 100%;
+                left: 0;
+                width: 100%;
+                background-color: #113A23; 
+                box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+                padding: 20px 0;
+                z-index: 1000;
+            }
+            .main-nav.active { display: block; }
+            .main-nav ul { flex-direction: column; align-items: center; gap: 20px; }
+
+            .sobre-content { flex-direction: column; }
+            .sobre-header { flex-direction: column; gap: 20px; }
+            .sobre-title { font-size: 2.2rem; }
+        }
+
+        @media (max-width: 768px) {
+            section { scroll-margin-top: 20px; }
+            .main-header { position: relative !important; background-color: #113A23 !important; padding: 15px 0 !important; }
+            .header-container { justify-content: center !important; }
+            .logo img { max-height: 60px !important; }
+            .mobile-menu-toggle { position: absolute; right: 20px; top: 18px; }
+            .main-nav { right: 0; left: 0; top: 100%; border-radius: 0; box-shadow: 0 10px 20px rgba(0,0,0,0.2); padding: 20px; }
+            .main-nav ul { align-items: center; }
+            .hero-section { height: 50vh !important; min-height: 380px !important; }
+            .hero-image img { object-position: center 15% !important; }
+            .sobre-image img { min-height: 280px !important; height: 280px !important; }
+            .container { padding-left: 20px !important; padding-right: 20px !important; width: 100% !important; overflow-x: hidden !important; }
+            .activities-grid, .modalities-grid, .faq-grid, .journey-grid, .info-grid { display: flex !important; flex-direction: column !important; gap: 30px !important; }
+            
+            /* EQUIPE LADO A LADO NO CELULAR */
+            .team-grid { 
+                flex-direction: row !important; 
+                flex-wrap: wrap !important; 
+                gap: 15px !important; 
+                justify-content: center !important; 
+            }
+            .team-card { 
+                flex: 0 0 45% !important; 
+                min-width: 140px !important; 
+                padding: 10px;
+            }
+            .team-card img { 
+                max-width: 140px !important; 
+                max-height: 180px !important; 
+                margin: 0 auto;
+            }
+            .team-card h3 { font-size: 1.1rem; margin-top: 10px; margin-bottom: 0; }
+            .team-card p.crp { font-size: 0.8rem; margin-top: 5px; }
+
+            .contact-layout { display: flex !important; flex-direction: column !important; gap: 40px !important; }
+            .form-row { display: flex !important; flex-direction: column !important; gap: 15px !important; }
+            .section-title { font-size: 2rem !important; line-height: 1.3 !important; text-align: left !important; }
+            .floating-action-menu { bottom: 0; right: 0; left: 0; flex-direction: row; gap: 0; }
+            .floating-btn { border-radius: 0; flex: 1; padding: 16px 10px; font-size: 0.75rem; box-shadow: 0 -2px 10px rgba(0,0,0,0.1); }
+            .floating-btn.secondary { border: none; border-left: 1px solid #e0e0e0; }
+            .plantao-container { padding: 30px 20px; }
+            .plantao-badges { flex-direction: column; }
+            .badge-item { display: flex; align-items: center; text-align: left; padding: 15px; gap: 20px; }
+            .badge-icon { margin-bottom: 0; }
+            .badge-info strong { display: inline; margin-top: 0; }
+            .modal-content-flex { flex-direction: column; gap: 20px; text-align: center; }
+            .modal-box { padding: 40px 20px; }
+            .modal-img-container img { max-width: 220px; border-width: 5px; }
+            .modal-text-container h2 { font-size: 2.2rem; text-align: center; }
+            .modal-text-container { text-align: center; }
+            .modal-desc p { text-align: left; font-size: 0.95rem; }
+            .modal-social { justify-content: center; }
+            .contact-grid-2x2 { grid-template-columns: 1fr; gap: 30px; }
+            .faq-summary { font-size: 1.05rem; padding: 15px 20px; text-align: left; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- MENU FLUTUANTE -->
+    <div class="floating-action-menu" data-aos="fade-up" data-aos-delay="1000">
+        <a href="#contato" class="floating-btn">Agendar consulta</a>
+        <a href="#plantao" class="floating-btn secondary">Plantão Psicológico</a>
+    </div>
+
+    <!-- CABEÇALHO -->
+    <header class="main-header" data-aos="fade-down" data-aos-duration="1000">
+        <div class="header-container">
+            <div class="logo">
+                <img src="img/logo-nexo-completa.png" alt="Nexo Logo" style="max-height: 90px; filter: brightness(0) invert(1);"> 
+            </div>
+            
+            <button class="mobile-menu-toggle" aria-label="Abrir menu">&#9776;</button>
+            
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#inicio">Home</a></li>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#atividades">Serviços</a></li>
+                    <li><a href="#equipe">Equipe</a></li>
+                    <li><a href="#duvidas">Dúvidas</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- 1. HERO SECTION -->
+        <section id="inicio" class="hero-section">
+            <div class="hero-image">
+                <img src="img/Home.JPG" alt="Equipe Nexo">
+                <div class="hero-overlay"></div>
+            </div>
+            <div class="hero-content" data-aos="fade-in" data-aos-duration="2000">
+                <h1>Lugar de escuta e cuidado</h1>
+            </div>
+        </section>
+
+        <!-- 2. SECÇÃO SOBRE -->
+        <section id="sobre" class="bg-beige">
+            <div class="container">
+                <div class="sobre-header" data-aos="fade-up">
+                    <h2 class="sobre-title"><strong>Quem Somos</strong><br></h2>
+                    <img src="img/logo-nexo-completa.png" alt="Nexo Icon" style="max-height: 60px; opacity: 0.7;">
+                </div>
+                <div class="sobre-content">
+                    <div class="sobre-image" data-aos="fade-right">
+                        <img src="img/QuemSomos.JPG" alt="Sobre a Clínica"> 
+                    </div>
+                    <div class="sobre-text" data-aos="fade-left">
+                        <p>A <strong> Nexo Psicologia Humanista </strong> nasce da coesão entre três psicólogos, que, apesar de percorrerem diferentes caminhos dentro da Psicologia, compartilham uma mesma forma de compreender o ser humano e o cuidado em saúde mental.</p>
+                        <p> Nossa união é construída a partir de valores que nos aproximam: a escuta genuína, o respeito à singularidade, a presença e a crença no potencial de cada pessoa para construir novos sentidos e possibilidades para sua própria vida.</p>
+                        <p> É dessa conexão que surge a <strong> Nexo. </strong> Nossa prática reúne diferentes perspectivas da Psicologia Humanista. São caminhos distintos, mas que se encontram em um propósito comum: oferecer um atendimento ético, acolhedor e verdadeiramente humano. Acreditamos que é justamente naquilo que nos une que nossa força se encontra. A Nexo representa esse vínculo, essa coesão e a escolha de caminhar juntos, construindo um espaço onde diferentes olhares podem coexistir sem perder aquilo que nos torna um só propósito.
+                        <strong> Nexo é conexão. É o que nos une. É o que nos move. </strong>
+                        E é desse encontro que nasce o nosso compromisso com você.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3. ATIVIDADES -->
+        <section id="atividades" class="bg-white">
+            <div class="container">
+                <h2 class="section-title" data-aos="fade-up">Serviços</h2>
+                <div class="activities-grid" style="text-align: center;">
+                    <div class="activity-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="icon-circle">🧘</div> 
+                        <h3>Psicoterapia<br>Individual</h3>
+                        <p>Espaço de acolhimento focado no seu autoconhecimento e saúde mental.</p>
+                    </div>
+                    <div class="activity-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="icon-circle">🙏</div>
+                        <h3>Orientação<br>Parental</h3>
+                        <p>Suporte para fortalecer os vínculos e lidar com desafios da educação familiar.</p>
+                    </div>
+                    <div class="activity-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="icon-circle">⏱️</div>
+                        <h3>Plantão<br>Psicológico</h3>
+                        <p>Acolhimento imediato e escuta qualificada em momentos de crise.</p>
+                    </div>
+                    <div class="activity-card" data-aos="fade-up" data-aos-delay="400">
+                        <div class="icon-circle">🌿</div>
+                        <h3>Terapia de<br>Grupo</h3>
+                        <p>Troca de experiências e desenvolvimento pessoal em um ambiente seguro.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. EQUIPE -->
+        <section id="equipe" class="bg-beige section-relative" style="padding-top: 80px; padding-bottom: 80px;">
+            <div class="container">
+                <h2 class="section-title" data-aos="fade-right">Equipe</h2>
+                <div class="team-grid">
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="100" onclick="abrirModalEquipe('adriana', this)" title="Clique para ver o perfil completo">
+                        <img src="img/adriana.png" alt="Adriana Santos">
+                        <h3>Adriana Santos</h3>
+                        <p class="crp">CRP: 19/5704</p>
+                    </div>
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="250" onclick="abrirModalEquipe('joselito', this)" title="Clique para ver o perfil completo">
+                        <img src="img/joselito.png" alt="Joselito Silva">
+                        <h3>Joselito Júnior</h3>
+                        <p class="crp">CRP: 19/005914</p>
+                    </div>
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="400" onclick="abrirModalEquipe('suzana', this)" title="Clique para ver o perfil completo">
+                        <img src="img/suzana.png" alt="Suzana M. de Araújo">
+                        <h3>Suzana M. de Araújo</h3>
+                        <p class="crp">CRP: 19/5694</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. MODALIDADES -->
+        <section id="modalidades" class="bg-white">
+            <div class="container">
+                <h2 class="section-title" data-aos="fade-up">Modalidades de atendimento<br></h2>
+                <div class="modalities-grid">
+                    <div class="modality-card" data-aos="fade-up" data-aos-delay="100">
+                        <img src="img/online.png" alt="Atendimento Online">
+                        <h3>Psicoterapia Online</h3>
+                    </div>
+                    <div class="modality-card" data-aos="fade-up" data-aos-delay="250">
+                        <img src="img/presencial.png" alt="Consultório Presencial">
+                        <h3>Psicoterapia Presencial</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. TEXTO E FORMULÁRIO -->
+        <section id="contato" class="bg-beige">
+            <div class="container contact-layout">
+                <div class="contact-text" data-aos="fade-right">
+                    <h2 class="sobre-title">Por que fazer<br>terapia?</h2>
+                    <p style="font-size: 1.1rem; line-height: 1.6; margin-top: 20px;">A psicoterapia é um espaço de escuta, acolhimento e autoconhecimento. Por meio dela, é possível compreender emoções, desenvolver recursos para lidar com desafios e fortalecer a saúde mental.</p>
+                </div>
+                <div class="contact-form-container" data-aos="fade-left">
+                    <form class="nexo-form">
+                        <div class="form-group">
+                            <label>Nome</label>
+                            <input type="text" id="nome" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Número do WhatsApp</label>
+                            <input type="tel" id="whatsapp" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="email" id="email" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group" style="flex: 1;">
+                                <label>Atendimento</label>
+                                <select id="atendimento" required>
+                                    <option value="" disabled selected>Selecione</option>
+                                    <option value="individual">Individual</option>
+                                    <option value="parental">Parental</option>
+                                </select>
+                            </div>
+                            <div class="form-group" style="flex: 1;">
+                                <label>Modalidade</label>
+                                <select id="modalidade" required>
+                                    <option value="" disabled selected>Selecione</option>
+                                    <option value="presencial">Presencial</option>
+                                    <option value="online">Online</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Mensagem</label>
+                            <textarea id="mensagem" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary" id="btn-submit" style="width: 100%; background-color: #5a6659; border:none; padding:15px; color:white; font-weight:bold; cursor:pointer;">AGENDAR CONSULTA</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- 7. INFORMAÇÕES DO PLANTÃO PSICOLÓGICO -->
+        <section id="plantao" class="bg-beige" style="padding-top: 40px; padding-bottom: 80px;">
+            <div class="container">
+                <div class="plantao-container" data-aos="fade-up">
+                    <h2 class="sobre-title" style="margin-bottom: 30px;">Plantão Psicológico</h2>
+                    
+                    <div class="plantao-texto">
+                        <p style="text-align: left; font-size: 1.1rem; margin-bottom: 30px;">O <strong>Plantão Psicológico da Nexo</strong> foi criado para oferecer um espaço de acolhimento e escuta qualificada em momentos de crise, proporcionando suporte de forma rápida e acessível.</p>
+                        
+                        <div class="plantao-badges">
+                            <div class="badge-item">
+                                <span class="badge-icon">⏱️</span>
+                                <div class="badge-info">Duração de até<br><strong>50 minutos</strong></div>
+                            </div>
+                            <div class="badge-item">
+                                <span class="badge-icon">💲</span>
+                                <div class="badge-info">Valor social<br><strong>R$ 30,00</strong></div>
+                            </div>
+                            <div class="badge-item">
+                                <span class="badge-icon">📅</span>
+                                <div class="badge-info">Disponível<br><strong>a cada 30 dias</strong></div>
+                            </div>
+                        </div>
+
+                        <div class="plantao-alerta">
+                            <strong>Importante:</strong> Este é um atendimento pontual voltado à avaliação da demanda. Ele não substitui o processo de psicoterapia, mas é o primeiro passo para quem necessita de apoio emocional imediato.<br><br>
+                            <strong>Regra de utilização:</strong> O plantão poderá ser utilizado por cada pessoa, respeitando-se o intervalo mínimo de 30 dias.
+                        </div>
+                        
+                        <div style="text-align: center; margin-top: 30px;">
+                            <a href="#contato" class="btn-plantao-acao">Solicitar Plantão Agora</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 8. DÚVIDAS FREQUENTES -->
+        <section id="duvidas" class="bg-white section-relative" style="padding-bottom: 80px;">
+            <div class="container">
+                <h2 class="sobre-title" data-aos="fade-up" style="margin-bottom: 40px;">Dúvidas Frequentes</h2>
+                <div class="faq-grid" style="max-width: 900px; margin: 0 auto; display: block;">
+                    
+                    <details class="faq-details" data-aos="fade-up">
+                        <summary class="faq-summary">Como saber se preciso de terapia?</summary>
+                        <div class="faq-content">
+                            <p>Você não precisa esperar que o sofrimento se torne insuportável para buscar ajuda. A terapia pode ser um espaço para lidar com ansiedade, tristeza, conflitos nos relacionamentos, momentos de crise, mudanças de vida, dificuldades emocionais ou simplesmente para investir em autoconhecimento e desenvolvimento pessoal. Se algo tem afetado sua qualidade de vida ou faz você sentir que precisa de um espaço para ser ouvido, a terapia pode ser um importante caminho de cuidado.</p>
+                        </div>
+                    </details>
+                    
+                    <details class="faq-details" data-aos="fade-up">
+                        <summary class="faq-summary">Como funciona a primeira sessão?</summary>
+                        <div class="faq-content">
+                            <p>A primeira sessão é um momento de acolhimento. Você poderá falar sobre sua história, o que motivou a busca por atendimento e quais são suas necessidades neste momento. Também será uma oportunidade para conhecer o psicólogo, compreender como funciona o processo terapêutico e esclarecer dúvidas.</p>
+                        </div>
+                    </details>
+                    
+                    <details class="faq-details" data-aos="fade-up">
+                        <summary class="faq-summary">Quanto tempo dura uma sessão?</summary>
+                        <div class="faq-content">
+                            <p>As sessões de psicoterapia têm duração média de 50 minutos.</p>
+                        </div>
+                    </details>
+                    
+                    <details class="faq-details" data-aos="fade-up">
+                        <summary class="faq-summary">Com que frequência acontecem as sessões?</summary>
+                        <div class="faq-content">
+                            <p>Na maioria dos casos, as sessões são semanais. Entretanto, a frequência é definida em conjunto entre psicólogo e paciente, considerando as necessidades e objetivos de cada processo.</p>
+                        </div>
+                    </details>
+                    
+                    <details class="faq-details" data-aos="fade-up">
+                        <summary class="faq-summary">O Plantão Psicológico substitui a psicoterapia?</summary>
+                        <div class="faq-content">
+                            <p>Não. O Plantão Psicológico é um atendimento pontual, pensado para momentos de urgência emocional. Dependendo da necessidade identificada durante o encontro, poderá ser indicada a continuidade do cuidado por meio da psicoterapia.</p>
+                        </div>
+                    </details>
+                    
+                    <details class="faq-details" data-aos="fade-up">
+                        <summary class="faq-summary">Como funciona a psicoterapia em grupo?</summary>
+                        <div class="faq-content">
+                            <p>A psicoterapia em grupo reúne pessoas que compartilham o desejo de cuidar da saúde emocional em um ambiente seguro, respeitoso e sigiloso. O grupo favorece a troca de experiências, o sentimento de pertencimento e o desenvolvimento pessoal, sempre com a mediação de psicólogos.</p>
+                        </div>
+                    </details>
+                    
+                    <details class="faq-details" data-aos="fade-up">
+                        <summary class="faq-summary">O que é Orientação Parental?</summary>
+                        <div class="faq-content">
+                            <p>A Orientação Parental é um espaço destinado a pais, mães e cuidadores que desejam compreender melhor o desenvolvimento dos filhos, fortalecer os vínculos familiares e encontrar estratégias para lidar com desafios da educação e da convivência. O objetivo não é julgar a forma de educar, mas construir caminhos mais saudáveis para a relação familiar.</p>
+                        </div>
+                    </details>
+                    
+                    <details class="faq-details" data-aos="fade-up">
+                        <summary class="faq-summary">Os atendimentos são sigilosos?</summary>
+                        <div class="faq-content">
+                            <p>Sim. Todo atendimento psicológico é protegido pelo sigilo profissional, conforme estabelece o Código de Ética do Psicólogo. As informações compartilhadas durante as sessões permanecem confidenciais, exceto nas situações previstas em lei.</p>
+                        </div>
+                    </details>
+                    
+                    <details class="faq-details" data-aos="fade-up">
+                        <summary class="faq-summary">Posso fazer terapia mesmo sem um diagnóstico?</summary>
+                        <div class="faq-content">
+                            <p>Sim. A terapia não é destinada apenas a quem possui um diagnóstico psicológico ou psiquiátrico. Muitas pessoas procuram atendimento para compreender melhor suas emoções, desenvolver habilidades para lidar com desafios cotidianos, fortalecer relacionamentos ou buscar uma vida com mais equilíbrio e sentido.</p>
+                        </div>
+                    </details>
+                    
+                    <details class="faq-details" data-aos="fade-up">
+                        <summary class="faq-summary">A terapia online é tão eficaz quanto a presencial?</summary>
+                        <div class="faq-content">
+                            <p>Sim. Quando realizada de acordo com as normas do Conselho Federal de Psicologia e em um ambiente adequado, a psicoterapia online é uma modalidade segura e eficaz, oferecendo acolhimento e qualidade técnica semelhantes ao atendimento presencial.</p>
+                        </div>
+                    </details>
+                    
+                    <details class="faq-details" data-aos="fade-up">
+                        <summary class="faq-summary">Como agendar um atendimento?</summary>
+                        <div class="faq-content">
+                            <p>Você pode entrar em contato conosco pelos canais disponíveis no site ou pelo formulário. Nossa equipe irá orientar você sobre a modalidade de atendimento mais adequada, esclarecer dúvidas e ajudar no agendamento da sua primeira sessão.</p>
+                        </div>
+                    </details>
+                    
+                </div>
+            </div>
+        </section>
+
+        <!-- 9. INFORMAÇÕES DE CONTATO -->
+        <section class="info-section-dark">
+            <div class="container">
+                <div class="contact-grid-2x2">
+                    
+                    <div class="contact-item-nexo" data-aos="fade-up" data-aos-delay="100">
+                        <div class="contact-number-circle">1</div>
+                        <div class="contact-text-nexo">
+                            <h4>Email</h4>
+                            <p>nexopsicologia@gmail.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item-nexo" data-aos="fade-up" data-aos-delay="200">
+                        <div class="contact-number-circle">3</div>
+                        <div class="contact-text-nexo">
+                            <h4>WhatsApp</h4>
+                            <p>00 0000-0000</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item-nexo" data-aos="fade-up" data-aos-delay="300">
+                        <div class="contact-number-circle">2</div>
+                        <div class="contact-text-nexo">
+                            <h4>Telefone</h4>
+                            <p>00 0000-0000</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item-nexo" data-aos="fade-up" data-aos-delay="400">
+                        <div class="contact-number-circle">4</div>
+                        <div class="contact-text-nexo">
+                            <h4>Instagram</h4>
+                            <p>@nexohumanista</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="simple-footer bg-white" style="padding-bottom: 80px;">
+        <div class="container" style="padding: 30px 0; text-align: center;">
+            <p>&copy; 2026 Nexo Psicologia Humanista. Todos os direitos reservados.</p>
+            <p class="developer-credit">
+                Desenvolvido por <a href="https://www.linkedin.com/in/gabriel-souza-3b80a3271" target="_blank" rel="noopener noreferrer" style="color: #5a6659; text-decoration: none; font-weight: bold;">Gabriel Souza</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- ESTRUTURA DO MODAL DA EQUIPE -->
+    <div id="modal-equipe" class="modal-overlay">
+        <div class="modal-box">
+            <button class="modal-close" onclick="fecharModalEquipe()">&times;</button>
+            <div class="modal-content-flex">
+                <div class="modal-img-container">
+                    <img id="modal-img" src="" alt="Foto Psicólogo">
+                </div>
+                <div class="modal-text-container">
+                    <h2 id="modal-nome">Nome</h2>
+                    <div id="modal-desc" class="modal-desc"></div>
+                    
+                    <div class="modal-social">
+                        <a href="#" id="modal-insta" target="_blank" class="btn-insta" title="Instagram">
+                            <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts do Formulário, Supabase e AOS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true, offset: 100 });
+
+        const menuToggle = document.querySelector('.mobile-menu-toggle');
+        const mainNav = document.querySelector('.main-nav');
+        const navLinks = document.querySelectorAll('.main-nav ul li a');
+
+        if (menuToggle && mainNav) {
+            menuToggle.addEventListener('click', () => {
+                mainNav.classList.toggle('active');
+            });
+
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mainNav.classList.remove('active');
+                });
+            });
+        }
+
+        const dadosEquipe = {
+            'adriana': {
+                nome: 'Adriana Santos',
+                imgModal: 'img/PaginaAdriana.JPG',
+                descricao: `
+                    <p>Sou psicóloga Clínica (CRP 19/5704);<br>
+                    Formação e Mentoria para Atuação aos Sofrimentos Extremos;<br>
+                    Pós Graduação em Suicidologia;<br>
+                    Pós graduação em Psicologia Humanista com Abordagem Centrada na Pessoa;</p>
+                    <p>Minha abordagem terapêutica é pautada no acolhimento e na escuta ativa, auxiliando meus pacientes no autoconhecimento e na construção de relações mais saudáveis.</p>
+                `,
+                insta: 'https://www.instagram.com/psi.adrianastoss',
+                wpp: 'https://wa.me/557996877676'
+            },
+            'joselito': {
+                nome: 'Joselito Júnior',
+                imgModal: 'img/PaginaJoselito.JPG',
+                descricao: `
+                    <p>Sou psicólogo Clínico (CRP 19/005914);<br>
+                    Especialista em Gestalt-Terapia;<br>
+                    Pós-graduado em Psicologia Sexual.</p>
+                    <p>Minha prática clínica é pautada no acolhimento, na escuta qualificada e na construção de uma relação terapêutica ética e autêntica. Atuo no manejo de demandas envolvendo sexualidade, relacionamentos, questões de identidade e vivências da população negra e da comunidade LGBTQIAPN+, auxiliando cada pessoa no desenvolvimento do autoconhecimento, da autonomia e de formas mais saudáveis de se relacionar consigo, com o outro e com o mundo.</p>
+                `,
+                insta: 'https://www.instagram.com/joselitosilva.psi',
+                wpp: 'https://wa.me/5579996018224'
+            },
+            'suzana': {
+                nome: 'Suzana M. de Araújo',
+                imgModal: 'img/PaginaSuzana.JPG',
+                descricao: `
+                    <p>Sou psicóloga Clínica (CRP 19/5694);<br>
+                    Pós-graduada em Psicologia Hospitalar e da Saúde.</p>
+                    <p>Minha atuação está voltada para questões relacionadas à ansiedade, à depressão e a diferentes formas de sofrimento emocional. Meu trabalho é pautado pela ética, pelo respeito e pela construção de um espaço seguro de acolhimento e escuta, valorizando a singularidade de cada pessoa.</p>
+                    <p>Será um privilégio caminhar ao seu lado nesse processo.</p>
+                `,
+                insta: 'https://www.instagram.com/psi.suzanamelo',
+                wpp: 'https://wa.me/5579999387341'
+            }
+        };
+
+        function abrirModalEquipe(id, elementoCard) {
+            const modal = document.getElementById('modal-equipe');
+            
+            let fotoParaModal = '';
+            if (dadosEquipe[id] && dadosEquipe[id].imgModal) {
+                fotoParaModal = dadosEquipe[id].imgModal;
+            } else if (elementoCard) {
+                fotoParaModal = elementoCard.querySelector('img').src;
+            }
+
+            document.getElementById('modal-img').src = fotoParaModal;
+            document.getElementById('modal-nome').innerHTML = dadosEquipe[id].nome;
+            document.getElementById('modal-desc').innerHTML = dadosEquipe[id].descricao;
+            document.getElementById('modal-insta').href = dadosEquipe[id].insta;
+            document.getElementById('modal-wpp').href = dadosEquipe[id].wpp;
+
+            modal.style.display = 'flex';
+            setTimeout(() => modal.classList.add('active'), 10);
+        }
+
+        function fecharModalEquipe() {
+            const modal = document.getElementById('modal-equipe');
+            modal.classList.remove('active');
+            setTimeout(() => modal.style.display = 'none', 300);
+        }
+
+        window.addEventListener('click', function(e) {
+            const modal = document.getElementById('modal-equipe');
+            if (e.target === modal) {
+                fecharModalEquipe();
+            }
+        });
+
+        const supabaseUrl = 'https://aywlhxvljukjsmcspplc.supabase.co'; 
+        const supabaseKey = 'sb_publishable_EEuGEXGAAMSTKXS94LTihA_Q9QWrDaT';
+        const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+        async function carregarConteudoDinamico() {
+            try {
+                const { data, error } = await supabaseClient.from('conteudo_site').select('*');
+                if (error) throw error;
+
+                const dbMap = {};
+                data.forEach(item => { dbMap[item.secao + "_" + item.chave] = item.valor; });
+
+                if (dbMap['hero_titulo']) document.querySelector('.hero-content h1').innerHTML = dbMap['hero_titulo'];
+                
+                if (dbMap['terapia_titulo']) document.querySelector('.contact-text h2').innerHTML = dbMap['terapia_titulo'];
+                if (dbMap['terapia_texto']) document.querySelector('.contact-text p').innerHTML = dbMap['terapia_texto'];
+
+                if (dbMap['geral_btn_flutuante_1']) {
+                    const btn1 = document.querySelector('.floating-btn:not(.secondary)');
+                    if (btn1) btn1.innerText = dbMap['geral_btn_flutuante_1'];
+                }
+                if (dbMap['geral_btn_flutuante_2']) {
+                    const btn2 = document.querySelector('.floating-btn.secondary');
+                    if (btn2) btn2.innerText = dbMap['geral_btn_flutuante_2'];
+                }
+                if (dbMap['sobre_texto_1']) {
+                    const sobreTextos = document.querySelectorAll('.sobre-text p');
+                    if (sobreTextos.length > 0) sobreTextos[0].innerHTML = dbMap['sobre_texto_1']; 
+                }
+
+                function updateImg(selector, valor) {
+                    const img = document.querySelector(selector);
+                    if (img && valor && valor.length > 5 && valor !== 'https://via.placeholder.com/300') {
+                        img.src = valor;
+                    }
+                }
+
+                function aplicarEstiloImagem(selector, dbMap, baseKey) {
+                    const img = document.querySelector(selector);
+                    if (!img) return;
+
+                    const width = dbMap[baseKey + '_width'];
+                    const height = dbMap[baseKey + '_height'];
+                    const fit = dbMap[baseKey + '_fit'];
+                    const position = dbMap[baseKey + '_position'];
+
+                    if (width) img.style.width = width;
+                    if (height) img.style.height = height;
+                    if (fit) img.style.objectFit = fit;
+                    if (position) img.style.objectPosition = position;
+                }
+
+                // =========================================================================
+                // LIGAÇÃO DA EQUIPE COM O SUPABASE RESTAURADA COM AS CHAVES CORRETAS!
+                // Agora o painel volta a controlar as três fotos normalmente!
+                // =========================================================================
+                updateImg('.hero-image img', dbMap['hero_imagem']);
+                updateImg('.team-grid .team-card:nth-child(1) img', dbMap['equipe_foto_1']);
+                updateImg('.team-grid .team-card:nth-child(2) img', dbMap['equipe_foto_2']);
+                updateImg('.team-grid .team-card:nth-child(3) img', dbMap['equipe_foto_3']);
+                updateImg('.modalities-grid .modality-card:nth-child(1) img', dbMap['modalidades_foto_online']);
+                updateImg('.modalities-grid .modality-card:nth-child(2) img', dbMap['modalidades_foto_presencial']);
+
+                aplicarEstiloImagem('.hero-image img', dbMap, 'hero_imagem');
+                aplicarEstiloImagem('.team-grid .team-card:nth-child(1) img', dbMap, 'equipe_foto_1');
+                aplicarEstiloImagem('.team-grid .team-card:nth-child(2) img', dbMap, 'equipe_foto_2');
+                aplicarEstiloImagem('.team-grid .team-card:nth-child(3) img', dbMap, 'equipe_foto_3');
+                aplicarEstiloImagem('.modalities-grid .modality-card:nth-child(1) img', dbMap, 'modalidades_foto');
+                aplicarEstiloImagem('.modalities-grid .modality-card:nth-child(2) img', dbMap, 'modalidades_foto');
+
+                const fonteTitulos = dbMap['geral_fonte_titulos'];
+                const fonteTextos = dbMap['geral_fonte_textos'];
+                
+                if (fonteTitulos || fonteTextos) {
+                    const style = document.createElement('style');
+                    let cssDinamico = '';
+                    if (fonteTitulos) cssDinamico += `h1, h2, h3, h4, h5, h6, .section-title { font-family: '${fonteTitulos}', serif !important; } `;
+                    if (fonteTextos) cssDinamico += `body, p, a, span, button, input, select, textarea, .crp, li, label, .btn-outline { font-family: '${fonteTextos}', sans-serif !important; } `;
+                    style.innerHTML = cssDinamico;
+                    document.head.appendChild(style);
+                }
+                
+            } catch (erro) {
+                console.error('Erro na conexão dinâmica:', erro.message);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', carregarConteudoDinamico);
+
+        const formularioNexo = document.querySelector('.nexo-form');
+        const whatsappInput = document.getElementById('whatsapp');
+
+        if (whatsappInput) {
+            whatsappInput.addEventListener('input', (event) => {
+                let valor = event.target.value;
+                valor = valor.replace(/\D/g, ""); 
+                if (valor.length > 0) valor = "(" + valor;
+                if (valor.length > 3) valor = valor.slice(0, 3) + ") " + valor.slice(3);
+                if (valor.length > 10) valor = valor.slice(0, 10) + "-" + valor.slice(10, 15);
+                event.target.value = valor.slice(0, 15);
+            });
+        }
+
+        if (formularioNexo) {
+            formularioNexo.addEventListener('submit', async (event) => {
+                event.preventDefault(); 
+                const btnSubmit = document.getElementById('btn-submit');
+                btnSubmit.disabled = true;
+                btnSubmit.innerText = "Processando agendamento...";
+
+                const dadosFormulario = {
+                    nome: document.getElementById('nome').value,
+                    whatsapp: document.getElementById('whatsapp').value,
+                    email: document.getElementById('email').value,
+                    atendimento: document.getElementById('atendimento').value,
+                    modalidade: document.getElementById('modalidade').value,
+                    mensagem: document.getElementById('mensagem').value
+                };
+
+                try {
+                    const response = await fetch('https://nexo-api-s2dz.onrender.com/api/agendamentos', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(dadosFormulario)
+                    });
+
+                    if (response.ok) {
+                        alert('Agendamento enviado com sucesso! Entraremos em contato.');
+                        formularioNexo.reset(); 
+                    } else {
+                        alert('Erro ao processar o agendamento no servidor. Código: ' + response.status);
+                    }
+                } catch (error) {
+                    console.error('Erro de conexão:', error);
+                    alert('Estamos acordando o servidor... por favor, aguarde mais alguns segundos e tente novamente.');
+                } finally {
+                    btnSubmit.disabled = false;
+                    btnSubmit.innerText = "AGENDAR CONSULTA";
+                }
+            });
+        }
+    </script>
 </body>
 </html>
