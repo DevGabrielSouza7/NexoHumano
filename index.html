@@ -164,6 +164,7 @@
             font-size: 2rem;
             display: block;
             margin-bottom: 10px;
+            color: #5a6659;
         }
         .badge-info {
             font-size: 0.95rem;
@@ -407,7 +408,7 @@
             .container { padding-left: 20px !important; padding-right: 20px !important; width: 100% !important; overflow-x: hidden !important; }
             .activities-grid, .modalities-grid, .faq-grid, .journey-grid, .info-grid { display: flex !important; flex-direction: column !important; gap: 30px !important; }
             
-            /* EQUIPE LADO A LADO NO CELULAR */
+            /* EQUIPE LADO A LADO NO CELULAR COM QUALIDADE CORRIGIDA */
             .team-grid { 
                 flex-direction: row !important; 
                 flex-wrap: wrap !important; 
@@ -420,8 +421,8 @@
                 padding: 10px;
             }
             .team-card img { 
-                width: 130px !important;
-                height: 130px !important;
+                max-width: 140px !important; 
+                height: 140px !important; /* Força o formato perfeitamente quadrado antes do border-radius */
                 margin: 0 auto 10px auto !important;
             }
             .team-card h3 { font-size: 1.1rem; margin-top: 10px; margin-bottom: 0; }
@@ -465,7 +466,6 @@
                 <img src="img/logo-nexo-completa.png" alt="Nexo Logo" style="max-height: 90px; filter: brightness(0) invert(1);"> 
             </div>
             
-            <!-- Botão Hambúrguer Mobile -->
             <button class="mobile-menu-toggle" aria-label="Abrir menu">&#9776;</button>
             
             <nav class="main-nav">
@@ -635,10 +635,10 @@
         </section>
 
         <!-- 7. INFORMAÇÕES DO PLANTÃO PSICOLÓGICO -->
-        <section id="plantao" class="bg-beige" style="padding-top: 40px; padding-bottom: 80px;">
-            <div class="container">
+        <section id="plantao" class="bg-beige" style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 40px 0; scroll-margin-top: 0;">
+            <div class="container" style="width: 100%;">
                 <div class="plantao-container" data-aos="fade-up">
-                    <h2 class="sobre-title" style="margin-bottom: 30px;">Plantão Psicológico</h2>
+                    <h2 class="sobre-title" style="margin-bottom: 30px; text-align: center;">Plantão Psicológico</h2>
                     
                     <div class="plantao-texto">
                         <p style="text-align: left; font-size: 1.1rem; margin-bottom: 30px;">O <strong>Plantão Psicológico da Nexo</strong> foi criado para oferecer um espaço de acolhimento e escuta qualificada em momentos de crise, proporcionando suporte de forma rápida e acessível.</p>
@@ -840,7 +840,6 @@
     <script>
         AOS.init({ duration: 800, once: true, offset: 100 });
 
-        // SCRIPT: Menu Mobile Hambúrguer
         const menuToggle = document.querySelector('.mobile-menu-toggle');
         const mainNav = document.querySelector('.main-nav');
         const navLinks = document.querySelectorAll('.main-nav ul li a');
@@ -897,7 +896,6 @@
             }
         };
 
-        // LÓGICA DO MODAL 100% RESTAURADA E FUNCIONAL
         function abrirModalEquipe(id, elementoCard) {
             const modal = document.getElementById('modal-equipe');
             
