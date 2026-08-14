@@ -164,7 +164,6 @@
             font-size: 2rem;
             display: block;
             margin-bottom: 10px;
-            color: #5a6659;
         }
         .badge-info {
             font-size: 0.95rem;
@@ -206,13 +205,12 @@
         }
 
         /* ========================================== */
-        /* EQUIPE E CARD (FOTOS NITIDAS E SIMÉTRICAS) */
+        /* EQUIPE E CARD                              */
         /* ========================================== */
         .team-grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; margin-top: 20px; }
         .team-card { flex: 1; min-width: 280px; max-width: 330px; text-align: center; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; }
         .team-card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); border-radius: 10px; }
         
-        /* Ajuste de Nitidez e Formato Simétrico */
         .team-card img {
             width: 220px !important;
             height: 220px !important;
@@ -408,7 +406,7 @@
             .container { padding-left: 20px !important; padding-right: 20px !important; width: 100% !important; overflow-x: hidden !important; }
             .activities-grid, .modalities-grid, .faq-grid, .journey-grid, .info-grid { display: flex !important; flex-direction: column !important; gap: 30px !important; }
             
-            /* EQUIPE LADO A LADO NO CELULAR COM QUALIDADE CORRIGIDA */
+            /* EQUIPE LADO A LADO NO CELULAR */
             .team-grid { 
                 flex-direction: row !important; 
                 flex-wrap: wrap !important; 
@@ -421,8 +419,8 @@
                 padding: 10px;
             }
             .team-card img { 
-                max-width: 140px !important; 
-                height: 140px !important; /* Força o formato perfeitamente quadrado antes do border-radius */
+                width: 130px !important;
+                height: 130px !important;
                 margin: 0 auto 10px auto !important;
             }
             .team-card h3 { font-size: 1.1rem; margin-top: 10px; margin-bottom: 0; }
@@ -982,12 +980,10 @@
                 }
 
                 updateImg('.hero-image img', dbMap['hero_imagem']);
-                updateImg('.modalities-grid .modality-card:nth-child(1) img', dbMap['modalidades_foto_online']);
-                updateImg('.modalities-grid .modality-card:nth-child(2) img', dbMap['modalidades_foto_presencial']);
-
+                
+                // Removidas as linhas que sobrescreviam as fotos de modalidades com links antigos do Supabase
+                
                 aplicarEstiloImagem('.hero-image img', dbMap, 'hero_imagem');
-                aplicarEstiloImagem('.modalities-grid .modality-card:nth-child(1) img', dbMap, 'modalidades_foto');
-                aplicarEstiloImagem('.modalities-grid .modality-card:nth-child(2) img', dbMap, 'modalidades_foto');
 
                 const fonteTitulos = dbMap['geral_fonte_titulos'];
                 const fonteTextos = dbMap['geral_fonte_textos'];
