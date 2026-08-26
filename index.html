@@ -143,6 +143,7 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            /* Mantive o fundo transparente aqui já que você removeu o fundo das imagens pelo remove.bg */
         }
         .icon-circle img {
             width: 65%;
@@ -309,9 +310,8 @@
             object-position: top !important;
         }
         
-        /* Ajuste do modal de modalidades para não ter foto tão redonda se não quiser, mas vamos manter o padrão */
         #modal-modalidade .modal-img-container img {
-            border-radius: 20px; /* Foto mais quadrada/arredondada para as modalidades */
+            border-radius: 20px;
         }
 
         .modal-text-container { flex: 1.4; text-align: left; }
@@ -421,6 +421,17 @@
             font-size: 1.05rem;
             color: #d1d8d4;
             font-weight: 300;
+        }
+        
+        /* NOVO: Estilo para os links do rodapé ficarem brancos ao passar o mouse */
+        .contact-link {
+            color: #d1d8d4;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .contact-link:hover {
+            color: #ffffff;
+            text-decoration: underline;
         }
 
         /* AJUSTES PARA MOBILE */
@@ -841,7 +852,7 @@
                         <div class="contact-number-circle">1</div>
                         <div class="contact-text-nexo">
                             <h4>Email</h4>
-                            <p>nexopsicologia@gmail.com</p>
+                            <p><a href="mailto:nexopsicologia@gmail.com" class="contact-link">nexopsicologia@gmail.com</a></p>
                         </div>
                     </div>
                     
@@ -849,7 +860,7 @@
                         <div class="contact-number-circle">3</div>
                         <div class="contact-text-nexo">
                             <h4>WhatsApp</h4>
-                            <p>(79) 9690-3490</p>
+                            <p><a href="https://wa.me/557996903490?text=Olá!%20Vim%20pelo%20site%20e%20gostaria%20de%20tirar%20uma%20dúvida." target="_blank" class="contact-link">(79) 9690-3490</a></p>
                         </div>
                     </div>
                     
@@ -857,7 +868,7 @@
                         <div class="contact-number-circle">2</div>
                         <div class="contact-text-nexo">
                             <h4>Telefone</h4>
-                            <p>(79) 9690-3490</p>
+                            <p><a href="tel:+557996903490" class="contact-link">(79) 9690-3490</a></p>
                         </div>
                     </div>
                     
@@ -865,7 +876,7 @@
                         <div class="contact-number-circle">4</div>
                         <div class="contact-text-nexo">
                             <h4>Instagram</h4>
-                            <p>@nexohumanista</p>
+                            <p><a href="https://instagram.com/nexohumanista" target="_blank" class="contact-link">@nexohumanista</a></p>
                         </div>
                     </div>
 
