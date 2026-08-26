@@ -135,6 +135,21 @@
         }
         .sobre-text { flex: 1.5; font-size: 0.95rem; line-height: 1.8; text-align: justify; color: #4a4a4a; }
 
+        /* ========================================== */
+        /* ÍCONES DE SERVIÇOS (AJUSTE DE IMAGEM)      */
+        /* ========================================== */
+        .icon-circle {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .icon-circle img {
+            width: 65%;
+            height: 65%;
+            object-fit: contain;
+        }
+
         .plantao-container {
             max-width: 900px; margin: 0 auto; background-color: #ffffff;
             padding: 50px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.05);
@@ -454,7 +469,6 @@
     <!-- MENU FLUTUANTE -->
     <div class="floating-action-menu" data-aos="fade-up" data-aos-delay="1000">
         <a href="#contato" class="floating-btn">Agendar consulta</a>
-        <!-- Adicionado link direto para o WhatsApp do Plantão Psicológico -->
         <a href="https://wa.me/557996903490?text=Olá!%20Gostaria%20de%20solicitar%20o%20Plantão%20Psicológico." target="_blank" class="floating-btn secondary">Plantão Psicológico</a>
     </div>
 
@@ -519,26 +533,39 @@
             <div class="container">
                 <h2 class="section-title" data-aos="fade-up">Serviços</h2>
                 <div class="activities-grid" style="text-align: center;">
+                    
                     <div class="activity-card" data-aos="fade-up" data-aos-delay="100">
-                        <div class="icon-circle">🧘</div> 
+                        <div class="icon-circle">
+                            <img src="img/icone-psicoterapia.png" alt="Ícone Psicoterapia Individual">
+                        </div> 
                         <h3>Psicoterapia<br>Individual</h3>
                         <p>Espaço de acolhimento focado no seu autoconhecimento e saúde mental.</p>
                     </div>
+                    
                     <div class="activity-card" data-aos="fade-up" data-aos-delay="200">
-                        <div class="icon-circle">🙏</div>
+                        <div class="icon-circle">
+                            <img src="img/icone-orientacao.png" alt="Ícone Orientação Parental">
+                        </div>
                         <h3>Orientação<br>Parental</h3>
                         <p>Suporte para fortalecer os vínculos e lidar com desafios da educação familiar.</p>
                     </div>
+                    
                     <div class="activity-card" data-aos="fade-up" data-aos-delay="300">
-                        <div class="icon-circle">⏱️</div>
+                        <div class="icon-circle">
+                            <img src="img/icone-plantao.png" alt="Ícone Plantão Psicológico">
+                        </div>
                         <h3>Plantão<br>Psicológico</h3>
                         <p>Acolhimento imediato e escuta qualificada em momentos de crise.</p>
                     </div>
+                    
                     <div class="activity-card" data-aos="fade-up" data-aos-delay="400">
-                        <div class="icon-circle">🌿</div>
+                        <div class="icon-circle">
+                            <img src="img/icone-grupo.png" alt="Ícone Terapia de Grupo">
+                        </div>
                         <h3>Terapia de<br>Grupo</h3>
                         <p>Troca de experiências e desenvolvimento pessoal em um ambiente seguro.</p>
                     </div>
+                    
                 </div>
             </div>
         </section>
@@ -663,7 +690,6 @@
                         </div>
                         
                         <div style="text-align: center; margin-top: 30px;">
-                            <!-- Adicionado link direto para o WhatsApp do Plantão Psicológico -->
                             <a href="https://wa.me/557996903490?text=Olá!%20Gostaria%20de%20solicitar%20o%20Plantão%20Psicológico." target="_blank" class="btn-plantao-acao">Solicitar Plantão Agora</a>
                         </div>
                     </div>
