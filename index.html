@@ -220,11 +220,11 @@
         }
 
         /* ========================================== */
-        /* EQUIPE E CARD                              */
+        /* EQUIPE E CARD (AJUSTE DE DICA DE CLIQUE)   */
         /* ========================================== */
         .team-grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 30px; margin-top: 20px; }
-        .team-card { flex: 1; min-width: 280px; max-width: 330px; text-align: center; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; }
-        .team-card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); border-radius: 10px; }
+        .team-card { flex: 1; min-width: 280px; max-width: 330px; text-align: center; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; position: relative; padding-bottom: 15px; }
+        .team-card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); border-radius: 10px; background-color: #ffffff; }
         
         .team-card img {
             width: 220px !important;
@@ -239,7 +239,45 @@
         }
 
         /* ========================================== */
-        /* MODAL DOS PSICÓLOGOS                       */
+        /* MODALIDADES DE ATENDIMENTO                 */
+        /* ========================================== */
+        .modality-card {
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+            padding: 20px;
+            border-radius: 15px;
+        }
+        .modality-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            background-color: #f7f5f0;
+        }
+
+        /* AVISO VISUAL DE CLIQUE (BOTÃOZINHO) */
+        .click-hint {
+            display: inline-block;
+            margin-top: 15px;
+            font-size: 0.8rem;
+            color: #ffffff;
+            background-color: #5a6659;
+            padding: 6px 18px;
+            border-radius: 30px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: background-color 0.3s, transform 0.3s;
+            opacity: 0.9;
+        }
+        .team-card:hover .click-hint, 
+        .modality-card:hover .click-hint {
+            background-color: #113A23;
+            transform: scale(1.05);
+            opacity: 1;
+        }
+
+        /* ========================================== */
+        /* MODAL DOS PSICÓLOGOS E MODALIDADES         */
         /* ========================================== */
         .modal-overlay {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -271,6 +309,11 @@
             object-position: top !important;
         }
         
+        /* Ajuste do modal de modalidades para não ter foto tão redonda se não quiser, mas vamos manter o padrão */
+        #modal-modalidade .modal-img-container img {
+            border-radius: 20px; /* Foto mais quadrada/arredondada para as modalidades */
+        }
+
         .modal-text-container { flex: 1.4; text-align: left; }
         .modal-text-container h2 { font-size: 2.8rem; font-family: 'Playfair Display', serif; color: #4b5860; margin-bottom: 25px; font-weight: 400; line-height: 1.1; }
         .modal-desc p { font-size: 1.05rem; line-height: 1.8; color: #4a4a4a; margin-bottom: 15px; text-align: justify; }
@@ -579,16 +622,19 @@
                         <img src="img/adriana.png" alt="Adriana Santos">
                         <h3>Adriana Santos</h3>
                         <p class="crp">CRP: 19/5704</p>
+                        <span class="click-hint">Ver detalhes ➕</span>
                     </div>
                     <div class="team-card" data-aos="fade-up" data-aos-delay="250" onclick="abrirModalEquipe('joselito', this)" title="Clique para ver o perfil completo">
                         <img src="img/joselito.png" alt="Joselito Silva">
                         <h3>Joselito Júnior</h3>
                         <p class="crp">CRP: 19/005914</p>
+                        <span class="click-hint">Ver detalhes ➕</span>
                     </div>
                     <div class="team-card" data-aos="fade-up" data-aos-delay="400" onclick="abrirModalEquipe('suzana', this)" title="Clique para ver o perfil completo">
                         <img src="img/suzana.png" alt="Suzana M. de Araújo">
                         <h3>Suzana M. de Araújo</h3>
                         <p class="crp">CRP: 19/5694</p>
+                        <span class="click-hint">Ver detalhes ➕</span>
                     </div>
                 </div>
             </div>
@@ -599,13 +645,15 @@
             <div class="container">
                 <h2 class="section-title" data-aos="fade-up">Modalidades de atendimento<br></h2>
                 <div class="modalities-grid">
-                    <div class="modality-card" data-aos="fade-up" data-aos-delay="100">
+                    <div class="modality-card" data-aos="fade-up" data-aos-delay="100" onclick="abrirModalModalidade('online')" title="Clique para saber mais">
                         <img src="img/online-novo.JPG" alt="Atendimento Online">
                         <h3>Psicoterapia Online</h3>
+                        <span class="click-hint">Ver detalhes ➕</span>
                     </div>
-                    <div class="modality-card" data-aos="fade-up" data-aos-delay="250">
+                    <div class="modality-card" data-aos="fade-up" data-aos-delay="250" onclick="abrirModalModalidade('presencial')" title="Clique para saber mais">
                         <img src="img/presencial-novo.JPG" alt="Consultório Presencial">
                         <h3>Psicoterapia Presencial</h3>
+                        <span class="click-hint">Ver detalhes ➕</span>
                     </div>
                 </div>
             </div>
@@ -860,6 +908,22 @@
         </div>
     </div>
 
+    <!-- ESTRUTURA DO MODAL DE MODALIDADES -->
+    <div id="modal-modalidade" class="modal-overlay">
+        <div class="modal-box">
+            <button class="modal-close" onclick="fecharModalModalidade()">&times;</button>
+            <div class="modal-content-flex">
+                <div class="modal-img-container">
+                    <img id="modal-mod-img" src="" alt="Foto Modalidade">
+                </div>
+                <div class="modal-text-container">
+                    <h2 id="modal-mod-nome">Nome da Modalidade</h2>
+                    <div id="modal-mod-desc" class="modal-desc"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Scripts do Formulário, Supabase e AOS -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
@@ -882,6 +946,9 @@
             });
         }
 
+        // ==========================================
+        // DADOS DA EQUIPE E MODAL DE EQUIPE
+        // ==========================================
         const dadosEquipe = {
             'adriana': {
                 nome: 'Adriana Santos',
@@ -948,13 +1015,65 @@
             setTimeout(() => modal.style.display = 'none', 300);
         }
 
+        // ==========================================
+        // DADOS DAS MODALIDADES E MODAL DAS MODALIDADES
+        // ==========================================
+        const dadosModalidade = {
+            'online': {
+                nome: 'Psicoterapia Online',
+                imgModal: 'img/online-novo.JPG',
+                descricao: `
+                    <p>O atendimento online oferece a flexibilidade e o conforto de realizar suas sessões de onde você estiver, desde que tenha um ambiente privativo e uma boa conexão de internet.</p>
+                    <p>Essa modalidade segue os mesmos princípios éticos, de sigilo e de qualidade técnica do atendimento presencial, sendo regulamentada pelo Conselho Federal de Psicologia.</p>
+                    <p>É uma excelente opção para quem tem uma rotina corrida, viaja frequentemente, ou simplesmente prefere a praticidade de ser atendido no conforto de casa.</p>
+                `
+            },
+            'presencial': {
+                nome: 'Psicoterapia Presencial',
+                imgModal: 'img/presencial-novo.JPG',
+                descricao: `
+                    <p>O atendimento presencial acontece em nosso consultório, um ambiente cuidadosamente planejado para oferecer conforto, segurança e total acolhimento.</p>
+                    <p>Muitas pessoas preferem essa modalidade por sentirem que a mudança de ambiente — o ato de sair de casa ou do trabalho para ir à clínica — ajuda na imersão e no processo terapêutico.</p>
+                    <p>Nosso espaço está preparado para receber você com toda a atenção, privacidade e cuidado que a sua saúde mental exige.</p>
+                `
+            }
+        };
+
+        function abrirModalModalidade(id) {
+            const modal = document.getElementById('modal-modalidade');
+            
+            document.getElementById('modal-mod-img').src = dadosModalidade[id].imgModal;
+            document.getElementById('modal-mod-nome').innerHTML = dadosModalidade[id].nome;
+            document.getElementById('modal-mod-desc').innerHTML = dadosModalidade[id].descricao;
+
+            modal.style.display = 'flex';
+            setTimeout(() => modal.classList.add('active'), 10);
+        }
+
+        function fecharModalModalidade() {
+            const modal = document.getElementById('modal-modalidade');
+            modal.classList.remove('active');
+            setTimeout(() => modal.style.display = 'none', 300);
+        }
+
+        // ==========================================
+        // FECHAR MODALS CLICANDO FORA DA CAIXA
+        // ==========================================
         window.addEventListener('click', function(e) {
-            const modal = document.getElementById('modal-equipe');
-            if (e.target === modal) {
+            const modalEquipe = document.getElementById('modal-equipe');
+            const modalModalidade = document.getElementById('modal-modalidade');
+            
+            if (e.target === modalEquipe) {
                 fecharModalEquipe();
+            }
+            if (e.target === modalModalidade) {
+                fecharModalModalidade();
             }
         });
 
+        // ==========================================
+        // INTEGRAÇÃO COM SUPABASE E FORMULÁRIO
+        // ==========================================
         const supabaseUrl = 'https://aywlhxvljukjsmcspplc.supabase.co'; 
         const supabaseKey = 'sb_publishable_EEuGEXGAAMSTKXS94LTihA_Q9QWrDaT';
         const supabaseClient = window.supabase.createClient(supabaseUrl, supabaseKey);
